@@ -11,6 +11,7 @@ const copyBtn = document.querySelector("#copyBtn");
 const downloadBtn = document.querySelector("#downloadBtn");
 const apiKeyInput = document.querySelector("#apiKey");
 const modelInput = document.querySelector("#model");
+const modelOptions = document.querySelector("#modelOptions");
 const providerInput = document.querySelector("#provider");
 const minimaxRegionInput = document.querySelector("#minimaxRegion");
 const minimaxRegionRow = document.querySelector("#minimaxRegionRow");
@@ -24,15 +25,24 @@ const storageKeys = {
   provider: "yhst_provider",
   minimaxRegion: "yhst_minimax_region",
   providerApiKeys: "yhst_provider_api_keys",
+  settingsVersion: "yhst_settings_version",
   lastOutput: "yhst_last_output",
   lastForm: "yhst_last_form",
   selectedAngle: "yhst_selected_angle"
 };
 
+const currentSettingsVersion = "2";
+
 const defaultModels = {
   deepseek: "deepseek-v4-flash",
   minimax: "MiniMax-M2.7",
   openai: "gpt-5-mini"
+};
+
+const providerModels = {
+  deepseek: ["deepseek-v4-flash", "deepseek-v4-pro"],
+  minimax: ["MiniMax-M2.7"],
+  openai: ["gpt-5-mini"]
 };
 
 const stageLabels = {
@@ -65,7 +75,9 @@ function formData() {
 }
 
 function fillForm(data) {
+  const settingsFields = new Set(["provider", "model", "minimaxRegion"]);
   for (const [key, value] of Object.entries(data)) {
+    if (settingsFields.has(key)) continue;
     const field = document.querySelector(`#${key}`);
     if (field) field.value = value;
   }
@@ -101,9 +113,26 @@ function migrateLegacyApiKey(provider) {
   saveApiKeyForProvider(provider, legacyKey);
 }
 
+function migrateSettingsVersion() {
+  const version = localStorage.getItem(storageKeys.settingsVersion);
+  if (version === currentSettingsVersion) return;
+
+  const savedProvider = localStorage.getItem(storageKeys.provider);
+  const savedModel = localStorage.getItem(storageKeys.model);
+  const savedLooksLegacyMiniMax = !savedProvider || savedProvider === "minimax" || savedModel === "MiniMax-M2.7";
+
+  if (savedLooksLegacyMiniMax) {
+    localStorage.setItem(storageKeys.provider, "deepseek");
+    localStorage.setItem(storageKeys.model, defaultModels.deepseek);
+  }
+
+  localStorage.setItem(storageKeys.settingsVersion, currentSettingsVersion);
+}
+
 function loadState() {
+  migrateSettingsVersion();
   const savedProvider = localStorage.getItem(storageKeys.provider) || "deepseek";
-  migrateLegacyApiKey(savedProvider);
+  if (savedProvider !== "deepseek") migrateLegacyApiKey(savedProvider);
   providerInput.value = savedProvider;
   minimaxRegionInput.value = localStorage.getItem(storageKeys.minimaxRegion) || "cn";
   modelInput.value = localStorage.getItem(storageKeys.model) || defaultModels[providerInput.value];
@@ -259,8 +288,8 @@ function useSample() {
 function updateProviderDefaultModel() {
   const provider = providerInput.value;
   const current = modelInput.value.trim();
-  const knownDefaults = Object.values(defaultModels);
-  if (!current || knownDefaults.includes(current)) {
+  const knownModels = Object.values(providerModels).flat();
+  if (!current || knownModels.includes(current)) {
     modelInput.value = defaultModels[provider];
   }
   apiKeyInput.value = apiKeyForProvider(provider);
@@ -272,6 +301,17 @@ function updateProviderDefaultModel() {
 function updateProviderUi() {
   const isMiniMax = providerInput.value === "minimax";
   minimaxRegionRow.style.display = isMiniMax ? "flex" : "none";
+  updateModelOptions();
+}
+
+function updateModelOptions() {
+  const models = providerModels[providerInput.value] || [];
+  modelOptions.innerHTML = "";
+  for (const model of models) {
+    const option = document.createElement("option");
+    option.value = model;
+    modelOptions.appendChild(option);
+  }
 }
 
 async function copyOutput() {
@@ -319,6 +359,9 @@ copyBtn.addEventListener("click", copyOutput);
 downloadBtn.addEventListener("click", downloadMarkdown);
 providerInput.addEventListener("change", updateProviderDefaultModel);
 minimaxRegionInput.addEventListener("change", saveSettings);
+modelInput.addEventListener("input", () => {
+  localStorage.setItem(storageKeys.model, modelInput.value.trim() || defaultModels[providerInput.value]);
+});
 selectedAngleInput.addEventListener("input", () => {
   localStorage.setItem(storageKeys.selectedAngle, selectedAngleInput.value.trim());
 });
