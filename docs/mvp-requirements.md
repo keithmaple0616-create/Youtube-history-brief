@@ -143,7 +143,7 @@ Script should include:
 
 Default target length:
 
-- 20-35 minutes.
+- 12-15 minutes, strictly under 15 minutes.
 
 ## Non-Functional Requirements
 
@@ -166,4 +166,3 @@ The MVP is useful if it can:
 - Produce an outline that feels specific to the channel, not generic.
 - Generate a script draft that can be edited rather than rewritten from scratch.
 - Warn when a historical comparison is too weak or too politically risky.
-

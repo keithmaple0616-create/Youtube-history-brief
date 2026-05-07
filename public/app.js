@@ -210,7 +210,7 @@ function useSample() {
     sourceLink: "",
     creatorNotes:
       "探索这到底是自由与官僚体系的冲突，还是更深层的合法性危机。可以谨慎使用中国王朝史，但避免直接说美国就是晚明。",
-    targetLength: "20-35 分钟",
+    targetLength: "12-15 分钟",
     sensitivity: "中",
     tone: "冷静、严肃、有历史感、适合 YouTube",
     provider: "minimax",

@@ -67,7 +67,7 @@ Creator input:
 - Event description: ${input.eventDescription || "Not provided"}
 - Source link: ${input.sourceLink || "Not provided"}
 - Creator notes: ${input.creatorNotes || "Not provided"}
-- Target length: ${input.targetLength || "20-35 minutes"}
+- Target length: ${input.targetLength || "12-15 minutes, strictly under 15 minutes"}
 - Tone: ${input.tone || "calm, serious, historically literate, YouTube-friendly"}
 - Sensitivity level: ${input.sensitivity || "medium"}
 
@@ -78,6 +78,7 @@ Output language requirements:
 - The Chinese script should be a faithful creator-facing Chinese version of the English script, not a separate Chinese-market rewrite.
 - Keep the English script natural for North American audiences.
 - Keep the Chinese script clear enough for the creator to review, revise, and record from if desired.
+- Keep the final video under 15 minutes. Prefer one main current-event frame, one main historical mirror, and one Chinese lens. Avoid side quests.
 
 Generate a complete working package in Markdown with these exact sections and Chinese section titles:
 
@@ -178,7 +179,7 @@ Creator input:
 - Event description: ${input.eventDescription || "Not provided"}
 - Source link: ${input.sourceLink || "Not provided"}
 - Creator notes: ${input.creatorNotes || "Not provided"}
-- Target length: ${input.targetLength || "20-35 minutes"}
+- Target length: ${input.targetLength || "12-15 minutes, strictly under 15 minutes"}
 - Tone: ${input.tone || "calm, serious, historically literate, YouTube-friendly"}
 - Sensitivity level: ${input.sensitivity || "medium"}
 
@@ -187,6 +188,7 @@ Output rules:
 - Use English for YouTube-facing titles, hooks, descriptions, narration, thumbnail text, and Shorts titles intended for North American viewers.
 - Do not invent precise statistics, quotes, dates, or obscure facts without marking them for verification.
 - Distinguish useful similarity from false equivalence.
+- Keep the final video under 15 minutes. Prefer one main current-event frame, one main historical mirror, and one Chinese lens. Avoid side quests.
 - Output Markdown only.
 `;
 }
@@ -372,6 +374,7 @@ Output exactly:
 - 目标观众
 - 视觉风格
 - 节奏建议
+- 15 分钟以内的取舍原则
 
 ## 2. 分段剪辑表
 For each major section:
@@ -394,7 +397,7 @@ For each major section:
 Create a practical image storyboard for a "still images + Ken Burns" editing style.
 
 Requirements:
-- 生成 20-40 个画面条目，按视频顺序排列。
+- 生成 12-24 个画面条目，按视频顺序排列，适配 15 分钟以内视频。
 - 每个画面对应一个清晰的文案段落或语义转折，不要逐句切图。
 - 优先使用可由 ChatGPT/AI 图片生成的画面；涉及真实新闻人物、真实机构争议、具体历史档案时，标注“建议使用真实素材/需版权核查”。
 - 图片提示词必须用英文，适合 16:9 YouTube 画面。
