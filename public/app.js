@@ -23,12 +23,14 @@ const storageKeys = {
   model: "yhst_model",
   provider: "yhst_provider",
   minimaxRegion: "yhst_minimax_region",
+  providerApiKeys: "yhst_provider_api_keys",
   lastOutput: "yhst_last_output",
   lastForm: "yhst_last_form",
   selectedAngle: "yhst_selected_angle"
 };
 
 const defaultModels = {
+  deepseek: "deepseek-v4-flash",
   minimax: "MiniMax-M2.7",
   openai: "gpt-5-mini"
 };
@@ -36,7 +38,7 @@ const defaultModels = {
 const stageLabels = {
   topics: "阶段一：选题方向",
   plan: "阶段二：视频方案",
-  script: "阶段三：脚本",
+  script: "阶段三：脚本 Brief",
   production: "阶段四：制作包"
 };
 
@@ -69,11 +71,43 @@ function fillForm(data) {
   }
 }
 
+function providerApiKeys() {
+  const raw = localStorage.getItem(storageKeys.providerApiKeys);
+  if (!raw) return {};
+  try {
+    return JSON.parse(raw) || {};
+  } catch {
+    return {};
+  }
+}
+
+function apiKeyForProvider(provider) {
+  return providerApiKeys()[provider] || "";
+}
+
+function saveApiKeyForProvider(provider, apiKey) {
+  const keys = providerApiKeys();
+  if (apiKey) {
+    keys[provider] = apiKey;
+  } else {
+    delete keys[provider];
+  }
+  localStorage.setItem(storageKeys.providerApiKeys, JSON.stringify(keys));
+}
+
+function migrateLegacyApiKey(provider) {
+  const legacyKey = localStorage.getItem(storageKeys.apiKey);
+  if (!legacyKey || apiKeyForProvider(provider)) return;
+  saveApiKeyForProvider(provider, legacyKey);
+}
+
 function loadState() {
-  apiKeyInput.value = localStorage.getItem(storageKeys.apiKey) || "";
-  providerInput.value = localStorage.getItem(storageKeys.provider) || "minimax";
+  const savedProvider = localStorage.getItem(storageKeys.provider) || "deepseek";
+  migrateLegacyApiKey(savedProvider);
+  providerInput.value = savedProvider;
   minimaxRegionInput.value = localStorage.getItem(storageKeys.minimaxRegion) || "cn";
   modelInput.value = localStorage.getItem(storageKeys.model) || defaultModels[providerInput.value];
+  apiKeyInput.value = apiKeyForProvider(providerInput.value);
   selectedAngleInput.value = localStorage.getItem(storageKeys.selectedAngle) || "";
   updateProviderUi();
 
@@ -160,10 +194,10 @@ function setButtonsDisabled(disabled) {
 }
 
 function saveSettings() {
-  localStorage.setItem(storageKeys.apiKey, apiKeyInput.value.trim());
   localStorage.setItem(storageKeys.provider, providerInput.value);
   localStorage.setItem(storageKeys.minimaxRegion, minimaxRegionInput.value);
   localStorage.setItem(storageKeys.model, modelInput.value.trim() || defaultModels[providerInput.value]);
+  saveApiKeyForProvider(providerInput.value, apiKeyInput.value.trim());
   setStatus("设置已保存在这台电脑上。", "success");
 }
 
@@ -213,9 +247,9 @@ function useSample() {
     targetLength: "12-15 分钟",
     sensitivity: "中",
     tone: "冷静、严肃、有历史感、适合 YouTube",
-    provider: "minimax",
+    provider: "deepseek",
     minimaxRegion: "cn",
-    model: "MiniMax-M2.7"
+    model: "deepseek-v4-flash"
   });
   selectedAngleInput.value = "";
   updateProviderUi();
@@ -229,6 +263,9 @@ function updateProviderDefaultModel() {
   if (!current || knownDefaults.includes(current)) {
     modelInput.value = defaultModels[provider];
   }
+  apiKeyInput.value = apiKeyForProvider(provider);
+  localStorage.setItem(storageKeys.provider, provider);
+  localStorage.setItem(storageKeys.model, modelInput.value.trim() || defaultModels[provider]);
   updateProviderUi();
 }
 
@@ -259,8 +296,8 @@ function clearWorkspace() {
 
 1. 生成选题方向：只做判断，不写脚本。
 2. 生成视频方案：选择一个方向后，展开标题、Hook、历史案例、中国视角和大纲。
-3. 生成脚本：在方案确认后，再生成英文正式脚本和中文审稿版。
-4. 生成制作包：把脚本转成 B-roll、分镜、屏幕文字、Shorts 和发布清单。`;
+3. 生成脚本 Brief：把方案整理成可交给 Codex 写正式稿的创作简报。
+4. 生成制作包：在正式稿确认后，把脚本转成 B-roll、分镜、屏幕文字、Shorts 和发布清单。`;
   selectedAngleInput.value = "";
   localStorage.removeItem(storageKeys.lastOutput);
   localStorage.removeItem(storageKeys.selectedAngle);

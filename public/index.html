@@ -82,10 +82,10 @@
           </label>
           <div class="button-row">
             <button type="button" id="developBtn" class="secondary">2. 生成视频方案</button>
-            <button type="button" id="scriptBtn" class="secondary">3. 生成脚本</button>
+            <button type="button" id="scriptBtn" class="secondary">3. 生成脚本 Brief</button>
             <button type="button" id="productionBtn" class="secondary">4. 生成制作包</button>
           </div>
-          <p class="hint">真实工作流是先选题，再展开方案，再写稿，最后准备剪辑素材。每一步都可以人工修改后再继续。</p>
+          <p class="hint">推荐工作流：工具先生成选题、方案和脚本 Brief；正式英文主脚本交给 Codex 重写；最后再生成制作包。</p>
         </section>
 
         <section class="settings panel">
@@ -93,6 +93,7 @@
           <label>
             <span>模型供应商</span>
             <select id="provider">
+              <option value="deepseek">DeepSeek</option>
               <option value="minimax">MiniMax</option>
               <option value="openai">OpenAI</option>
             </select>
@@ -106,7 +107,7 @@
           </label>
           <label>
             <span>API Key</span>
-            <input id="apiKey" type="password" placeholder="把 MiniMax 或 OpenAI 的 API Key 粘贴到这里">
+            <input id="apiKey" type="password" placeholder="把 DeepSeek、MiniMax 或 OpenAI 的 API Key 粘贴到这里">
           </label>
           <label>
             <span>模型</span>
@@ -114,7 +115,7 @@
           </label>
           <button type="button" id="saveSettings" class="secondary">保存设置</button>
           <button type="button" id="testKeyBtn" class="secondary">测试 API Key</button>
-          <p class="hint">如果你在 minimaxi.com 登录/充值，平台区域选「中国站」。如果在 platform.minimax.io 登录，选「国际站」。API Key 只保存在这台电脑的这个浏览器里。</p>
+          <p class="hint">DeepSeek 推荐使用 deepseek-v4-flash 或 deepseek-v4-pro。MiniMax 中国站选 minimaxi.com，国际站选 minimax.io。API Key 只保存在这台电脑的这个浏览器里。</p>
         </section>
       </aside>
 
@@ -138,8 +139,8 @@
 
 1. 生成选题方向：只做判断，不写脚本。
 2. 生成视频方案：选择一个方向后，展开标题、Hook、历史案例、中国视角和大纲。
-3. 生成脚本：在方案确认后，再生成英文正式脚本和中文审稿版。
-4. 生成制作包：把脚本转成 B-roll、分镜、屏幕文字、Shorts 和发布清单。</pre>
+3. 生成脚本 Brief：把方案整理成可交给 Codex 写正式稿的创作简报。
+4. 生成制作包：在正式稿确认后，把脚本转成 B-roll、分镜、屏幕文字、Shorts 和发布清单。</pre>
         </section>
       </main>
     </div>

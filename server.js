@@ -8,9 +8,10 @@ loadEnvFile(join(root, ".env"));
 
 const publicDir = join(root, "public");
 const port = Number(process.env.PORT || 5123);
-const defaultProvider = process.env.AI_PROVIDER || "minimax";
+const defaultProvider = process.env.AI_PROVIDER || "deepseek";
 const defaultMiniMaxRegion = process.env.MINIMAX_REGION || "cn";
 const defaultModels = {
+  deepseek: process.env.DEEPSEEK_MODEL || "deepseek-v4-flash",
   minimax: process.env.MINIMAX_MODEL || "MiniMax-M2.7",
   openai: process.env.OPENAI_MODEL || "gpt-5-mini"
 };
@@ -315,7 +316,7 @@ List what the creator should confirm or modify before generating the script.`;
   if (input.stage === "script") {
     return `${context}
 
-Current task: STAGE 3 - SCRIPT.
+Current task: STAGE 3 - SCRIPT BRIEF FOR CODEX.
 
 Selected direction:
 ${selected}
@@ -324,31 +325,59 @@ Approved plan / previous workspace:
 ${workspace}
 
 Goal:
-Write the script only after the direction and plan are established.
+Prepare a rigorous creator-facing brief that will be handed to Codex/GPT-5.5 to write the final English script. Do NOT write the full script. Do NOT output a draft narration.
 
 Output exactly:
 
-# 阶段三：脚本
+# 阶段三：脚本 Brief
 
-## 1. 英文脚本草稿
-Write a polished English narration script for North American YouTube viewers.
-Requirements:
-- Use natural spoken language.
-- Include section headings.
-- Include light visual notes in brackets only when helpful.
-- Mark uncertain statistics, direct quotes, dates, and claims with [VERIFY].
-- Keep the argument coherent even if concise.
-- Include a real ending, not just setup.
+## 1. 给 Codex 的写作任务
+- 用中文说明这期视频要写成什么
+- 明确目标观众、目标时长、语气、频道定位
+- 明确最终交付要包含英文正式脚本和中文审稿版
 
-## 2. 中文审稿版
-Write a faithful Simplified Chinese version of the English script for creator review.
-Requirements:
-- Preserve structure, nuance, examples, and verification placeholders.
-- Make it readable in Chinese.
-- Do not rewrite it for a Chinese-market audience.
+## 2. 核心创作判断
+- 一句话主论点
+- 观众必须带走的理解
+- 最强反直觉点
+- 情绪曲线
+- 结尾要留下的问题
 
-## 3. 录制前修改建议
-List 8-12 concrete edits the creator should consider before recording.`;
+## 3. 推荐英文包装
+- 最推荐英文标题
+- 备选英文标题 5 个
+- 缩略图文字 5 个，每个 2-5 个词
+- 最推荐开场 Hook 3 个
+
+## 4. 脚本结构 Brief
+Use 6-8 sections for a 12-15 minute video.
+For each section:
+- 英文章节名
+- 中文目的
+- 预计时长
+- 必须表达的观点
+- 可用历史案例
+- 可用中国历史/文化视角
+- 需要避免的写法
+
+## 5. 事实核查清单
+List every claim that must be verified before Codex writes or before recording.
+Mark sensitive or uncertain claims clearly.
+
+## 6. 中国视角使用说明
+- 哪个中国历史概念最适合
+- 为什么自然
+- 类比边界
+- 禁止的简单类比
+
+## 7. 写作风格要求
+- 英文旁白风格
+- 中文审稿版风格
+- 禁止使用的套话
+- 如何处理政治敏感与事实不确定
+
+## 8. 可直接复制给 Codex 的最终任务指令
+Write a polished prompt in Chinese that the creator can copy to Codex/GPT-5.5. It must include all important requirements above and ask Codex to write the final English narration script plus faithful Chinese review version.`;
   }
 
   if (input.stage === "production") {
@@ -460,7 +489,7 @@ async function generatePackage(req, res) {
   const apiKey = getApiKey(req, provider);
   if (!apiKey) {
     sendJson(res, 400, {
-      error: `缺少 ${provider === "minimax" ? "MiniMax" : "OpenAI"} API Key。请在页面左下角设置里填写。`
+      error: `缺少 ${providerLabel(provider)} API Key。请在页面左下角设置里填写。`
     });
     return;
   }
@@ -474,9 +503,7 @@ async function generatePackage(req, res) {
   const prompt = buildPrompt(body);
 
   try {
-    const result = provider === "minimax"
-      ? await callMiniMax({ apiKey, model, prompt, region: minimaxRegion })
-      : await callOpenAI({ apiKey, model, prompt });
+    const result = await callProvider({ provider, apiKey, model, prompt, minimaxRegion, useMiniMaxPackageMode: true });
 
     sendJson(res, 200, { text: result.text, model, provider, minimaxRegion });
   } catch (error) {
@@ -502,7 +529,7 @@ async function generateStep(req, res) {
   const apiKey = getApiKey(req, provider);
   if (!apiKey) {
     sendJson(res, 400, {
-      error: `缺少 ${provider === "minimax" ? "MiniMax" : "OpenAI"} API Key。请在页面左下角设置里填写。`
+      error: `缺少 ${providerLabel(provider)} API Key。请在页面左下角设置里填写。`
     });
     return;
   }
@@ -522,9 +549,7 @@ async function generateStep(req, res) {
   const prompt = buildStepPrompt({ ...body, stage });
 
   try {
-    const result = provider === "minimax"
-      ? await callMiniMaxSingle({ apiKey, model, prompt, region: minimaxRegion })
-      : await callOpenAI({ apiKey, model, prompt });
+    const result = await callProvider({ provider, apiKey, model, prompt, minimaxRegion });
 
     sendJson(res, 200, { text: result.text, model, provider, minimaxRegion, stage });
   } catch (error) {
@@ -562,6 +587,8 @@ async function testKey(req, res) {
         endpoint: getMiniMaxEndpoint(minimaxRegion),
         prompt: "Reply with exactly: OK"
       });
+    } else if (provider === "deepseek") {
+      await callDeepSeek({ apiKey, model, prompt: "Reply with exactly: OK" });
     } else {
       await callOpenAI({ apiKey, model, prompt: "Reply with exactly: OK" });
     }
@@ -576,7 +603,15 @@ async function testKey(req, res) {
 }
 
 function normalizeProvider(provider) {
-  return provider === "openai" ? "openai" : "minimax";
+  if (provider === "openai") return "openai";
+  if (provider === "deepseek") return "deepseek";
+  return "minimax";
+}
+
+function providerLabel(provider) {
+  if (provider === "deepseek") return "DeepSeek";
+  if (provider === "minimax") return "MiniMax";
+  return "OpenAI";
 }
 
 function normalizeStage(stage) {
@@ -586,13 +621,32 @@ function normalizeStage(stage) {
 
 function getApiKey(req, provider) {
   const headerKey = req.headers["x-api-key"] || req.headers["x-openai-key"];
-  const key = headerKey || (provider === "minimax" ? process.env.MINIMAX_API_KEY : process.env.OPENAI_API_KEY);
+  const envKey = provider === "minimax"
+    ? process.env.MINIMAX_API_KEY
+    : provider === "deepseek"
+      ? process.env.DEEPSEEK_API_KEY
+      : process.env.OPENAI_API_KEY;
+  const key = headerKey || envKey;
   return normalizeApiKey(key);
 }
 
 function normalizeApiKey(key) {
   if (!key) return "";
   return String(key).trim().replace(/^Bearer\s+/i, "").replace(/^["']|["']$/g, "").trim();
+}
+
+async function callProvider({ provider, apiKey, model, prompt, minimaxRegion, useMiniMaxPackageMode = false }) {
+  if (provider === "minimax") {
+    return useMiniMaxPackageMode
+      ? callMiniMax({ apiKey, model, prompt, region: minimaxRegion })
+      : callMiniMaxSingle({ apiKey, model, prompt, region: minimaxRegion });
+  }
+
+  if (provider === "deepseek") {
+    return callDeepSeek({ apiKey, model, prompt });
+  }
+
+  return callOpenAI({ apiKey, model, prompt });
 }
 
 async function callOpenAI({ apiKey, model, prompt }) {
@@ -633,6 +687,40 @@ async function callOpenAI({ apiKey, model, prompt }) {
     }
 
     return { text: data.output_text || extractOutputText(data) };
+}
+
+async function callDeepSeek({ apiKey, model, prompt }) {
+  const response = await fetch("https://api.deepseek.com/chat/completions", {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${apiKey}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      model,
+      messages: [
+        {
+          role: "system",
+          content: "You produce rigorous, YouTube-native strategy and script briefs. Follow the requested bilingual output structure exactly. Output only Markdown."
+        },
+        { role: "user", content: prompt }
+      ],
+      stream: false,
+      temperature: 0.7,
+      max_tokens: 12000
+    })
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw Object.assign(new Error(data.error?.message || data.message || "DeepSeek API 请求失败。"), {
+      status: response.status,
+      details: data
+    });
+  }
+
+  return { text: data.choices?.[0]?.message?.content || "" };
 }
 
 async function callMiniMax({ apiKey, model, prompt, region }) {
