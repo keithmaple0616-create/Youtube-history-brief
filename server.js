@@ -390,7 +390,29 @@ For each major section:
 - 地图/时间线
 - 版权注意事项
 
-## 4. Shorts 切片
+## 4. Ken Burns 图片分镜表
+Create a practical image storyboard for a "still images + Ken Burns" editing style.
+
+Requirements:
+- 生成 20-40 个画面条目，按视频顺序排列。
+- 每个画面对应一个清晰的文案段落或语义转折，不要逐句切图。
+- 优先使用可由 ChatGPT/AI 图片生成的画面；涉及真实新闻人物、真实机构争议、具体历史档案时，标注“建议使用真实素材/需版权核查”。
+- 图片提示词必须用英文，适合 16:9 YouTube 画面。
+- 图片里不要出现文字、水印、logo、字幕。
+- 风格要统一：cinematic editorial documentary style, realistic, historically grounded, muted colors, 16:9, no text.
+
+For each image include:
+- 画面编号
+- 对应文案/段落
+- 画面目的
+- 英文图片生成提示词
+- Ken Burns 动作：慢推近/慢拉远/左到右平移/右到左平移/轻微上移/静止
+- 建议时长，通常 6-12 秒
+- 文件名，例如 001_institutional_trust_decline.png
+- 适合 AI 生成：是/否/谨慎
+- 备注：事实、版权或历史准确性提醒
+
+## 5. Shorts 切片
 Create 8 Shorts ideas. For each:
 - 英文 Shorts 标题
 - 中文说明
@@ -398,7 +420,7 @@ Create 8 Shorts ideas. For each:
 - 建议时长
 - 结尾引导
 
-## 5. 发布包
+## 6. 发布包
 - 最推荐英文标题
 - 备选标题
 - 英文简介
@@ -406,11 +428,12 @@ Create 8 Shorts ideas. For each:
 - 章节时间戳草稿
 - 置顶评论
 
-## 6. 最终核查清单
+## 7. 最终核查清单
 - 事实核查
 - 政治敏感表述
 - 中国历史类比边界
 - 画面版权
+- AI 图片历史准确性
 - 字幕与发音
 - 发布前检查`;
   }
