@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>YouTube 历史时政脚本工具</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">YH</div>
+          <div>
+            <h1>YouTube 历史时政脚本工具</h1>
+            <p>用热点进入历史，用中国视角解释当下。</p>
+          </div>
+        </div>
+
+        <form id="eventForm" class="panel">
+          <label>
+            <span>热点事件标题</span>
+            <input id="eventTitle" name="eventTitle" placeholder="例：美国公众对联邦机构的信任持续下降">
+          </label>
+
+          <label>
+            <span>事件描述</span>
+            <textarea id="eventDescription" name="eventDescription" rows="7" placeholder="用你自己的话描述这个新闻事件。可以写中文，也可以写英文。"></textarea>
+          </label>
+
+          <label>
+            <span>新闻来源链接</span>
+            <input id="sourceLink" name="sourceLink" placeholder="可选，粘贴新闻链接">
+          </label>
+
+          <label>
+            <span>你的创作备注</span>
+            <textarea id="creatorNotes" name="creatorNotes" rows="5" placeholder="你已经想到的角度、想强调的观点，或需要避免的表达。"></textarea>
+          </label>
+
+          <div class="grid-2">
+            <label>
+              <span>目标视频长度</span>
+              <select id="targetLength" name="targetLength">
+                <option>20-35 分钟</option>
+                <option>12-18 分钟</option>
+                <option>35-50 分钟</option>
+              </select>
+            </label>
+
+            <label>
+              <span>敏感度</span>
+              <select id="sensitivity" name="sensitivity">
+                <option>中</option>
+                <option>低</option>
+                <option>高</option>
+              </select>
+            </label>
+          </div>
+
+          <label>
+            <span>内容语气</span>
+            <select id="tone" name="tone">
+              <option>冷静、严肃、有历史感、适合 YouTube</option>
+              <option>更有故事感和戏剧张力</option>
+              <option>更学术、更谨慎</option>
+              <option>更直接、更有观点</option>
+            </select>
+          </label>
+
+          <div class="button-row">
+            <button type="submit" id="generateTopicsBtn">1. 生成选题方向</button>
+            <button type="button" id="sampleBtn" class="secondary">填入示例</button>
+          </div>
+        </form>
+
+        <section class="panel">
+          <h2>当前选择</h2>
+          <label>
+            <span>你选中的方向</span>
+            <textarea id="selectedAngle" rows="5" placeholder="阶段一生成后，把你想继续开发的选题方向复制到这里。"></textarea>
+          </label>
+          <div class="button-row">
+            <button type="button" id="developBtn" class="secondary">2. 生成视频方案</button>
+            <button type="button" id="scriptBtn" class="secondary">3. 生成脚本</button>
+            <button type="button" id="productionBtn" class="secondary">4. 生成制作包</button>
+          </div>
+          <p class="hint">真实工作流是先选题，再展开方案，再写稿，最后准备剪辑素材。每一步都可以人工修改后再继续。</p>
+        </section>
+
+        <section class="settings panel">
+          <h2>设置</h2>
+          <label>
+            <span>模型供应商</span>
+            <select id="provider">
+              <option value="minimax">MiniMax</option>
+              <option value="openai">OpenAI</option>
+            </select>
+          </label>
+          <label id="minimaxRegionRow">
+            <span>MiniMax 平台区域</span>
+            <select id="minimaxRegion">
+              <option value="cn">中国站 minimaxi.com</option>
+              <option value="global">国际站 minimax.io</option>
+            </select>
+          </label>
+          <label>
+            <span>API Key</span>
+            <input id="apiKey" type="password" placeholder="把 MiniMax 或 OpenAI 的 API Key 粘贴到这里">
+          </label>
+          <label>
+            <span>模型</span>
+            <input id="model" value="MiniMax-M2.7">
+          </label>
+          <button type="button" id="saveSettings" class="secondary">保存设置</button>
+          <button type="button" id="testKeyBtn" class="secondary">测试 API Key</button>
+          <p class="hint">如果你在 minimaxi.com 登录/充值，平台区域选「中国站」。如果在 platform.minimax.io 登录，选「国际站」。API Key 只保存在这台电脑的这个浏览器里。</p>
+        </section>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">MVP 工作台</p>
+            <h2>分阶段视频创作工作台</h2>
+          </div>
+          <div class="actions">
+            <button type="button" id="clearBtn" class="secondary">清空工作台</button>
+            <button type="button" id="copyBtn" class="secondary">复制结果</button>
+            <button type="button" id="downloadBtn" class="secondary">下载 Markdown</button>
+          </div>
+        </header>
+
+        <div id="status" class="status">阶段一：输入热点后先生成选题方向。</div>
+
+        <section class="output-panel">
+          <pre id="output">工作流：
+
+1. 生成选题方向：只做判断，不写脚本。
+2. 生成视频方案：选择一个方向后，展开标题、Hook、历史案例、中国视角和大纲。
+3. 生成脚本：在方案确认后，再生成英文正式脚本和中文审稿版。
+4. 生成制作包：把脚本转成 B-roll、分镜、屏幕文字、Shorts 和发布清单。</pre>
+        </section>
+      </main>
+    </div>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
