@@ -3,12 +3,13 @@ const output = document.querySelector("#output");
 const statusBox = document.querySelector("#status");
 const generateTopicsBtn = document.querySelector("#generateTopicsBtn");
 const sampleBtn = document.querySelector("#sampleBtn");
-const developBtn = document.querySelector("#developBtn");
 const scriptBtn = document.querySelector("#scriptBtn");
-const productionBtn = document.querySelector("#productionBtn");
 const clearBtn = document.querySelector("#clearBtn");
 const copyBtn = document.querySelector("#copyBtn");
 const downloadBtn = document.querySelector("#downloadBtn");
+const refreshRadarBtn = document.querySelector("#refreshRadarBtn");
+const loadRadarBtn = document.querySelector("#loadRadarBtn");
+const radarReportSelect = document.querySelector("#radarReportSelect");
 const apiKeyInput = document.querySelector("#apiKey");
 const modelInput = document.querySelector("#model");
 const modelOptions = document.querySelector("#modelOptions");
@@ -46,10 +47,8 @@ const providerModels = {
 };
 
 const stageLabels = {
-  topics: "阶段一：选题方向",
-  plan: "阶段二：视频方案",
-  script: "阶段三：脚本 Brief",
-  production: "阶段四：制作包"
+  topics: "阶段一：创作角度评估",
+  script: "阶段二：Codex 脚本 Brief"
 };
 
 function setStatus(message, type = "") {
@@ -160,7 +159,7 @@ function validateEventInput(payload) {
 
 function validateSelectedAngle(payload) {
   if (!payload.selectedAngle) {
-    setStatus("请先把你选中的选题方向复制到「你选中的方向」里。", "error");
+    setStatus("请先把你选中的创作角度复制到「你选中的创作角度」里。", "error");
     return false;
   }
   return true;
@@ -217,9 +216,9 @@ function appendStageOutput(label, text) {
 
 function setButtonsDisabled(disabled) {
   generateTopicsBtn.disabled = disabled;
-  developBtn.disabled = disabled;
   scriptBtn.disabled = disabled;
-  productionBtn.disabled = disabled;
+  refreshRadarBtn.disabled = disabled;
+  loadRadarBtn.disabled = disabled;
 }
 
 function saveSettings() {
@@ -282,7 +281,7 @@ function useSample() {
   });
   selectedAngleInput.value = "";
   updateProviderUi();
-  setStatus("示例已填入。先点击「1. 生成选题方向」。", "success");
+  setStatus("示例已填入。先点击「1. 生成创作角度评估」。", "success");
 }
 
 function updateProviderDefaultModel() {
@@ -325,7 +324,7 @@ function downloadMarkdown() {
   const anchor = document.createElement("a");
   const date = new Date().toISOString().slice(0, 10);
   anchor.href = url;
-  anchor.download = `youtube-workflow-${date}.md`;
+  anchor.download = `youtube-brief-workspace-${date}.md`;
   anchor.click();
   URL.revokeObjectURL(url);
   setStatus("Markdown 文件已下载。", "success");
@@ -334,29 +333,89 @@ function downloadMarkdown() {
 function clearWorkspace() {
   output.textContent = `工作流：
 
-1. 生成选题方向：只做判断，不写脚本。
-2. 生成视频方案：选择一个方向后，展开标题、Hook、历史案例、中国视角和大纲。
-3. 生成脚本 Brief：把方案整理成可交给 Codex 写正式稿的创作简报。
-4. 生成制作包：在正式稿确认后，把脚本转成 B-roll、分镜、屏幕文字、Shorts 和发布清单。`;
+1. 每周雷达报告：龙虾每周生成 Markdown，你从里面挑候选题。
+2. 创作角度评估：判断这个热点有哪些可做角度，不写脚本。
+3. Codex 脚本 Brief：把选定角度整理成可交给 Codex skill 写正式稿的创作简报。
+
+暂时不在这个工具里生成最终脚本、视频方案或制作包，避免流程过早变复杂。`;
   selectedAngleInput.value = "";
   localStorage.removeItem(storageKeys.lastOutput);
   localStorage.removeItem(storageKeys.selectedAngle);
   setStatus("工作台已清空，可以开始新的热点。", "success");
 }
 
+async function refreshRadarReports() {
+  refreshRadarBtn.disabled = true;
+  setStatus("正在读取 radar 文件夹...");
+
+  try {
+    const response = await fetch("/api/radar");
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || "读取 radar 报告失败。");
+
+    radarReportSelect.innerHTML = "";
+    if (!data.files?.length) {
+      const option = document.createElement("option");
+      option.value = "";
+      option.textContent = "暂无报告";
+      radarReportSelect.appendChild(option);
+      setStatus("radar 文件夹里还没有 Markdown 报告。", "error");
+      return;
+    }
+
+    for (const file of data.files) {
+      const option = document.createElement("option");
+      option.value = file;
+      option.textContent = file;
+      radarReportSelect.appendChild(option);
+    }
+
+    setStatus(`已找到 ${data.files.length} 份 radar 报告。`, "success");
+  } catch (error) {
+    setStatus(error.message, "error");
+  } finally {
+    refreshRadarBtn.disabled = false;
+  }
+}
+
+async function loadRadarReport() {
+  const file = radarReportSelect.value;
+  if (!file) {
+    setStatus("请先选择一份 radar Markdown 报告。", "error");
+    return;
+  }
+
+  loadRadarBtn.disabled = true;
+  setStatus(`正在打开：${file}`);
+
+  try {
+    const response = await fetch(`/api/radar/report?file=${encodeURIComponent(file)}`);
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || "打开 radar 报告失败。");
+
+    output.textContent = data.text;
+    localStorage.setItem(storageKeys.lastOutput, output.textContent);
+    setStatus("报告已打开。请从报告中挑一个候选题，复制到左侧热点输入框继续开发。", "success");
+  } catch (error) {
+    setStatus(error.message, "error");
+  } finally {
+    loadRadarBtn.disabled = false;
+  }
+}
+
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   runStage("topics");
 });
-developBtn.addEventListener("click", () => runStage("plan"));
 scriptBtn.addEventListener("click", () => runStage("script"));
-productionBtn.addEventListener("click", () => runStage("production"));
 saveSettingsBtn.addEventListener("click", saveSettings);
 testKeyBtn.addEventListener("click", testApiKey);
 sampleBtn.addEventListener("click", useSample);
 clearBtn.addEventListener("click", clearWorkspace);
 copyBtn.addEventListener("click", copyOutput);
 downloadBtn.addEventListener("click", downloadMarkdown);
+refreshRadarBtn.addEventListener("click", refreshRadarReports);
+loadRadarBtn.addEventListener("click", loadRadarReport);
 providerInput.addEventListener("change", updateProviderDefaultModel);
 minimaxRegionInput.addEventListener("change", saveSettings);
 modelInput.addEventListener("input", () => {
@@ -367,3 +426,4 @@ selectedAngleInput.addEventListener("input", () => {
 });
 
 loadState();
+refreshRadarReports();

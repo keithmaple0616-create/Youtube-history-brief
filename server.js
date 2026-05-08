@@ -1,12 +1,13 @@
 import { createServer } from "node:http";
-import { readFile } from "node:fs/promises";
+import { mkdir, readFile, readdir } from "node:fs/promises";
 import { existsSync, readFileSync } from "node:fs";
-import { extname, join, normalize } from "node:path";
+import { basename, extname, join, normalize } from "node:path";
 
 const root = process.cwd();
 loadEnvFile(join(root, ".env"));
 
 const publicDir = join(root, "public");
+const radarDir = join(root, "radar");
 const port = Number(process.env.PORT || 5123);
 const defaultProvider = process.env.AI_PROVIDER || "deepseek";
 const defaultMiniMaxRegion = process.env.MINIMAX_REGION || "cn";
@@ -202,14 +203,15 @@ function buildStepPrompt(input) {
   if (input.stage === "topics") {
     return `${context}
 
-Current task: STAGE 1 - TOPIC RADAR.
+Current task: STAGE 1 - CREATIVE ANGLE EVALUATION.
 
 Goal:
-Help the creator decide which topic direction is worth making. Do NOT write a script. Do NOT create a detailed video plan yet.
+The creator already has a current event or a weekly radar candidate. Help the creator choose the best storytelling angle for this channel.
+Do NOT write a script. Do NOT create a production plan. Do NOT produce a full video outline yet.
 
 Output exactly:
 
-# 阶段一：选题雷达
+# 阶段一：创作角度评估
 
 ## 1. 事件简报
 - 简洁总结
@@ -217,8 +219,8 @@ Output exactly:
 - 为什么现在重要
 - 背后的深层张力
 
-## 2. 选题方向
-Create 6 candidate directions. For each:
+## 2. 可选创作角度
+Create 3-5 candidate angles. For each:
 - 方向编号
 - 英文工作标题
 - 中文内部标题
@@ -229,8 +231,8 @@ Create 6 candidate directions. For each:
 - 对北美观众的吸引力
 - 可能误区
 
-## 3. 选题评分
-For each direction, score:
+## 3. 角度评分
+For each angle, score:
 - 热点相关性：1-10
 - 历史深度：1-10
 - 中国视角自然度：1-10
@@ -240,10 +242,10 @@ For each direction, score:
 - 政治/事实风险：低/中/高
 
 ## 4. 推荐优先级
-Rank the top 3 directions and explain why.
+Rank the top 3 angles and explain why.
 
 ## 5. 下一步给创作者的动作
-Tell the creator to copy one selected direction into the selected-angle box before continuing.`;
+Tell the creator to copy one selected angle into the selected-angle box before generating the Codex script brief.`;
   }
 
   if (input.stage === "plan") {
@@ -316,12 +318,12 @@ List what the creator should confirm or modify before generating the script.`;
   if (input.stage === "script") {
     return `${context}
 
-Current task: STAGE 3 - SCRIPT BRIEF FOR CODEX.
+Current task: STAGE 2 - SCRIPT BRIEF FOR CODEX.
 
-Selected direction:
+Selected creative angle:
 ${selected}
 
-Approved plan / previous workspace:
+Previous workspace, usually the angle evaluation:
 ${workspace}
 
 Goal:
@@ -557,6 +559,44 @@ async function generateStep(req, res) {
       error: error.message || "生成失败。请检查网络连接和 API Key。",
       details: error.details
     });
+  }
+}
+
+async function listRadarReports(req, res) {
+  try {
+    await mkdir(radarDir, { recursive: true });
+    const entries = await readdir(radarDir, { withFileTypes: true });
+    const files = entries
+      .filter((entry) => entry.isFile() && /\.md$/i.test(entry.name))
+      .map((entry) => entry.name)
+      .sort((a, b) => b.localeCompare(a));
+
+    sendJson(res, 200, { files });
+  } catch (error) {
+    sendJson(res, 500, { error: error.message || "读取 radar 报告失败。" });
+  }
+}
+
+async function getRadarReport(req, res) {
+  const url = new URL(req.url, `http://${req.headers.host}`);
+  const file = basename(url.searchParams.get("file") || "");
+
+  if (!file || !/\.md$/i.test(file)) {
+    sendJson(res, 400, { error: "请选择一个 Markdown 报告。" });
+    return;
+  }
+
+  const filePath = join(radarDir, file);
+  if (!filePath.startsWith(radarDir) || !existsSync(filePath)) {
+    sendJson(res, 404, { error: "没有找到这份 radar 报告。" });
+    return;
+  }
+
+  try {
+    const text = await readFile(filePath, "utf8");
+    sendJson(res, 200, { file, text });
+  } catch (error) {
+    sendJson(res, 500, { error: error.message || "读取 radar 报告失败。" });
   }
 }
 
@@ -896,6 +936,16 @@ const server = createServer(async (req, res) => {
 
   if (req.method === "POST" && req.url === "/api/test-key") {
     await testKey(req, res);
+    return;
+  }
+
+  if (req.method === "GET" && req.url === "/api/radar") {
+    await listRadarReports(req, res);
+    return;
+  }
+
+  if (req.method === "GET" && req.url.startsWith("/api/radar/report")) {
+    await getRadarReport(req, res);
     return;
   }
 

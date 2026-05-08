@@ -183,6 +183,12 @@ button.secondary:hover {
   gap: 12px;
 }
 
+.radar-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 .hint {
   font-size: 12px;
   line-height: 1.45;

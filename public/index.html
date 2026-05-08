@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>YouTube 历史时政脚本工具</title>
+    <title>YouTube 历史频道 Brief 工具</title>
     <link rel="stylesheet" href="/styles.css">
   </head>
   <body>
@@ -12,10 +12,22 @@
         <div class="brand">
           <div class="brand-mark">YH</div>
           <div>
-            <h1>YouTube 历史时政脚本工具</h1>
-            <p>用热点进入历史，用中国视角解释当下。</p>
+            <h1>YouTube 历史频道 Brief 工具</h1>
+            <p>把热点开发成可交给 Codex 精写的脚本 Brief。</p>
           </div>
         </div>
+
+        <section class="panel radar-panel">
+          <h2>每周雷达报告</h2>
+          <p class="hint">龙虾生成的 Markdown 报告放在项目的 radar 文件夹里。先打开报告，挑一个候选题，再复制到下面输入框继续开发。</p>
+          <div class="button-row">
+            <button type="button" id="refreshRadarBtn" class="secondary">刷新报告列表</button>
+            <button type="button" id="loadRadarBtn" class="secondary">打开报告</button>
+          </div>
+          <select id="radarReportSelect" aria-label="选择 radar Markdown 报告">
+            <option value="">暂无报告</option>
+          </select>
+        </section>
 
         <form id="eventForm" class="panel">
           <label>
@@ -69,7 +81,7 @@
           </label>
 
           <div class="button-row">
-            <button type="submit" id="generateTopicsBtn">1. 生成选题方向</button>
+            <button type="submit" id="generateTopicsBtn">1. 生成创作角度评估</button>
             <button type="button" id="sampleBtn" class="secondary">填入示例</button>
           </div>
         </form>
@@ -77,15 +89,13 @@
         <section class="panel">
           <h2>当前选择</h2>
           <label>
-            <span>你选中的方向</span>
-            <textarea id="selectedAngle" rows="5" placeholder="阶段一生成后，把你想继续开发的选题方向复制到这里。"></textarea>
+            <span>你选中的创作角度</span>
+            <textarea id="selectedAngle" rows="5" placeholder="阶段一生成后，把你想继续开发的创作角度复制到这里。"></textarea>
           </label>
           <div class="button-row">
-            <button type="button" id="developBtn" class="secondary">2. 生成视频方案</button>
-            <button type="button" id="scriptBtn" class="secondary">3. 生成脚本 Brief</button>
-            <button type="button" id="productionBtn" class="secondary">4. 生成制作包</button>
+            <button type="button" id="scriptBtn" class="secondary">2. 生成 Codex 脚本 Brief</button>
           </div>
-          <p class="hint">推荐工作流：工具先生成选题、方案和脚本 Brief；正式英文主脚本交给 Codex 重写；最后再生成制作包。</p>
+          <p class="hint">推荐工作流：先从热点或雷达报告生成角度评估，选定一个角度后生成脚本 Brief；正式英文主脚本交给 Codex skill 精写。</p>
         </section>
 
         <section class="settings panel">
@@ -123,8 +133,8 @@
       <main class="workspace">
         <header class="topbar">
           <div>
-            <p class="eyebrow">MVP 工作台</p>
-            <h2>分阶段视频创作工作台</h2>
+            <p class="eyebrow">Brief 工作台</p>
+            <h2>选题开发与脚本 Brief</h2>
           </div>
           <div class="actions">
             <button type="button" id="clearBtn" class="secondary">清空工作台</button>
@@ -133,15 +143,16 @@
           </div>
         </header>
 
-        <div id="status" class="status">阶段一：输入热点后先生成选题方向。</div>
+        <div id="status" class="status">阶段一：输入热点，或先打开每周雷达报告选择候选题。</div>
 
         <section class="output-panel">
           <pre id="output">工作流：
 
-1. 生成选题方向：只做判断，不写脚本。
-2. 生成视频方案：选择一个方向后，展开标题、Hook、历史案例、中国视角和大纲。
-3. 生成脚本 Brief：把方案整理成可交给 Codex 写正式稿的创作简报。
-4. 生成制作包：在正式稿确认后，把脚本转成 B-roll、分镜、屏幕文字、Shorts 和发布清单。</pre>
+1. 每周雷达报告：龙虾每周生成 Markdown，你从里面挑候选题。
+2. 创作角度评估：判断这个热点有哪些可做角度，不写脚本。
+3. Codex 脚本 Brief：把选定角度整理成可交给 Codex skill 写正式稿的创作简报。
+
+暂时不在这个工具里生成最终脚本、视频方案或制作包，避免流程过早变复杂。</pre>
         </section>
       </main>
     </div>
