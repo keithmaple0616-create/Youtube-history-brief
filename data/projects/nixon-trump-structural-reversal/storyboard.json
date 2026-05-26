@@ -1,0 +1,158 @@
+{
+  "projectId": "nixon-trump-structural-reversal",
+  "title": "The Photograph That Deceives",
+  "targetDurationSeconds": 90,
+  "style": "archival documentary essay with modern explanatory graphics",
+  "voiceover": {
+    "status": "temporary",
+    "sourceTextPath": "video-samples/nixon-trump-sample/narration.txt",
+    "audioPath": "video-samples/nixon-trump-sample/assets/placeholder-narration.mp3",
+    "notes": "Temporary AI voiceover is acceptable for draft timing. Replace or regenerate after the visual rhythm is approved."
+  },
+  "beats": [
+    {
+      "id": "beat-01-current-image",
+      "start": 0,
+      "duration": 7,
+      "voiceover": "Some photographs arrive already wearing someone else's memory.",
+      "viewerShouldSee": "A striking modern diplomatic arrival image or news montage, not an abstract title slide.",
+      "visualType": "real_or_editorial_current_event",
+      "assetNeeds": [
+        "Modern Beijing airport or diplomatic arrival footage/photo",
+        "U.S. and China flags in a diplomatic setting",
+        "News headline texture about the 2026 visit"
+      ],
+      "motion": "Fast but restrained cold open: 2-3 quick cuts, then a slow push-in.",
+      "onScreenText": "THE PHOTOGRAPH THAT DECEIVES",
+      "riskNotes": "Verify the factual basis and date of the 2026 visit before final production."
+    },
+    {
+      "id": "beat-02-modern-comparison",
+      "start": 7,
+      "duration": 11,
+      "voiceover": "When President Donald Trump landed in Beijing in May 2026, the comparison was almost too tempting. An American president. China. A carefully staged arrival. Cameras waiting for a handshake that would be inspected like an X-ray.",
+      "viewerShouldSee": "Modern diplomatic choreography: arrivals, cameras, handshake anticipation, official buildings.",
+      "visualType": "real_current_event_or_source_like_editorial",
+      "assetNeeds": [
+        "Trump official travel or summit image",
+        "Beijing diplomatic venue exterior",
+        "Press camera pool footage/photo"
+      ],
+      "motion": "Cut between arrival, press cameras, and a slow crop toward hands or podium.",
+      "onScreenText": "BEIJING / MAY 2026",
+      "riskNotes": "Do not use fake real-person images. Use verified public photos, licensed material, or neutral illustrative footage."
+    },
+    {
+      "id": "beat-03-historical-echo",
+      "start": 18,
+      "duration": 10,
+      "voiceover": "For many Americans, there is only one historical template for that image: Richard Nixon in 1972.",
+      "viewerShouldSee": "Nixon's 1972 China visit appears as the historical echo.",
+      "visualType": "archival_photo_or_footage",
+      "assetNeeds": [
+        "Nixon arriving in China, 1972",
+        "Nixon and Zhou Enlai handshake",
+        "Mao/Nixon meeting archive image"
+      ],
+      "motion": "Dissolve from modern frame to archival frame; add subtle film grain and date label.",
+      "onScreenText": "BEIJING / 1972",
+      "riskNotes": "Prefer National Archives, Nixon Library, or other clear-source archival material."
+    },
+    {
+      "id": "beat-04-famous-phrase",
+      "start": 28,
+      "duration": 9,
+      "voiceover": "Nixon goes to China. The old enemy becomes a partner. A door opens. The world changes.",
+      "viewerShouldSee": "A compact montage of Nixon-era archive material and newspapers.",
+      "visualType": "archival_montage",
+      "assetNeeds": [
+        "1972 newspaper headline about Nixon China visit",
+        "Air Force One or arrival still",
+        "Banquet or meeting room still"
+      ],
+      "motion": "Newspaper sweep, then archival photo push-in.",
+      "onScreenText": "NIXON GOES TO CHINA",
+      "riskNotes": "Avoid overusing title cards; let archival material carry the moment."
+    },
+    {
+      "id": "beat-05-wrong-lesson",
+      "start": 37,
+      "duration": 10,
+      "voiceover": "But the danger of a famous photograph is that it teaches us to look for the wrong thing.",
+      "viewerShouldSee": "Split screen: 1972 on one side, 2026 on the other, visually similar but tense.",
+      "visualType": "split_screen_comparison",
+      "assetNeeds": [
+        "One verified Nixon 1972 image",
+        "One verified Trump/modern China image",
+        "Subtle document or contact-sheet texture"
+      ],
+      "motion": "Split screen aligns similar gestures, then a thin line divides the frames.",
+      "onScreenText": "A RHYME IS NOT A REPEAT",
+      "riskNotes": "The comparison must be clearly analytical, not implying identical events."
+    },
+    {
+      "id": "beat-06-surface-vs-structure",
+      "start": 47,
+      "duration": 10,
+      "voiceover": "Trump's China visit looked, on the surface, like a Nixon sequel. But underneath the image, the structure was almost the opposite.",
+      "viewerShouldSee": "The split-screen image gives way to a simple structural diagram.",
+      "visualType": "transition_to_explainer",
+      "assetNeeds": [
+        "Split-screen source frames",
+        "Graphic layer for surface/structure contrast"
+      ],
+      "motion": "Photos slide upward like evidence cards; map grid fades in underneath.",
+      "onScreenText": "SURFACE: SIMILAR / STRUCTURE: REVERSED",
+      "riskNotes": "Keep text short and readable."
+    },
+    {
+      "id": "beat-07-1972-triangle",
+      "start": 57,
+      "duration": 13,
+      "voiceover": "Nixon went to China because Washington and Beijing both feared a third power more than they feared each other: the Soviet Union.",
+      "viewerShouldSee": "Animated U.S.-China-Soviet triangle. Soviet node creates pressure that explains the opening.",
+      "visualType": "hyperframes_or_remotion_explainer",
+      "assetNeeds": [
+        "Cold War world map base",
+        "U.S. node",
+        "China node",
+        "Soviet Union node",
+        "Animated pressure lines"
+      ],
+      "motion": "Soviet node appears first as pressure; U.S. and China lines connect in response.",
+      "onScreenText": "1972: THE TRIANGLE",
+      "riskNotes": "This is the ideal place to reuse HyperFrames as an inserted explainer."
+    },
+    {
+      "id": "beat-08-2026-no-equivalent",
+      "start": 70,
+      "duration": 11,
+      "voiceover": "Trump went to China in a world where there is no equivalent Soviet shadow pulling the two sides together.",
+      "viewerShouldSee": "The Soviet node fades out. The U.S.-China line remains tense and exposed.",
+      "visualType": "explainer_graphic",
+      "assetNeeds": [
+        "Same map/triangle graphic as previous beat",
+        "Modern tension labels: trade, Taiwan, technology, Pacific"
+      ],
+      "motion": "Soviet node dissolves; tension labels appear along the U.S.-China line.",
+      "onScreenText": "2026: NO SHARED THIRD PRESSURE",
+      "riskNotes": "Avoid oversimplifying Russia's current relevance; phrase as no equivalent Soviet-style strategic gravity."
+    },
+    {
+      "id": "beat-09-thesis-lock",
+      "start": 81,
+      "duration": 9,
+      "voiceover": "The handshake may rhyme. The photograph may echo. But the strategic music is in a different key.",
+      "viewerShouldSee": "Return to split-screen photos, then settle on the episode thesis.",
+      "visualType": "documentary_title_close",
+      "assetNeeds": [
+        "Best Nixon/Trump comparison frames",
+        "Dark editorial title background",
+        "Source-style lower-third labels"
+      ],
+      "motion": "Slow push-in, slight audio swell, clean title resolve.",
+      "onScreenText": "NOT NIXON 2.0",
+      "riskNotes": "This should feel like the start of the episode, not the end of an explainer deck."
+    }
+  ]
+}

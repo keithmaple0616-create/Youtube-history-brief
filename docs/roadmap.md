@@ -78,22 +78,41 @@ Goal:
 
 Make the tool increasingly aligned with the creator's actual channel.
 
-## Phase 5: Production Workflow
+## Phase 5: Separate Video Production Tool
 
 Focus:
 
-Support the broader video production process.
+Support the broader video production process after a final script is approved, but keep it outside the Brief MVP so it can serve other content lanes.
 
 Features:
 
-- Shot list and B-roll planning.
-- Visual asset prompts.
-- Editing notes.
-- Teleprompter export.
-- YouTube description and tags.
-- Publishing checklist.
+- Script-to-visual-beat conversion.
+- Evidence / diagram / generated illustration / atmosphere classification.
+- Per-episode asset plan instead of a universal footage library.
+- Manual image2 prompt package for Codex-based image generation.
+- Diagram specs for maps, timelines, charts, and relationship graphics.
+- Caption and kinetic-emphasis plan.
+- Later: HyperFrames or Remotion assembly.
 
 Goal:
 
-Move from script assistant to end-to-end creator operating system.
+Move from script assistant to a reusable visual planning workflow without making the Brief tool responsible for video production.
 
+## Phase 6: Creator Operating System
+
+Focus:
+
+Connect strategy, writing, production, packaging, and channel memory.
+
+Features:
+
+- Teleprompter export.
+- Publishing checklist.
+- Published video archive.
+- Performance notes.
+- Comment summaries.
+- Reusable asset and topic memory.
+
+Goal:
+
+Make the tool increasingly aligned with the creator's actual channel and production habits.

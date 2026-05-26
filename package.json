@@ -4,7 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "video:plan": "node video-tool/plan-video.js",
+    "video:check-assets": "node video-tool/check-assets.js",
+    "video:sample:one-minute": "node scripts/make_one_minute_sample.js",
+    "video:sample:reference-style": "node scripts/make_reference_style_sample.js",
+    "video:render-test": "node video-tool/render-test-video.js"
   },
   "engines": {
     "node": ">=20"

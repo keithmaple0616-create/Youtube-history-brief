@@ -1,0 +1,101 @@
+{
+  "title": "Full pipeline completeness test",
+  "createdAt": "2026-05-20T05:37:28.720Z",
+  "projectRoot": "/Users/xionglili/Desktop/youtube-history-script-tool/video/remotion/generated/full-pipeline-completeness-test-20260520T0537",
+  "notes": "Replace placeholder slots with real footage, archival video, maps, and licensed stills before final publishing.",
+  "narrationAudio": "assets/generated-narration.aiff",
+  "mediaSummary": {
+    "sourceDirectory": "/Users/xionglili/Desktop/youtube-history-script-tool/outputs/nixon-trump-structural-reversal",
+    "copied": [
+      {
+        "type": "image",
+        "originalName": "quick-draft-contact-sheet.jpg",
+        "publicPath": "assets/01-quick-draft-contact-sheet.jpg"
+      },
+      {
+        "type": "image",
+        "originalName": "quick-draft-v2-contact-sheet.jpg",
+        "publicPath": "assets/02-quick-draft-v2-contact-sheet.jpg"
+      },
+      {
+        "type": "video",
+        "originalName": "quick-draft-v2.mp4",
+        "publicPath": "assets/03-quick-draft-v2.mp4"
+      },
+      {
+        "type": "image",
+        "originalName": "quick-draft-v3-video-footage-contact-sheet.jpg",
+        "publicPath": "assets/04-quick-draft-v3-video-footage-contact-sheet.jpg"
+      },
+      {
+        "type": "video",
+        "originalName": "quick-draft-v3-video-footage.mp4",
+        "publicPath": "assets/05-quick-draft-v3-video-footage.mp4"
+      },
+      {
+        "type": "video",
+        "originalName": "quick-draft.mp4",
+        "publicPath": "assets/06-quick-draft.mp4"
+      }
+    ],
+    "narrationAudio": "assets/generated-narration.aiff"
+  },
+  "beats": [
+    {
+      "id": 1,
+      "durationSeconds": 7,
+      "kind": "title",
+      "narration": "This is a short confirmed narration script for a test.",
+      "screenText": "This is a short confirmed narration script for a test.",
+      "assetNeed": "Title card",
+      "searchKeywords": "Full pipeline completeness test documentary footage 1",
+      "media": {
+        "type": "video",
+        "src": "assets/03-quick-draft-v2.mp4",
+        "originalName": "quick-draft-v2.mp4"
+      }
+    },
+    {
+      "id": 2,
+      "durationSeconds": 7,
+      "kind": "footage",
+      "narration": "The opening explains why public trust becomes fragile when institutions feel distant.",
+      "screenText": "The opening explains why public trust becomes fragile when institutions feel distant.",
+      "assetNeed": "Real moving footage required",
+      "searchKeywords": "Full pipeline completeness test documentary footage 2",
+      "media": {
+        "type": "video",
+        "src": "assets/05-quick-draft-v3-video-footage.mp4",
+        "originalName": "quick-draft-v3-video-footage.mp4"
+      }
+    },
+    {
+      "id": 3,
+      "durationSeconds": 7,
+      "kind": "footage",
+      "narration": "The second beat shows how historical memory changes the way audiences interpret power.",
+      "screenText": "The second beat shows how historical memory changes the way audiences interpret power.",
+      "assetNeed": "Real moving footage required",
+      "searchKeywords": "Full pipeline completeness test documentary footage 3",
+      "media": {
+        "type": "video",
+        "src": "assets/06-quick-draft.mp4",
+        "originalName": "quick-draft.mp4"
+      }
+    },
+    {
+      "id": 4,
+      "durationSeconds": 7,
+      "kind": "archive",
+      "narration": "The final beat asks what kind of legitimacy can survive a long political crisis.",
+      "screenText": "The final beat asks what kind of legitimacy can survive a long political crisis.",
+      "assetNeed": "Archival footage or public-domain stills",
+      "searchKeywords": "Full pipeline completeness test documentary footage 4",
+      "media": {
+        "type": "image",
+        "src": "assets/01-quick-draft-contact-sheet.jpg",
+        "originalName": "quick-draft-contact-sheet.jpg"
+      }
+    }
+  ]
+}

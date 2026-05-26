@@ -1,0 +1,224 @@
+{
+  "title": "特朗普中国之行：关税谈判与战略博弈",
+  "createdAt": "2026-05-19T23:46:07.222Z",
+  "projectRoot": "/Users/xionglili/Desktop/youtube-history-script-tool/video/remotion/generated/history-video-20260519T2346",
+  "notes": "Replace placeholder slots with real footage, archival video, maps, and licensed stills before final publishing.",
+  "beats": [
+    {
+      "id": 1,
+      "durationSeconds": 8,
+      "kind": "title",
+      "narration": "Target length: about 10-12 minutes Tone: calm, historically literate, skeptical of easy analogies Core thesis: Trump’s 2026 China visit was not Nixon 2.",
+      "screenText": "Target length: about 10-12 minutes Tone: calm, historically literate, skeptical of easy analo...",
+      "assetNeed": "Title card",
+      "searchKeywords": "特朗普中国之行：关税谈判与战略博弈 documentary footage 1"
+    },
+    {
+      "id": 2,
+      "durationSeconds": 9,
+      "kind": "footage",
+      "narration": "It was almost the reverse: not a strategic opening built around a shared enemy, but crisis management between two powers that no longer trust the foundations of their own relationship.",
+      "screenText": "It was almost the reverse: not a strategic opening built around a shared enemy, but crisis ma...",
+      "assetNeed": "Real moving footage required",
+      "searchKeywords": "特朗普中国之行：关税谈判与战略博弈 documentary footage 2"
+    },
+    {
+      "id": 3,
+      "durationSeconds": 7,
+      "kind": "footage",
+      "narration": "Some photographs arrive already wearing someone else’s memory.",
+      "screenText": "Some photographs arrive already wearing someone else’s memory.",
+      "assetNeed": "Real moving footage required",
+      "searchKeywords": "特朗普中国之行：关税谈判与战略博弈 documentary footage 3"
+    },
+    {
+      "id": 4,
+      "durationSeconds": 7,
+      "kind": "archive",
+      "narration": "When President Donald Trump landed in Beijing in May 2026, the comparison was almost too tempting.",
+      "screenText": "When President Donald Trump landed in Beijing in May 2026, the comparison was almost too temp...",
+      "assetNeed": "Archival footage or public-domain stills",
+      "searchKeywords": "特朗普中国之行：关税谈判与战略博弈 documentary footage 4"
+    },
+    {
+      "id": 5,
+      "durationSeconds": 7,
+      "kind": "footage",
+      "narration": "An American president.",
+      "screenText": "An American president.",
+      "assetNeed": "Real moving footage required",
+      "searchKeywords": "特朗普中国之行：关税谈判与战略博弈 documentary footage 5"
+    },
+    {
+      "id": 6,
+      "durationSeconds": 7,
+      "kind": "map",
+      "narration": "A carefully staged arrival.",
+      "screenText": "A carefully staged arrival.",
+      "assetNeed": "Map, timeline, or explanatory graphic",
+      "searchKeywords": "特朗普中国之行：关税谈判与战略博弈 documentary footage 6"
+    },
+    {
+      "id": 7,
+      "durationSeconds": 7,
+      "kind": "archive",
+      "narration": "Cameras waiting for a handshake that would be inspected like an X-ray.",
+      "screenText": "Cameras waiting for a handshake that would be inspected like an X-ray.",
+      "assetNeed": "Archival footage or public-domain stills",
+      "searchKeywords": "特朗普中国之行：关税谈判与战略博弈 documentary footage 7"
+    },
+    {
+      "id": 8,
+      "durationSeconds": 7,
+      "kind": "footage",
+      "narration": "For many Americans, there is only one historical template for that image: Richard Nixon in 1972.",
+      "screenText": "For many Americans, there is only one historical template for that image: Richard Nixon in 1972.",
+      "assetNeed": "Real moving footage required",
+      "searchKeywords": "特朗普中国之行：关税谈判与战略博弈 documentary footage 8"
+    },
+    {
+      "id": 9,
+      "durationSeconds": 7,
+      "kind": "footage",
+      "narration": "Nixon goes to China.",
+      "screenText": "Nixon goes to China.",
+      "assetNeed": "Real moving footage required",
+      "searchKeywords": "特朗普中国之行：关税谈判与战略博弈 documentary footage 9"
+    },
+    {
+      "id": 10,
+      "durationSeconds": 7,
+      "kind": "archive",
+      "narration": "The old enemy becomes a partner.",
+      "screenText": "The old enemy becomes a partner.",
+      "assetNeed": "Archival footage or public-domain stills",
+      "searchKeywords": "特朗普中国之行：关税谈判与战略博弈 documentary footage 10"
+    },
+    {
+      "id": 11,
+      "durationSeconds": 7,
+      "kind": "map",
+      "narration": "It is one of the few diplomatic stories that can still survive as a simple phrase.",
+      "screenText": "It is one of the few diplomatic stories that can still survive as a simple phrase.",
+      "assetNeed": "Map, timeline, or explanatory graphic",
+      "searchKeywords": "特朗普中国之行：关税谈判与战略博弈 documentary footage 11"
+    },
+    {
+      "id": 12,
+      "durationSeconds": 7,
+      "kind": "footage",
+      "narration": "Which is useful, because most diplomatic stories require maps, dates, footnotes, and a strong chair.",
+      "screenText": "Which is useful, because most diplomatic stories require maps, dates, footnotes, and a strong...",
+      "assetNeed": "Real moving footage required",
+      "searchKeywords": "特朗普中国之行：关税谈判与战略博弈 documentary footage 12"
+    },
+    {
+      "id": 13,
+      "durationSeconds": 7,
+      "kind": "archive",
+      "narration": "But the danger of a famous photograph is that it teaches us to look for the wrong thing.",
+      "screenText": "But the danger of a famous photograph is that it teaches us to look for the wrong thing.",
+      "assetNeed": "Archival footage or public-domain stills",
+      "searchKeywords": "特朗普中国之行：关税谈判与战略博弈 documentary footage 13"
+    },
+    {
+      "id": 14,
+      "durationSeconds": 7,
+      "kind": "footage",
+      "narration": "Trump’s China visit looked, on the surface, like a Nixon sequel.",
+      "screenText": "Trump’s China visit looked, on the surface, like a Nixon sequel.",
+      "assetNeed": "Real moving footage required",
+      "searchKeywords": "特朗普中国之行：关税谈判与战略博弈 documentary footage 14"
+    },
+    {
+      "id": 15,
+      "durationSeconds": 7,
+      "kind": "footage",
+      "narration": "But underneath the image, the structure was almost the opposite.",
+      "screenText": "But underneath the image, the structure was almost the opposite.",
+      "assetNeed": "Real moving footage required",
+      "searchKeywords": "特朗普中国之行：关税谈判与战略博弈 documentary footage 15"
+    },
+    {
+      "id": 16,
+      "durationSeconds": 8,
+      "kind": "map",
+      "narration": "Nixon went to China because Washington and Beijing both feared a third power more than they feared each other: the Soviet Union.",
+      "screenText": "Nixon went to China because Washington and Beijing both feared a third power more than they f...",
+      "assetNeed": "Map, timeline, or explanatory graphic",
+      "searchKeywords": "特朗普中国之行：关税谈判与战略博弈 documentary footage 16"
+    },
+    {
+      "id": 17,
+      "durationSeconds": 7,
+      "kind": "footage",
+      "narration": "Trump went to China in a world where there is no equivalent Soviet shadow pulling the two sides together.",
+      "screenText": "Trump went to China in a world where there is no equivalent Soviet shadow pulling the two sid...",
+      "assetNeed": "Real moving footage required",
+      "searchKeywords": "特朗普中国之行：关税谈判与战略博弈 documentary footage 17"
+    },
+    {
+      "id": 18,
+      "durationSeconds": 7,
+      "kind": "footage",
+      "narration": "That difference changes everything.",
+      "screenText": "That difference changes everything.",
+      "assetNeed": "Real moving footage required",
+      "searchKeywords": "特朗普中国之行：关税谈判与战略博弈 documentary footage 18"
+    },
+    {
+      "id": 19,
+      "durationSeconds": 7,
+      "kind": "archive",
+      "narration": "The handshake may rhyme.",
+      "screenText": "The handshake may rhyme.",
+      "assetNeed": "Archival footage or public-domain stills",
+      "searchKeywords": "特朗普中国之行：关税谈判与战略博弈 documentary footage 19"
+    },
+    {
+      "id": 20,
+      "durationSeconds": 7,
+      "kind": "footage",
+      "narration": "The photograph may echo.",
+      "screenText": "The photograph may echo.",
+      "assetNeed": "Real moving footage required",
+      "searchKeywords": "特朗普中国之行：关税谈判与战略博弈 documentary footage 20"
+    },
+    {
+      "id": 21,
+      "durationSeconds": 7,
+      "kind": "map",
+      "narration": "But the strategic music is in a different key.",
+      "screenText": "But the strategic music is in a different key.",
+      "assetNeed": "Map, timeline, or explanatory graphic",
+      "searchKeywords": "特朗普中国之行：关税谈判与战略博弈 documentary footage 21"
+    },
+    {
+      "id": 22,
+      "durationSeconds": 7,
+      "kind": "archive",
+      "narration": "The 1972 visit was not a sentimental act of reconciliation.",
+      "screenText": "The 1972 visit was not a sentimental act of reconciliation.",
+      "assetNeed": "Archival footage or public-domain stills",
+      "searchKeywords": "特朗普中国之行：关税谈判与战略博弈 documentary footage 22"
+    },
+    {
+      "id": 23,
+      "durationSeconds": 7,
+      "kind": "footage",
+      "narration": "By the late 1960s, the communist world was badly divided.",
+      "screenText": "By the late 1960s, the communist world was badly divided.",
+      "assetNeed": "Real moving footage required",
+      "searchKeywords": "特朗普中国之行：关税谈判与战略博弈 documentary footage 23"
+    },
+    {
+      "id": 24,
+      "durationSeconds": 7,
+      "kind": "footage",
+      "narration": "China and the Soviet Union were not simply having an ideological disagreement at a conference table.",
+      "screenText": "China and the Soviet Union were not simply having an ideological disagreement at a conference...",
+      "assetNeed": "Real moving footage required",
+      "searchKeywords": "特朗普中国之行：关税谈判与战略博弈 documentary footage 24"
+    }
+  ]
+}

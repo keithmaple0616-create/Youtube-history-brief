@@ -1,0 +1,83 @@
+{
+  "projectId": "nixon-trump-structural-reversal",
+  "status": "needs_asset_collection",
+  "assets": [
+    {
+      "id": "modern-beijing-arrival",
+      "title": "Modern Beijing diplomatic arrival or airport exterior",
+      "type": "footage_or_photo",
+      "rightsStatus": "needs_review",
+      "sourceUrl": "",
+      "localPath": "",
+      "tags": ["beijing", "diplomacy", "arrival", "modern"],
+      "usedInBeats": ["beat-01-current-image", "beat-02-modern-comparison"],
+      "notes": "Use verified current-event material if available. If not available, use neutral Beijing airport/diplomatic venue footage clearly as illustrative B-roll."
+    },
+    {
+      "id": "trump-china-visit-2026",
+      "title": "Trump China visit visual reference",
+      "type": "verified_news_or_official_image",
+      "rightsStatus": "needs_verification",
+      "sourceUrl": "",
+      "localPath": "",
+      "tags": ["trump", "china", "2026", "summit"],
+      "usedInBeats": ["beat-02-modern-comparison", "beat-05-wrong-lesson"],
+      "notes": "High factual sensitivity. Verify event date and source before final recording."
+    },
+    {
+      "id": "nixon-china-1972-arrival",
+      "title": "Nixon 1972 China arrival",
+      "type": "archival_photo_or_footage",
+      "rightsStatus": "needs_review",
+      "sourceUrl": "",
+      "localPath": "",
+      "tags": ["nixon", "china", "1972", "arrival"],
+      "usedInBeats": ["beat-03-historical-echo", "beat-04-famous-phrase", "beat-05-wrong-lesson"],
+      "notes": "Prefer National Archives, Nixon Library, or other official archive sources."
+    },
+    {
+      "id": "nixon-zhou-handshake",
+      "title": "Nixon and Zhou Enlai handshake",
+      "type": "archival_photo_or_footage",
+      "rightsStatus": "needs_review",
+      "sourceUrl": "",
+      "localPath": "",
+      "tags": ["nixon", "zhou enlai", "handshake", "1972"],
+      "usedInBeats": ["beat-03-historical-echo", "beat-04-famous-phrase"],
+      "notes": "Useful visual anchor for the phrase 'Nixon goes to China.'"
+    },
+    {
+      "id": "mao-nixon-meeting",
+      "title": "Mao and Nixon meeting",
+      "type": "archival_photo_or_footage",
+      "rightsStatus": "needs_review",
+      "sourceUrl": "",
+      "localPath": "",
+      "tags": ["mao", "nixon", "1972", "meeting"],
+      "usedInBeats": ["beat-03-historical-echo"],
+      "notes": "Use carefully; this image carries strong historical meaning."
+    },
+    {
+      "id": "cold-war-triangle-map",
+      "title": "U.S.-China-Soviet triangle map",
+      "type": "generated_graphic",
+      "rightsStatus": "created_in_project",
+      "sourceUrl": "",
+      "localPath": "",
+      "tags": ["map", "cold war", "triangle diplomacy", "explainer"],
+      "usedInBeats": ["beat-07-1972-triangle", "beat-08-2026-no-equivalent"],
+      "notes": "Can be generated with HyperFrames or Remotion. This is an explainer, not historical footage."
+    },
+    {
+      "id": "news-headline-texture",
+      "title": "Newspaper/news headline texture",
+      "type": "editorial_texture",
+      "rightsStatus": "needs_review_or_generated",
+      "sourceUrl": "",
+      "localPath": "",
+      "tags": ["newspaper", "headline", "documentary texture"],
+      "usedInBeats": ["beat-01-current-image", "beat-04-famous-phrase"],
+      "notes": "Can use public-domain newspaper scans, licensed screenshots, or project-generated headline textures."
+    }
+  ]
+}

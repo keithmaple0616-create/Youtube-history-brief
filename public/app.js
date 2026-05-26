@@ -51,9 +51,22 @@ const stageLabels = {
   script: "阶段二：Codex 脚本 Brief"
 };
 
+const defaultWorkspaceText = `工作流：
+
+1. 每周雷达报告：龙虾每周生成 Markdown，你从里面挑候选题。
+2. 创作角度评估：判断这个热点有哪些可做角度，不写脚本。
+3. Codex 脚本 Brief：把选定角度整理成可交给 Codex skill 写正式稿的创作简报。
+
+暂时不在这个工具里生成最终脚本、视频方案或制作包，避免流程过早变复杂。`;
+
 function setStatus(message, type = "") {
   statusBox.textContent = message;
   statusBox.className = `status ${type}`.trim();
+}
+
+function setOutput(markdown) {
+  output.textContent = (markdown || "").trim() || defaultWorkspaceText;
+  localStorage.setItem(storageKeys.lastOutput, output.textContent);
 }
 
 function formData() {
@@ -168,7 +181,7 @@ function validateSelectedAngle(payload) {
 async function runStage(stage) {
   const payload = formData();
   if (!validateEventInput(payload)) return;
-  if (stage !== "topics" && !validateSelectedAngle(payload)) return;
+  if (stage === "script" && !validateSelectedAngle(payload)) return;
 
   localStorage.setItem(storageKeys.lastForm, JSON.stringify(payload));
   localStorage.setItem(storageKeys.selectedAngle, payload.selectedAngle);
@@ -194,24 +207,23 @@ async function runStage(stage) {
     const data = await response.json();
     if (!response.ok) throw new Error(data.error || "生成失败。");
 
-    appendStageOutput(label, data.text || "没有返回内容。");
+    appendStageOutput(data.text || "没有返回内容。");
     setStatus(`${label} 已生成。你可以修改后继续下一步。`, "success");
   } catch (error) {
-    appendStageOutput(label, `生成失败。\n\n${error.message}`);
+    appendStageOutput(`生成失败。\n\n${error.message}`);
     setStatus(error.message, "error");
   } finally {
     setButtonsDisabled(false);
   }
 }
 
-function appendStageOutput(label, text) {
+function appendStageOutput(text) {
   const current = output.textContent
     .replace(/\n?\n?---\n\n正在生成 .+$/s, "")
     .replace(/正在生成 .+$/s, "")
     .trim();
   const next = current && !current.startsWith("工作流：") ? `${current}\n\n---\n\n${text}` : text;
-  output.textContent = next.trim();
-  localStorage.setItem(storageKeys.lastOutput, output.textContent);
+  setOutput(next.trim());
 }
 
 function setButtonsDisabled(disabled) {
@@ -331,13 +343,7 @@ function downloadMarkdown() {
 }
 
 function clearWorkspace() {
-  output.textContent = `工作流：
-
-1. 每周雷达报告：龙虾每周生成 Markdown，你从里面挑候选题。
-2. 创作角度评估：判断这个热点有哪些可做角度，不写脚本。
-3. Codex 脚本 Brief：把选定角度整理成可交给 Codex skill 写正式稿的创作简报。
-
-暂时不在这个工具里生成最终脚本、视频方案或制作包，避免流程过早变复杂。`;
+  output.textContent = defaultWorkspaceText;
   selectedAngleInput.value = "";
   localStorage.removeItem(storageKeys.lastOutput);
   localStorage.removeItem(storageKeys.selectedAngle);
@@ -393,8 +399,7 @@ async function loadRadarReport() {
     const data = await response.json();
     if (!response.ok) throw new Error(data.error || "打开 radar 报告失败。");
 
-    output.textContent = data.text;
-    localStorage.setItem(storageKeys.lastOutput, output.textContent);
+    setOutput(data.text);
     setStatus("报告已打开。请从报告中挑一个候选题，复制到左侧热点输入框继续开发。", "success");
   } catch (error) {
     setStatus(error.message, "error");

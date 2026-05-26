@@ -3,3 +3,15 @@
 node_modules/
 downloads/
 outputs/
+**/node_modules/
+**/.cache/
+
+# Local generated media and source footage are too large for normal GitHub pushes.
+*.mp4
+*.mov
+*.webm
+*.mp3
+*.m4a
+*.wav
+*.aiff
+*.aif

@@ -98,6 +98,9 @@ http://localhost:5123
 - `docs/content-framework.md`
 - `docs/roadmap.md`
 - `docs/decision-log.md`
+- `docs/PROJECT_HANDOFF.md`
+- `docs/video-tool-requirements.md`
+- `video-tool/README.md`
 
 ## 下一步建设方向
 
@@ -108,4 +111,4 @@ http://localhost:5123
 - 保存每一次 Brief 生成记录。
 - 把输出拆成更清晰的标签页。
 - 增加资料来源和事实核查工作流。
-- 正式脚本确认后，再单独建设制作辅助模块：分镜、图片提示词、Ken Burns 镜头表、素材清单。
+- 正式脚本确认后，使用独立的 `video-tool/` 生成视觉分镜、图解规格和 image2 手动生图提示词；不要把视频流程塞回 Brief 工具。

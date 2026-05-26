@@ -1,0 +1,119 @@
+{
+  "title": "MiniMax TTS smoke test",
+  "createdAt": "2026-05-20T05:43:56.770Z",
+  "projectRoot": "/Users/xionglili/Desktop/youtube-history-script-tool/video/remotion/generated/minimax-tts-smoke-test-20260520T0543",
+  "notes": "Replace placeholder slots with real footage, archival video, maps, and licensed stills before final publishing.",
+  "narrationAudio": null,
+  "mediaSummary": {
+    "sourceDirectory": "/Users/xionglili/Desktop/youtube-history-script-tool/outputs/nixon-trump-structural-reversal",
+    "copied": [
+      {
+        "type": "image",
+        "originalName": "quick-draft-contact-sheet.jpg",
+        "publicPath": "assets/01-quick-draft-contact-sheet.jpg"
+      },
+      {
+        "type": "image",
+        "originalName": "quick-draft-v2-contact-sheet.jpg",
+        "publicPath": "assets/02-quick-draft-v2-contact-sheet.jpg"
+      },
+      {
+        "type": "video",
+        "originalName": "quick-draft-v2.mp4",
+        "publicPath": "assets/03-quick-draft-v2.mp4"
+      },
+      {
+        "type": "image",
+        "originalName": "quick-draft-v3-video-footage-contact-sheet.jpg",
+        "publicPath": "assets/04-quick-draft-v3-video-footage-contact-sheet.jpg"
+      },
+      {
+        "type": "video",
+        "originalName": "quick-draft-v3-video-footage.mp4",
+        "publicPath": "assets/05-quick-draft-v3-video-footage.mp4"
+      },
+      {
+        "type": "video",
+        "originalName": "quick-draft.mp4",
+        "publicPath": "assets/06-quick-draft.mp4"
+      }
+    ],
+    "narrationAudio": null,
+    "tts": {
+      "provider": "minimax",
+      "model": "speech-2.8-turbo",
+      "voiceId": "English_expressive_narrator",
+      "generatedClips": 3,
+      "fallback": ""
+    }
+  },
+  "ttsSummary": {
+    "provider": "minimax",
+    "model": "speech-2.8-turbo",
+    "voiceId": "English_expressive_narrator",
+    "generatedClips": 3,
+    "fallback": ""
+  },
+  "beats": [
+    {
+      "id": 1,
+      "durationSeconds": 7,
+      "kind": "title",
+      "narration": "This is a short MiniMax narration test.",
+      "screenText": "This is a short MiniMax narration test.",
+      "assetNeed": "Title card",
+      "searchKeywords": "MiniMax TTS smoke test documentary footage 1",
+      "media": {
+        "type": "video",
+        "src": "assets/03-quick-draft-v2.mp4",
+        "originalName": "quick-draft-v2.mp4"
+      },
+      "audio": {
+        "type": "generated",
+        "src": "assets/narration-01.mp3",
+        "provider": "minimax",
+        "voiceId": "English_expressive_narrator"
+      }
+    },
+    {
+      "id": 2,
+      "durationSeconds": 7,
+      "kind": "footage",
+      "narration": "The voice should be generated through the MiniMax text to speech API.",
+      "screenText": "The voice should be generated through the MiniMax text to speech API.",
+      "assetNeed": "Real moving footage required",
+      "searchKeywords": "MiniMax TTS smoke test documentary footage 2",
+      "media": {
+        "type": "video",
+        "src": "assets/05-quick-draft-v3-video-footage.mp4",
+        "originalName": "quick-draft-v3-video-footage.mp4"
+      },
+      "audio": {
+        "type": "generated",
+        "src": "assets/narration-02.mp3",
+        "provider": "minimax",
+        "voiceId": "English_expressive_narrator"
+      }
+    },
+    {
+      "id": 3,
+      "durationSeconds": 7,
+      "kind": "footage",
+      "narration": "Each sentence becomes a separate beat for the rough cut timeline.",
+      "screenText": "Each sentence becomes a separate beat for the rough cut timeline.",
+      "assetNeed": "Real moving footage required",
+      "searchKeywords": "MiniMax TTS smoke test documentary footage 3",
+      "media": {
+        "type": "video",
+        "src": "assets/06-quick-draft.mp4",
+        "originalName": "quick-draft.mp4"
+      },
+      "audio": {
+        "type": "generated",
+        "src": "assets/narration-03.mp3",
+        "provider": "minimax",
+        "voiceId": "English_expressive_narrator"
+      }
+    }
+  ]
+}

@@ -245,6 +245,56 @@ button.secondary:hover {
   color: #124c46;
 }
 
+.result-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  border-bottom: 1px solid var(--line);
+}
+
+.result-tab {
+  min-height: 38px;
+  border-color: transparent;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  color: var(--muted);
+  background: transparent;
+}
+
+.result-tab:hover {
+  color: var(--accent-dark);
+  background: #f4fbfa;
+}
+
+.result-tab.active {
+  border-color: var(--line);
+  border-bottom-color: var(--panel);
+  color: var(--accent-dark);
+  background: var(--panel);
+}
+
+.result-tab.has-content::after {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-left: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  vertical-align: middle;
+}
+
+.result-hint {
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px;
+  padding: 12px 14px;
+  color: #26433f;
+  background: #f7fcfa;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
 .output-panel {
   flex: 1;
   min-height: 520px;
