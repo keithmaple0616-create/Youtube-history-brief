@@ -125,6 +125,25 @@ visual-plan.json + asset-intake.json
 
 It does not download footage, call AI image generation, or create a final MP4. It creates an inspectable video skeleton so the creator can decide what footage, archive material, documents, diagrams, or generated illustrations must be added before final assembly.
 
+## Material Production Pack
+
+For real production, create or maintain a per-episode material pack before rendering:
+
+```text
+visual-mix-plan.md
+external-sourcing-prompts.md
+image2-prompts.md
+asset-intake-template.json
+```
+
+The Trump/Nixon example lives at:
+
+```text
+outputs/trump-china-nixon-material-production-pack/
+```
+
+Use this kind of pack to collect official/public-domain/licensed footage, archive material, documents, and maps first. Image2 prompts are only for atmosphere or metaphor. The older publish-candidate renderer that stitches existing local images together is not the target production workflow.
+
 ## Design Principles
 
 - Evidence is not decoration. Real official/public-domain/cleared material should be used where a factual claim needs proof.
