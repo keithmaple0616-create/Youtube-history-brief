@@ -1,0 +1,1468 @@
+{
+  "schemaVersion": 1,
+  "lane": "history",
+  "source": "script-to-video-plan",
+  "segmentation": {
+    "strategy": "section-aware semantic beats",
+    "beatCount": 27,
+    "target": "Each beat should be a visual decision, not a sentence card."
+  },
+  "principles": [
+    "Do not scrape proprietary news videos.",
+    "Use official/public-domain/cleared assets for evidence.",
+    "Use generated images only for illustration, atmosphere, metaphor, or historical reconstruction.",
+    "Prefer diagrams when the argument is structural.",
+    "Every beat should answer: evidence, explanation, atmosphere, or voice?"
+  ],
+  "beats": [
+    {
+      "id": "beat-001",
+      "order": 1,
+      "sectionTitle": "The Photograph That Deceives",
+      "sectionIndex": 0,
+      "visualNote": "Trump arriving in Beijing in May 2026, then a slow dissolve to Nixon stepping off Air Force One in 1972.",
+      "estimatedDurationSec": 12,
+      "role": "hook",
+      "type": "title-card",
+      "text": "Some photographs arrive already wearing someone else’s memory. When President Donald Trump landed in Beijing in May 2026, the comparison was almost too tempting. An American president. China. A carefully staged arrival. Cameras waiting for a handshake that would be inspected like an X-ray. For many Americans, there is only one historical template for that image: Richard Nixon in 1972. Nixon goes to China. The old enemy becomes a partner. A door opens. The world changes. It is one of the few diplomatic stories that can still survive as a simple phrase. Which is useful, because most diplomatic stories require maps, dates, footnotes, and a strong chair.",
+      "summary": "Some photographs arrive already wearing someone else’s memory. When President Donald Trump landed in Beijing in May 2026,...",
+      "visualLayerPriority": "brief title transition only",
+      "visualGoal": "kinetic text + atmosphere plate",
+      "sourcePolicy": "No factual footage required; generated/abstract background is acceptable.",
+      "rightsRisk": "low",
+      "fallback": "Editorial title card with subtle map or document texture.",
+      "assetSearchQueries": [],
+      "screenText": "THE COMPARISON WAS ALMOST TOO TEMPTING",
+      "caption": "Some photographs arrive already wearing someone else’s memory. When President Donald Trump landed in Beijing in May 2026, the comparison was almost",
+      "emphasis": "the comparison was almost too tempting"
+    },
+    {
+      "id": "beat-002",
+      "order": 2,
+      "sectionTitle": "The Photograph That Deceives",
+      "sectionIndex": 0,
+      "visualNote": "Trump arriving in Beijing in May 2026, then a slow dissolve to Nixon stepping off Air Force One in 1972.",
+      "estimatedDurationSec": 24,
+      "role": "argument",
+      "type": "diagram",
+      "text": "But the danger of a famous photograph is that it teaches us to look for the wrong thing. Trump’s China visit looked, on the surface, like a Nixon sequel. But underneath the image, the structure was almost the opposite. Nixon went to China because Washington and Beijing both feared a third power more than they feared each other: the Soviet Union. Trump went to China in a world where there is no equivalent Soviet shadow pulling the two sides together. That difference changes everything. The handshake may rhyme. The photograph may echo. But the strategic music is in a different key.",
+      "summary": "But the danger of a famous photograph is that it teaches us to look for the wrong thing....",
+      "visualLayerPriority": "code-native explanatory motion first, tiny captions second",
+      "visualGoal": "map / relationship diagram / process graphic",
+      "sourcePolicy": "Can be fully generated as graphics because it explains structure rather than proving an event.",
+      "rightsRisk": "low",
+      "fallback": "HyperFrames animated diagram.",
+      "assetSearchQueries": [],
+      "screenText": "the structure was almost the opposite",
+      "caption": "But the danger of a famous photograph is that it teaches us to look for the wrong thing. Trump’s China visit looked,",
+      "emphasis": "the structure was almost the opposite"
+    },
+    {
+      "id": "beat-003",
+      "order": 3,
+      "sectionTitle": "Why Nixon Really Went to China",
+      "sectionIndex": 1,
+      "visualNote": "1960s maps of the Sino-Soviet border, Vietnam War footage, Nixon and Kissinger in archive images.",
+      "estimatedDurationSec": 5,
+      "role": "chapter",
+      "type": "chapter-card",
+      "text": "Why Nixon Really Went to China",
+      "summary": "Why Nixon Really Went to China",
+      "visualLayerPriority": "brief title transition only",
+      "visualGoal": "chapter card / thesis card",
+      "sourcePolicy": "No factual footage required.",
+      "rightsRisk": "low",
+      "fallback": "Typography over generated paper/map texture.",
+      "assetSearchQueries": [],
+      "screenText": "Why Nixon Really Went to China",
+      "caption": "Why Nixon Really Went to China",
+      "emphasis": "Why Nixon Really Went to China"
+    },
+    {
+      "id": "beat-004",
+      "order": 4,
+      "sectionTitle": "Why Nixon Really Went to China",
+      "sectionIndex": 1,
+      "visualNote": "1960s maps of the Sino-Soviet border, Vietnam War footage, Nixon and Kissinger in archive images.",
+      "estimatedDurationSec": 24,
+      "role": "argument",
+      "type": "diagram",
+      "text": "The 1972 visit was not a sentimental act of reconciliation. It was strategy. By the late 1960s, the communist world was badly divided. China and the Soviet Union were not simply having an ideological disagreement at a conference table. In 1969, Chinese and Soviet forces clashed along the Ussuri River, most famously around Zhenbao Island, known in Russian as Damansky Island. That border conflict mattered because it made the split visible. The world could see that Beijing and Moscow were no longer one disciplined communist bloc. They were rivals, and potentially dangerous ones. For Nixon and Henry Kissinger, this opened a door.",
+      "summary": "The 1972 visit was not a sentimental act of reconciliation. It was strategy. By the late 1960s, the...",
+      "visualLayerPriority": "code-native explanatory motion first, tiny captions second",
+      "visualGoal": "map / relationship diagram / process graphic",
+      "sourcePolicy": "Can be fully generated as graphics because it explains structure rather than proving an event.",
+      "rightsRisk": "low",
+      "fallback": "HyperFrames animated diagram.",
+      "assetSearchQueries": [],
+      "screenText": "the communist world was badly divided",
+      "caption": "The 1972 visit was not a sentimental act of reconciliation. It was strategy. By the late 1960s, the communist world was badly",
+      "emphasis": "the communist world was badly divided"
+    },
+    {
+      "id": "beat-005",
+      "order": 5,
+      "sectionTitle": "Why Nixon Really Went to China",
+      "sectionIndex": 1,
+      "visualNote": "1960s maps of the Sino-Soviet border, Vietnam War footage, Nixon and Kissinger in archive images.",
+      "estimatedDurationSec": 24,
+      "role": "argument",
+      "type": "diagram",
+      "text": "The United States was stuck in Vietnam. The Cold War balance felt heavy and expensive. The Soviet Union was the central strategic competitor. If Washington could open a channel to Beijing, it could put pressure on Moscow, gain leverage in Vietnam, and remake the geometry of the Cold War. This was triangle diplomacy. It was not built on trust. It was built on calculation. China had its own reasons. Mao’s China faced the Soviet Union across a long and militarized border. It needed strategic space. A relationship with Washington could balance Moscow, even if the United States remained ideologically hostile.",
+      "summary": "The United States was stuck in Vietnam. The Cold War balance felt heavy and expensive. The Soviet Union...",
+      "visualLayerPriority": "code-native explanatory motion first, tiny captions second",
+      "visualGoal": "map / relationship diagram / process graphic",
+      "sourcePolicy": "Can be fully generated as graphics because it explains structure rather than proving an event.",
+      "rightsRisk": "low",
+      "fallback": "HyperFrames animated diagram.",
+      "assetSearchQueries": [],
+      "screenText": "The United States was stuck in Vietnam",
+      "caption": "The United States was stuck in Vietnam. The Cold War balance felt heavy and expensive. The Soviet Union was the central strategic",
+      "emphasis": "The United States was stuck in Vietnam"
+    },
+    {
+      "id": "beat-006",
+      "order": 6,
+      "sectionTitle": "Why Nixon Really Went to China",
+      "sectionIndex": 1,
+      "visualNote": "1960s maps of the Sino-Soviet border, Vietnam War footage, Nixon and Kissinger in archive images.",
+      "estimatedDurationSec": 24,
+      "role": "argument",
+      "type": "diagram",
+      "text": "That is why the Shanghai Communiqué could be both historic and carefully vague. It did not solve every disagreement. It did not erase Taiwan. It did not make China and America natural friends. It created a framework where both sides could cooperate because the larger structure gave them a reason to do so. In Chinese strategic language, there is an old phrase from the Warring States period: yuan jiao jin gong, often translated as “ally with the distant, attack the near.” Do not take that as a magic key to Chinese behavior. Ancient formulas are not software updates for modern states.",
+      "summary": "That is why the Shanghai Communiqué could be both historic and carefully vague. It did not solve every...",
+      "visualLayerPriority": "code-native explanatory motion first, tiny captions second",
+      "visualGoal": "map / relationship diagram / process graphic",
+      "sourcePolicy": "Can be fully generated as graphics because it explains structure rather than proving an event.",
+      "rightsRisk": "low",
+      "fallback": "HyperFrames animated diagram.",
+      "assetSearchQueries": [],
+      "screenText": "It did not solve every disagreement",
+      "caption": "That is why the Shanghai Communiqué could be both historic and carefully vague. It did not solve every disagreement. It did not",
+      "emphasis": "It did not solve every disagreement"
+    },
+    {
+      "id": "beat-007",
+      "order": 7,
+      "sectionTitle": "Why Nixon Really Went to China",
+      "sectionIndex": 1,
+      "visualNote": "1960s maps of the Sino-Soviet border, Vietnam War footage, Nixon and Kissinger in archive images.",
+      "estimatedDurationSec": 22,
+      "role": "argument",
+      "type": "diagram",
+      "text": "But the phrase does capture something about 1972. China and the United States were distant powers whose immediate anxieties converged against a nearer Soviet threat. The point was not friendship. The point was shi, the configuration of power, the direction of the situation. Nixon’s genius was not that he suddenly discovered kindness toward Beijing. It was that he saw the shape of the triangle.",
+      "summary": "But the phrase does capture something about 1972. China and the United States were distant powers whose immediate...",
+      "visualLayerPriority": "code-native explanatory motion first, tiny captions second",
+      "visualGoal": "map / relationship diagram / process graphic",
+      "sourcePolicy": "Can be fully generated as graphics because it explains structure rather than proving an event.",
+      "rightsRisk": "low",
+      "fallback": "HyperFrames animated diagram.",
+      "assetSearchQueries": [],
+      "screenText": "the direction of the situation",
+      "caption": "But the phrase does capture something about 1972. China and the United States were distant powers whose immediate anxieties converged against a",
+      "emphasis": "the direction of the situation"
+    },
+    {
+      "id": "beat-008",
+      "order": 8,
+      "sectionTitle": "A Summit Without Soviets",
+      "sectionIndex": 2,
+      "visualNote": "modern Beijing skyline, U.S. and Chinese flags, trade headlines, military footage in the Pacific.",
+      "estimatedDurationSec": 5,
+      "role": "chapter",
+      "type": "chapter-card",
+      "text": "A Summit Without Soviets",
+      "summary": "A Summit Without Soviets",
+      "visualLayerPriority": "brief title transition only",
+      "visualGoal": "chapter card / thesis card",
+      "sourcePolicy": "No factual footage required.",
+      "rightsRisk": "low",
+      "fallback": "Typography over generated paper/map texture.",
+      "assetSearchQueries": [],
+      "screenText": "A Summit Without Soviets",
+      "caption": "A Summit Without Soviets",
+      "emphasis": "A Summit Without Soviets"
+    },
+    {
+      "id": "beat-009",
+      "order": 9,
+      "sectionTitle": "A Summit Without Soviets",
+      "sectionIndex": 2,
+      "visualNote": "modern Beijing skyline, U.S. and Chinese flags, trade headlines, military footage in the Pacific.",
+      "estimatedDurationSec": 24,
+      "role": "argument",
+      "type": "diagram",
+      "text": "Now compare that with 2026. There is no Soviet Union sitting above the map, forcing Washington and Beijing into each other’s arms. Russia matters. Europe matters. Iran, Taiwan, semiconductors, artificial intelligence, supply chains, and the Pacific all matter. But none of these creates the simple strategic gravity that the Soviet Union created in 1972. That is why Trump’s visit was not an opening in the Nixon sense. It was risk management.",
+      "summary": "Now compare that with 2026. There is no Soviet Union sitting above the map, forcing Washington and Beijing...",
+      "visualLayerPriority": "code-native explanatory motion first, tiny captions second",
+      "visualGoal": "map / relationship diagram / process graphic",
+      "sourcePolicy": "Can be fully generated as graphics because it explains structure rather than proving an event.",
+      "rightsRisk": "low",
+      "fallback": "HyperFrames animated diagram.",
+      "assetSearchQueries": [],
+      "screenText": "Now compare that with 2026",
+      "caption": "Now compare that with 2026. There is no Soviet Union sitting above the map, forcing Washington and Beijing into each other’s arms.",
+      "emphasis": "Now compare that with 2026"
+    },
+    {
+      "id": "beat-010",
+      "order": 10,
+      "sectionTitle": "A Summit Without Soviets",
+      "sectionIndex": 2,
+      "visualNote": "modern Beijing skyline, U.S. and Chinese flags, trade headlines, military footage in the Pacific.",
+      "estimatedDurationSec": 24,
+      "role": "argument",
+      "type": "diagram",
+      "text": "According to public reporting, the May 2026 Beijing visit was framed around stabilizing the world’s most important bilateral relationship at a moment of pressure: trade disputes, war fears, technology competition, and anxieties over Taiwan and the wider Pacific. Chinese state media emphasized stability and respect. American coverage focused on deals, uncertainty, symbolism, and the possibility that big gestures might substitute for durable agreements. That is a very different world from 1972. Back then, the two sides were trying to build a bridge across an ideological gulf because both wanted leverage against Moscow. Today, they are trying to prevent the bridge itself from becoming a battlefield. The old Chinese strategic vocabulary helps again, but in reverse.",
+      "summary": "According to public reporting, the May 2026 Beijing visit was framed around stabilizing the world’s most important bilateral...",
+      "visualLayerPriority": "code-native explanatory motion first, tiny captions second",
+      "visualGoal": "map / relationship diagram / process graphic",
+      "sourcePolicy": "Can be fully generated as graphics because it explains structure rather than proving an event.",
+      "rightsRisk": "low",
+      "fallback": "HyperFrames animated diagram.",
+      "assetSearchQueries": [],
+      "screenText": "American coverage focused on deals",
+      "caption": "According to public reporting, the May 2026 Beijing visit was framed around stabilizing the world’s most important bilateral relationship at a moment",
+      "emphasis": "American coverage focused on deals"
+    },
+    {
+      "id": "beat-011",
+      "order": 11,
+      "sectionTitle": "A Summit Without Soviets",
+      "sectionIndex": 2,
+      "visualNote": "modern Beijing skyline, U.S. and Chinese flags, trade headlines, military footage in the Pacific.",
+      "estimatedDurationSec": 24,
+      "role": "argument",
+      "type": "diagram",
+      "text": "If yuan jiao jin gong worked when the distant power helped balance the near threat, what happens when the distant power becomes the near threat in every practical sense? China and America are geographically far apart. But economically, technologically, militarily, and politically, they are now pressed against each other. They are distant neighbors. That is a strange category. It belongs in diplomacy’s drawer of awkward objects, somewhere between “strategic partner” and “temporary understanding,” which usually means nobody wants to admit how fragile the arrangement is. So the visit mattered. But it mattered because both sides were managing danger, not because either side had discovered a new strategic marriage.",
+      "summary": "If yuan jiao jin gong worked when the distant power helped balance the near threat, what happens when...",
+      "visualLayerPriority": "code-native explanatory motion first, tiny captions second",
+      "visualGoal": "map / relationship diagram / process graphic",
+      "sourcePolicy": "Can be fully generated as graphics because it explains structure rather than proving an event.",
+      "rightsRisk": "low",
+      "fallback": "HyperFrames animated diagram.",
+      "assetSearchQueries": [],
+      "screenText": "they are now pressed against each other",
+      "caption": "If yuan jiao jin gong worked when the distant power helped balance the near threat, what happens when the distant power becomes",
+      "emphasis": "they are now pressed against each other"
+    },
+    {
+      "id": "beat-012",
+      "order": 12,
+      "sectionTitle": "When Economics Became a Minefield",
+      "sectionIndex": 3,
+      "visualNote": "container ports, chip fabrication plants, cargo ships, tariff headlines, rare earth mining imagery.",
+      "estimatedDurationSec": 5,
+      "role": "chapter",
+      "type": "chapter-card",
+      "text": "When Economics Became a Minefield",
+      "summary": "When Economics Became a Minefield",
+      "visualLayerPriority": "brief title transition only",
+      "visualGoal": "chapter card / thesis card",
+      "sourcePolicy": "No factual footage required.",
+      "rightsRisk": "low",
+      "fallback": "Typography over generated paper/map texture.",
+      "assetSearchQueries": [],
+      "screenText": "When Economics Became a Minefield",
+      "caption": "When Economics Became a Minefield",
+      "emphasis": "When Economics Became a Minefield"
+    },
+    {
+      "id": "beat-013",
+      "order": 13,
+      "sectionTitle": "When Economics Became a Minefield",
+      "sectionIndex": 3,
+      "visualNote": "container ports, chip fabrication plants, cargo ships, tariff headlines, rare earth mining imagery.",
+      "estimatedDurationSec": 24,
+      "role": "argument",
+      "type": "diagram",
+      "text": "One of the biggest differences between Nixon’s visit and Trump’s visit is economic. In 1972, the United States and China barely had an economic relationship. Trade was tiny. Investment was minimal. Supply chains did not bind the two societies together. That made the opening easier in one sense. There was not much to untangle. By the 1990s and 2000s, the story had changed completely. China’s integration into the global economy, especially after joining the World Trade Organization in 2001, helped create one of the deepest commercial relationships in modern history.",
+      "summary": "One of the biggest differences between Nixon’s visit and Trump’s visit is economic. In 1972, the United States...",
+      "visualLayerPriority": "code-native explanatory motion first, tiny captions second",
+      "visualGoal": "map / relationship diagram / process graphic",
+      "sourcePolicy": "Can be fully generated as graphics because it explains structure rather than proving an event.",
+      "rightsRisk": "low",
+      "fallback": "HyperFrames animated diagram.",
+      "assetSearchQueries": [],
+      "screenText": "the story had changed completely",
+      "caption": "One of the biggest differences between Nixon’s visit and Trump’s visit is economic. In 1972, the United States and China barely had",
+      "emphasis": "the story had changed completely"
+    },
+    {
+      "id": "beat-014",
+      "order": 14,
+      "sectionTitle": "When Economics Became a Minefield",
+      "sectionIndex": 3,
+      "visualNote": "container ports, chip fabrication plants, cargo ships, tariff headlines, rare earth mining imagery.",
+      "estimatedDurationSec": 24,
+      "role": "argument",
+      "type": "diagram",
+      "text": "For years, the language around that relationship was soothing. Trade would be a ballast. Investment would create incentives for stability. Consumers would benefit. Companies would lobby for calm. Markets would make war irrational. Some of that was true. But ballast can become cargo. Cargo can become leverage. Leverage can become a weapon. By the time of Trump’s first presidency, tariffs had returned as a central instrument of U.S.-China competition. Later, export controls, semiconductor restrictions, investment reviews, sanctions, supply-chain security rules, and Chinese controls over key materials all became part of a wider contest. The result is one of the great reversals of the last fifty years.",
+      "summary": "For years, the language around that relationship was soothing. Trade would be a ballast. Investment would create incentives...",
+      "visualLayerPriority": "code-native explanatory motion first, tiny captions second",
+      "visualGoal": "map / relationship diagram / process graphic",
+      "sourcePolicy": "Can be fully generated as graphics because it explains structure rather than proving an event.",
+      "rightsRisk": "low",
+      "fallback": "HyperFrames animated diagram.",
+      "assetSearchQueries": [],
+      "screenText": "Markets would make war irrational",
+      "caption": "For years, the language around that relationship was soothing. Trade would be a ballast. Investment would create incentives for stability. Consumers would",
+      "emphasis": "Markets would make war irrational"
+    },
+    {
+      "id": "beat-015",
+      "order": 15,
+      "sectionTitle": "When Economics Became a Minefield",
+      "sectionIndex": 3,
+      "visualNote": "container ports, chip fabrication plants, cargo ships, tariff headlines, rare earth mining imagery.",
+      "estimatedDurationSec": 24,
+      "role": "argument",
+      "type": "diagram",
+      "text": "In the Nixon era, economic contact was a bridge to be built. In the Trump era, economic contact is often a minefield to be mapped. This is where the Chinese historical lens becomes useful, if we use it carefully. In the traditional Chinese tributary order, trade was rarely just trade. It was connected to recognition, hierarchy, border management, and political order. Access to markets could be a tool of governance. Commercial permission could signal status. Ritual and exchange belonged to the same world. That does not mean modern China is trying to recreate the tribute system. That would be a lazy claim, and lazy claims have done enough damage already.",
+      "summary": "In the Nixon era, economic contact was a bridge to be built. In the Trump era, economic contact...",
+      "visualLayerPriority": "code-native explanatory motion first, tiny captions second",
+      "visualGoal": "map / relationship diagram / process graphic",
+      "sourcePolicy": "Can be fully generated as graphics because it explains structure rather than proving an event.",
+      "rightsRisk": "low",
+      "fallback": "HyperFrames animated diagram.",
+      "assetSearchQueries": [],
+      "screenText": "economic contact was a bridge to be built",
+      "caption": "In the Nixon era, economic contact was a bridge to be built. In the Trump era, economic contact is often a minefield",
+      "emphasis": "economic contact was a bridge to be built"
+    },
+    {
+      "id": "beat-016",
+      "order": 16,
+      "sectionTitle": "When Economics Became a Minefield",
+      "sectionIndex": 3,
+      "visualNote": "container ports, chip fabrication plants, cargo ships, tariff headlines, rare earth mining imagery.",
+      "estimatedDurationSec": 24,
+      "role": "argument",
+      "type": "diagram",
+      "text": "The point is more modest: in Chinese political history, commerce has often been understood as part of order, not separate from it. Modern Washington, meanwhile, is learning the same lesson from a different direction. Trade is not simply prices and containers. It is dependence, pressure, and national security. Both governments now treat economic connection as a strategic instrument. That may be rational. It is also dangerous. Because once every supply chain becomes a security question, every factory becomes a pressure point, and every app, chip, mineral, and port can be dragged into geopolitics. At that point, interdependence does not disappear. It becomes nervous.",
+      "summary": "The point is more modest: in Chinese political history, commerce has often been understood as part of order,...",
+      "visualLayerPriority": "code-native explanatory motion first, tiny captions second",
+      "visualGoal": "map / relationship diagram / process graphic",
+      "sourcePolicy": "Can be fully generated as graphics because it explains structure rather than proving an event.",
+      "rightsRisk": "low",
+      "fallback": "HyperFrames animated diagram.",
+      "assetSearchQueries": [],
+      "screenText": "every factory becomes a pressure point",
+      "caption": "The point is more modest: in Chinese political history, commerce has often been understood as part of order, not separate from it.",
+      "emphasis": "every factory becomes a pressure point"
+    },
+    {
+      "id": "beat-017",
+      "order": 17,
+      "sectionTitle": "Why Body Language Matters More Than the Communiqué",
+      "sectionIndex": 4,
+      "visualNote": "Great Hall of the People, Zhongnanhai photos if available, Mao meeting Nixon, modern summit room, banquet scenes.",
+      "estimatedDurationSec": 5,
+      "role": "chapter",
+      "type": "chapter-card",
+      "text": "Why Body Language Matters More Than the Communiqué",
+      "summary": "Why Body Language Matters More Than the Communiqué",
+      "visualLayerPriority": "brief title transition only",
+      "visualGoal": "chapter card / thesis card",
+      "sourcePolicy": "No factual footage required.",
+      "rightsRisk": "low",
+      "fallback": "Typography over generated paper/map texture.",
+      "assetSearchQueries": [],
+      "screenText": "Why Body Language Matters More Than the Communiqué",
+      "caption": "Why Body Language Matters More Than the Communiqué",
+      "emphasis": "Why Body Language Matters More Than the Communiqué"
+    },
+    {
+      "id": "beat-018",
+      "order": 18,
+      "sectionTitle": "Why Body Language Matters More Than the Communiqué",
+      "sectionIndex": 4,
+      "visualNote": "Great Hall of the People, Zhongnanhai photos if available, Mao meeting Nixon, modern summit room, banquet scenes.",
+      "estimatedDurationSec": 24,
+      "role": "argument",
+      "type": "evidence",
+      "text": "When agreements are thin, ritual becomes thick. That is why summit choreography matters. The room. The table. The walk. The banquet. The order of meetings. Who smiles first. Who speaks through an interpreter. Who is shown touring which site. Who appears relaxed, and who appears to be performing relaxation under the supervision of 200 cameras. In 1972, Nixon’s meeting with Mao was itself a message. Mao did not need to negotiate policy details. The fact of the meeting signaled that the Chinese leader had chosen to receive the American president. That was enough to rearrange the world’s imagination. In 2026, ritual still matters, but the audience is harsher.",
+      "summary": "When agreements are thin, ritual becomes thick. That is why summit choreography matters. The room. The table. The...",
+      "visualLayerPriority": "evidence first, captions second, diagram overlay only if needed",
+      "visualGoal": "official/public-domain/cleared still or video",
+      "sourcePolicy": "Use only official, public-domain, Creative Commons, or licensed material. Do not scrape news sites.",
+      "rightsRisk": "medium",
+      "fallback": "Source-labeled document treatment, archive still with parallax, or map timeline.",
+      "assetSearchQueries": [
+        "Nixon China visit public domain footage",
+        "Nixon Library China visit photos public domain"
+      ],
+      "screenText": "That is why summit choreography matters",
+      "caption": "When agreements are thin, ritual becomes thick. That is why summit choreography matters. The room. The table. The walk. The banquet. The",
+      "emphasis": "That is why summit choreography matters"
+    },
+    {
+      "id": "beat-019",
+      "order": 19,
+      "sectionTitle": "Why Body Language Matters More Than the Communiqué",
+      "sectionIndex": 4,
+      "visualNote": "Great Hall of the People, Zhongnanhai photos if available, Mao meeting Nixon, modern summit room, banquet scenes.",
+      "estimatedDurationSec": 24,
+      "role": "argument",
+      "type": "diagram",
+      "text": "Every image from Trump’s Beijing visit had at least three audiences: the American public, the Chinese public, and the wider world of allies, rivals, investors, militaries, and nervous officials trying to read the weather. This is where Chinese political culture offers another useful camera. In the old tributary system, ritual was not decorative. It made order visible. The journey of an envoy, the reception ceremony, the language of tribute and return gifts, the arrangement of bodies in a room — these were not small details. They were political grammar. Modern diplomacy is not the tribute system. Presidents are not imperial envoys. The international system is built, at least formally, on sovereign equality. But power still needs theater.",
+      "summary": "Every image from Trump’s Beijing visit had at least three audiences: the American public, the Chinese public, and...",
+      "visualLayerPriority": "code-native explanatory motion first, tiny captions second",
+      "visualGoal": "map / relationship diagram / process graphic",
+      "sourcePolicy": "Can be fully generated as graphics because it explains structure rather than proving an event.",
+      "rightsRisk": "low",
+      "fallback": "HyperFrames animated diagram.",
+      "assetSearchQueries": [],
+      "screenText": "the arrangement of bodies in a room",
+      "caption": "Every image from Trump’s Beijing visit had at least three audiences: the American public, the Chinese public, and the wider world of",
+      "emphasis": "the arrangement of bodies in a room"
+    },
+    {
+      "id": "beat-020",
+      "order": 20,
+      "sectionTitle": "Why Body Language Matters More Than the Communiqué",
+      "sectionIndex": 4,
+      "visualNote": "Great Hall of the People, Zhongnanhai photos if available, Mao meeting Nixon, modern summit room, banquet scenes.",
+      "estimatedDurationSec": 24,
+      "role": "argument",
+      "type": "diagram",
+      "text": "All great powers use it. Washington uses aircraft carriers, joint statements, flags, and Oval Office seating. Beijing uses protocol, venue, historical symbolism, and the careful choreography of access. The difference now is that ideology has returned to the table more openly. During the high era of globalization, many people hoped that economics would soften political difference. Today, governance models, technology standards, media narratives, and security fears are all part of the competition. Even a handshake is no longer just a handshake. It has to survive domestic politics.",
+      "summary": "All great powers use it. Washington uses aircraft carriers, joint statements, flags, and Oval Office seating. Beijing uses...",
+      "visualLayerPriority": "code-native explanatory motion first, tiny captions second",
+      "visualGoal": "map / relationship diagram / process graphic",
+      "sourcePolicy": "Can be fully generated as graphics because it explains structure rather than proving an event.",
+      "rightsRisk": "low",
+      "fallback": "HyperFrames animated diagram.",
+      "assetSearchQueries": [],
+      "screenText": "During the high era of globalization",
+      "caption": "All great powers use it. Washington uses aircraft carriers, joint statements, flags, and Oval Office seating. Beijing uses protocol, venue, historical symbolism,",
+      "emphasis": "During the high era of globalization"
+    },
+    {
+      "id": "beat-021",
+      "order": 21,
+      "sectionTitle": "Why Body Language Matters More Than the Communiqué",
+      "sectionIndex": 4,
+      "visualNote": "Great Hall of the People, Zhongnanhai photos if available, Mao meeting Nixon, modern summit room, banquet scenes.",
+      "estimatedDurationSec": 16,
+      "role": "argument",
+      "type": "diagram",
+      "text": "Nixon could present China as a strategic surprise. Trump had to present China as a relationship he could manage without looking weak. Xi had to receive Trump without looking dependent on American approval. That is a lot of work for one photograph. No wonder diplomats look tired.",
+      "summary": "Nixon could present China as a strategic surprise. Trump had to present China as a relationship he could...",
+      "visualLayerPriority": "code-native explanatory motion first, tiny captions second",
+      "visualGoal": "map / relationship diagram / process graphic",
+      "sourcePolicy": "Can be fully generated as graphics because it explains structure rather than proving an event.",
+      "rightsRisk": "low",
+      "fallback": "HyperFrames animated diagram.",
+      "assetSearchQueries": [],
+      "screenText": "That is a lot of work for one photograph",
+      "caption": "Nixon could present China as a strategic surprise. Trump had to present China as a relationship he could manage without looking weak.",
+      "emphasis": "That is a lot of work for one photograph"
+    },
+    {
+      "id": "beat-022",
+      "order": 22,
+      "sectionTitle": "The Next Ten Years Won’t Look Like the Last Fifty",
+      "sectionIndex": 5,
+      "visualNote": "U.S.-China maps, Pacific shipping lanes, archival Nixon footage fading into modern Beijing night skyline.",
+      "estimatedDurationSec": 5,
+      "role": "chapter",
+      "type": "chapter-card",
+      "text": "The Next Ten Years Won’t Look Like the Last Fifty",
+      "summary": "The Next Ten Years Won’t Look Like the Last Fifty",
+      "visualLayerPriority": "brief title transition only",
+      "visualGoal": "chapter card / thesis card",
+      "sourcePolicy": "No factual footage required.",
+      "rightsRisk": "low",
+      "fallback": "Typography over generated paper/map texture.",
+      "assetSearchQueries": [],
+      "screenText": "The Next Ten Years Won’t Look Like the Last Fifty",
+      "caption": "The Next Ten Years Won’t Look Like the Last Fifty",
+      "emphasis": "The Next Ten Years Won’t Look Like the Last Fifty"
+    },
+    {
+      "id": "beat-023",
+      "order": 23,
+      "sectionTitle": "The Next Ten Years Won’t Look Like the Last Fifty",
+      "sectionIndex": 5,
+      "visualNote": "U.S.-China maps, Pacific shipping lanes, archival Nixon footage fading into modern Beijing night skyline.",
+      "estimatedDurationSec": 24,
+      "role": "argument",
+      "type": "diagram",
+      "text": "The Nixon model is gone. That does not mean diplomacy is useless. It means we should stop asking diplomacy to do the wrong historical job. In 1972, the challenge was to use a shared strategic fear to open a closed relationship. In 2026, the challenge is to manage a deeply connected relationship after the shared strategic foundation has disappeared. That is harder in some ways. The United States and China are not isolated from each other. They are entangled. Their competition runs through trade, technology, military planning, finance, universities, media, public opinion, and the daily lives of ordinary people who would very much prefer that great-power rivalry not raise the price of everything they buy.",
+      "summary": "The Nixon model is gone. That does not mean diplomacy is useless. It means we should stop asking...",
+      "visualLayerPriority": "code-native explanatory motion first, tiny captions second",
+      "visualGoal": "map / relationship diagram / process graphic",
+      "sourcePolicy": "Can be fully generated as graphics because it explains structure rather than proving an event.",
+      "rightsRisk": "low",
+      "fallback": "HyperFrames animated diagram.",
+      "assetSearchQueries": [],
+      "screenText": "Their competition runs through trade",
+      "caption": "The Nixon model is gone. That does not mean diplomacy is useless. It means we should stop asking diplomacy to do the",
+      "emphasis": "Their competition runs through trade"
+    },
+    {
+      "id": "beat-024",
+      "order": 24,
+      "sectionTitle": "The Next Ten Years Won’t Look Like the Last Fifty",
+      "sectionIndex": 5,
+      "visualNote": "U.S.-China maps, Pacific shipping lanes, archival Nixon footage fading into modern Beijing night skyline.",
+      "estimatedDurationSec": 24,
+      "role": "argument",
+      "type": "diagram",
+      "text": "The best historical comparison may not be Nixon’s opening. It may be the strange machinery of Cold War crisis management: hotlines, arms-control talks, quiet channels, rules of the road, and the disciplined art of not mistaking every provocation for the beginning of the end. But even that comparison has limits. The U.S.-Soviet rivalry had a brutally clear center: nuclear confrontation. U.S.-China rivalry is more diffuse. There are nuclear risks, yes, but also chips, shipping lanes, currencies, data, minerals, alliances, sanctions, universities, and domestic politics. There is no single red line glowing on the map. There are many lines, some bright, some invisible, some drawn by people who may not agree where the ink begins.",
+      "summary": "The best historical comparison may not be Nixon’s opening. It may be the strange machinery of Cold War...",
+      "visualLayerPriority": "code-native explanatory motion first, tiny captions second",
+      "visualGoal": "map / relationship diagram / process graphic",
+      "sourcePolicy": "Can be fully generated as graphics because it explains structure rather than proving an event.",
+      "rightsRisk": "low",
+      "fallback": "HyperFrames animated diagram.",
+      "assetSearchQueries": [],
+      "screenText": "But even that comparison has limits",
+      "caption": "The best historical comparison may not be Nixon’s opening. It may be the strange machinery of Cold War crisis management: hotlines, arms-control",
+      "emphasis": "But even that comparison has limits"
+    },
+    {
+      "id": "beat-025",
+      "order": 25,
+      "sectionTitle": "The Next Ten Years Won’t Look Like the Last Fifty",
+      "sectionIndex": 5,
+      "visualNote": "U.S.-China maps, Pacific shipping lanes, archival Nixon footage fading into modern Beijing night skyline.",
+      "estimatedDurationSec": 24,
+      "role": "argument",
+      "type": "diagram",
+      "text": "Chinese strategists have long emphasized shi: the tendency of a situation, the momentum of forces, the changing configuration that wise actors must read before they act. That concept is useful here because it warns against nostalgia. The shi of 1972 is gone. The shape of power has changed. The triangle is broken. The economic bridge has become a strategic instrument. The ritual remains, but the meaning of the ritual has shifted. So Trump’s visit to China should not be judged by whether it recreates Nixon. It cannot.",
+      "summary": "Chinese strategists have long emphasized shi: the tendency of a situation, the momentum of forces, the changing configuration...",
+      "visualLayerPriority": "code-native explanatory motion first, tiny captions second",
+      "visualGoal": "map / relationship diagram / process graphic",
+      "sourcePolicy": "Can be fully generated as graphics because it explains structure rather than proving an event.",
+      "rightsRisk": "low",
+      "fallback": "HyperFrames animated diagram.",
+      "assetSearchQueries": [],
+      "screenText": "but the meaning of the ritual has shifted",
+      "caption": "Chinese strategists have long emphasized shi: the tendency of a situation, the momentum of forces, the changing configuration that wise actors must",
+      "emphasis": "but the meaning of the ritual has shifted"
+    },
+    {
+      "id": "beat-026",
+      "order": 26,
+      "sectionTitle": "The Next Ten Years Won’t Look Like the Last Fifty",
+      "sectionIndex": 5,
+      "visualNote": "U.S.-China maps, Pacific shipping lanes, archival Nixon footage fading into modern Beijing night skyline.",
+      "estimatedDurationSec": 24,
+      "role": "closing",
+      "type": "diagram",
+      "text": "The better question is whether it helps build habits of managed hostility: channels that survive anger, procedures that reduce miscalculation, language that allows both sides to step back without humiliation, and enough strategic patience to keep competition from becoming collapse. That is not inspiring. It is not the stuff of a grand historical photograph. But it may be the kind of peace available to us now. In 1972, China and America could look past each other toward a common threat. Today, they have to look directly at each other and still find a way not to fall.",
+      "summary": "The better question is whether it helps build habits of managed hostility: channels that survive anger, procedures that...",
+      "visualLayerPriority": "code-native explanatory motion first, tiny captions second",
+      "visualGoal": "map / relationship diagram / process graphic",
+      "sourcePolicy": "Can be fully generated as graphics because it explains structure rather than proving an event.",
+      "rightsRisk": "low",
+      "fallback": "HyperFrames animated diagram.",
+      "assetSearchQueries": [],
+      "screenText": "procedures that reduce miscalculation",
+      "caption": "The better question is whether it helps build habits of managed hostility: channels that survive anger, procedures that reduce miscalculation, language that",
+      "emphasis": "procedures that reduce miscalculation"
+    },
+    {
+      "id": "beat-027",
+      "order": 27,
+      "sectionTitle": "The Next Ten Years Won’t Look Like the Last Fifty",
+      "sectionIndex": 5,
+      "visualNote": "U.S.-China maps, Pacific shipping lanes, archival Nixon footage fading into modern Beijing night skyline.",
+      "estimatedDurationSec": 16,
+      "role": "closing",
+      "type": "diagram",
+      "text": "If there is no shared enemy strong enough to define the relationship, then what will keep these two powers from drifting into a conflict neither one says it wants? That is the question behind the handshake. And it will last much longer than the photograph.",
+      "summary": "If there is no shared enemy strong enough to define the relationship, then what will keep these two...",
+      "visualLayerPriority": "code-native explanatory motion first, tiny captions second",
+      "visualGoal": "map / relationship diagram / process graphic",
+      "sourcePolicy": "Can be fully generated as graphics because it explains structure rather than proving an event.",
+      "rightsRisk": "low",
+      "fallback": "HyperFrames animated diagram.",
+      "assetSearchQueries": [],
+      "screenText": "That is the question behind the handshake",
+      "caption": "If there is no shared enemy strong enough to define the relationship, then what will keep these two powers from drifting into",
+      "emphasis": "That is the question behind the handshake"
+    }
+  ],
+  "imagePrompts": [
+    {
+      "id": "gen-001",
+      "beatId": "beat-001",
+      "use": "hook",
+      "purpose": "background plate or fallback",
+      "prompt": "Create a 16:9 editorial documentary illustration. Subject: an archival intelligence briefing table with maps, diplomatic cables, redacted papers, and a subtle world map glow, no readable text Narrative moment: Some photographs arrive already wearing someone else’s memory. When President Donald Trump landed in Beijing in May 2026,... Chapter context: The Photograph That Deceives. Lane: history. Composition: cinematic wide frame, layered foreground/midground/background, one clear focal object, strong directional light, usable negative space in the upper-left or lower-right for later typography, no text baked into the image. Style: premium editorial documentary, realistic lighting, subtle 2.5D depth cues, dark archive canvas, cold blue shadows, diplomatic red accents, aged map gold, paper and film grain, not glossy stock photography, not a poster, not a presentation slide. Camera language: 35mm documentary lens, low contrast shadows, shallow atmospheric depth, a frame that can hold slow parallax movement. Safety and accuracy: do not depict real current politicians, do not fabricate a news photo, do not create fake screenshots, no logos, no watermarks, no legible invented documents.",
+      "saveAs": "assets/generated/beat-001-background.png",
+      "mustLabelOnScreen": "Optional"
+    },
+    {
+      "id": "gen-002",
+      "beatId": "beat-003",
+      "use": "chapter",
+      "purpose": "background plate or fallback",
+      "prompt": "Create a 16:9 editorial documentary illustration. Subject: a dark museum-like chapter background with archival paper, map fragments, and a single shaft of light, no readable text Narrative moment: Why Nixon Really Went to China Chapter context: Why Nixon Really Went to China. Lane: history. Composition: cinematic wide frame, layered foreground/midground/background, one clear focal object, strong directional light, usable negative space in the upper-left or lower-right for later typography, no text baked into the image. Style: premium editorial documentary, realistic lighting, subtle 2.5D depth cues, dark archive canvas, cold blue shadows, diplomatic red accents, aged map gold, paper and film grain, not glossy stock photography, not a poster, not a presentation slide. Camera language: 35mm documentary lens, low contrast shadows, shallow atmospheric depth, a frame that can hold slow parallax movement. Safety and accuracy: do not depict real current politicians, do not fabricate a news photo, do not create fake screenshots, no logos, no watermarks, no legible invented documents.",
+      "saveAs": "assets/generated/beat-003-background.png",
+      "mustLabelOnScreen": "Optional"
+    },
+    {
+      "id": "gen-003",
+      "beatId": "beat-008",
+      "use": "chapter",
+      "purpose": "background plate or fallback",
+      "prompt": "Create a 16:9 editorial documentary illustration. Subject: a dark museum-like chapter background with archival paper, map fragments, and a single shaft of light, no readable text Narrative moment: A Summit Without Soviets Chapter context: A Summit Without Soviets. Lane: history. Composition: cinematic wide frame, layered foreground/midground/background, one clear focal object, strong directional light, usable negative space in the upper-left or lower-right for later typography, no text baked into the image. Style: premium editorial documentary, realistic lighting, subtle 2.5D depth cues, dark archive canvas, cold blue shadows, diplomatic red accents, aged map gold, paper and film grain, not glossy stock photography, not a poster, not a presentation slide. Camera language: 35mm documentary lens, low contrast shadows, shallow atmospheric depth, a frame that can hold slow parallax movement. Safety and accuracy: do not depict real current politicians, do not fabricate a news photo, do not create fake screenshots, no logos, no watermarks, no legible invented documents.",
+      "saveAs": "assets/generated/beat-008-background.png",
+      "mustLabelOnScreen": "Optional"
+    },
+    {
+      "id": "gen-004",
+      "beatId": "beat-012",
+      "use": "chapter",
+      "purpose": "background plate or fallback",
+      "prompt": "Create a 16:9 editorial documentary illustration. Subject: a dark museum-like chapter background with archival paper, map fragments, and a single shaft of light, no readable text Narrative moment: When Economics Became a Minefield Chapter context: When Economics Became a Minefield. Lane: history. Composition: cinematic wide frame, layered foreground/midground/background, one clear focal object, strong directional light, usable negative space in the upper-left or lower-right for later typography, no text baked into the image. Style: premium editorial documentary, realistic lighting, subtle 2.5D depth cues, dark archive canvas, cold blue shadows, diplomatic red accents, aged map gold, paper and film grain, not glossy stock photography, not a poster, not a presentation slide. Camera language: 35mm documentary lens, low contrast shadows, shallow atmospheric depth, a frame that can hold slow parallax movement. Safety and accuracy: do not depict real current politicians, do not fabricate a news photo, do not create fake screenshots, no logos, no watermarks, no legible invented documents.",
+      "saveAs": "assets/generated/beat-012-background.png",
+      "mustLabelOnScreen": "Optional"
+    },
+    {
+      "id": "gen-005",
+      "beatId": "beat-017",
+      "use": "chapter",
+      "purpose": "background plate or fallback",
+      "prompt": "Create a 16:9 editorial documentary illustration. Subject: a dark museum-like chapter background with archival paper, map fragments, and a single shaft of light, no readable text Narrative moment: Why Body Language Matters More Than the Communiqué Chapter context: Why Body Language Matters More Than the Communiqué. Lane: history. Composition: cinematic wide frame, layered foreground/midground/background, one clear focal object, strong directional light, usable negative space in the upper-left or lower-right for later typography, no text baked into the image. Style: premium editorial documentary, realistic lighting, subtle 2.5D depth cues, dark archive canvas, cold blue shadows, diplomatic red accents, aged map gold, paper and film grain, not glossy stock photography, not a poster, not a presentation slide. Camera language: 35mm documentary lens, low contrast shadows, shallow atmospheric depth, a frame that can hold slow parallax movement. Safety and accuracy: do not depict real current politicians, do not fabricate a news photo, do not create fake screenshots, no logos, no watermarks, no legible invented documents.",
+      "saveAs": "assets/generated/beat-017-background.png",
+      "mustLabelOnScreen": "Optional"
+    },
+    {
+      "id": "gen-006",
+      "beatId": "beat-022",
+      "use": "chapter",
+      "purpose": "background plate or fallback",
+      "prompt": "Create a 16:9 editorial documentary illustration. Subject: a dark museum-like chapter background with archival paper, map fragments, and a single shaft of light, no readable text Narrative moment: The Next Ten Years Won’t Look Like the Last Fifty Chapter context: The Next Ten Years Won’t Look Like the Last Fifty. Lane: history. Composition: cinematic wide frame, layered foreground/midground/background, one clear focal object, strong directional light, usable negative space in the upper-left or lower-right for later typography, no text baked into the image. Style: premium editorial documentary, realistic lighting, subtle 2.5D depth cues, dark archive canvas, cold blue shadows, diplomatic red accents, aged map gold, paper and film grain, not glossy stock photography, not a poster, not a presentation slide. Camera language: 35mm documentary lens, low contrast shadows, shallow atmospheric depth, a frame that can hold slow parallax movement. Safety and accuracy: do not depict real current politicians, do not fabricate a news photo, do not create fake screenshots, no logos, no watermarks, no legible invented documents.",
+      "saveAs": "assets/generated/beat-022-background.png",
+      "mustLabelOnScreen": "Optional"
+    },
+    {
+      "id": "gen-007",
+      "beatId": "beat-027",
+      "use": "closing",
+      "purpose": "background plate or fallback",
+      "prompt": "Create a 16:9 editorial documentary illustration. Subject: a strategic geometry study on an archive table: triangular force lines, shifting weights, map pins, and shadowed documents, no readable text Narrative moment: If there is no shared enemy strong enough to define the relationship, then what will keep these two... Chapter context: The Next Ten Years Won’t Look Like the Last Fifty. Lane: history. Composition: cinematic wide frame, layered foreground/midground/background, one clear focal object, strong directional light, usable negative space in the upper-left or lower-right for later typography, no text baked into the image. Style: premium editorial documentary, realistic lighting, subtle 2.5D depth cues, dark archive canvas, cold blue shadows, diplomatic red accents, aged map gold, paper and film grain, not glossy stock photography, not a poster, not a presentation slide. Camera language: 35mm documentary lens, low contrast shadows, shallow atmospheric depth, a frame that can hold slow parallax movement. Safety and accuracy: do not depict real current politicians, do not fabricate a news photo, do not create fake screenshots, no logos, no watermarks, no legible invented documents.",
+      "saveAs": "assets/generated/beat-027-background.png",
+      "mustLabelOnScreen": "Optional"
+    }
+  ],
+  "diagramSpecs": [
+    {
+      "id": "diagram-001",
+      "beatId": "beat-002",
+      "kind": "map",
+      "sectionTitle": "The Photograph That Deceives",
+      "goal": "But the danger of a famous photograph is that it teaches us to look for the wrong thing....",
+      "sourceText": "But the danger of a famous photograph is that it teaches us to look for the wrong thing. Trump’s China visit looked, on the surface, like a Nixon sequel. But underneath the image, the structure was almost the opposite. Nixon went to China because Washington and Beijing both feared a third power more than they feared each other: the Soviet Union. Trump went to China in a world where there is no equivalent Soviet shadow pulling the two sides together. That difference changes everything. The handshake may rhyme. The photograph may echo. But the strategic music is in a different key.",
+      "requiredLabels": [
+        "U.S.",
+        "China",
+        "Soviet Union",
+        "shared pressure",
+        "strategic opening"
+      ],
+      "visualLayers": [
+        "dark basemap",
+        "actor nodes",
+        "route or pressure lines",
+        "risk highlights",
+        "source note"
+      ],
+      "dataNeeds": [],
+      "animation": [
+        "map fades in",
+        "nodes pulse",
+        "route line grows",
+        "risk label appears"
+      ],
+      "style": "dark editorial documentary, restrained red/blue/gold accents, source labels, safe-zone text",
+      "implementationHint": "Build as HyperFrames/HTML first; keep all labels editable in code rather than baked into images."
+    },
+    {
+      "id": "diagram-002",
+      "beatId": "beat-004",
+      "kind": "map",
+      "sectionTitle": "Why Nixon Really Went to China",
+      "goal": "The 1972 visit was not a sentimental act of reconciliation. It was strategy. By the late 1960s, the...",
+      "sourceText": "The 1972 visit was not a sentimental act of reconciliation. It was strategy. By the late 1960s, the communist world was badly divided. China and the Soviet Union were not simply having an ideological disagreement at a conference table. In 1969, Chinese and Soviet forces clashed along the Ussuri River, most famously around Zhenbao Island, known in Russian as Damansky Island. That border conflict mattered because it made the split visible. The world could see that Beijing and Moscow were no longer one disciplined communist bloc. They were rivals, and potentially dangerous ones. For Nixon and Henry Kissinger, this opened a door.",
+      "requiredLabels": [
+        "U.S.",
+        "China",
+        "Soviet Union",
+        "shared pressure",
+        "strategic opening"
+      ],
+      "visualLayers": [
+        "dark basemap",
+        "actor nodes",
+        "route or pressure lines",
+        "risk highlights",
+        "source note"
+      ],
+      "dataNeeds": [],
+      "animation": [
+        "map fades in",
+        "nodes pulse",
+        "route line grows",
+        "risk label appears"
+      ],
+      "style": "dark editorial documentary, restrained red/blue/gold accents, source labels, safe-zone text",
+      "implementationHint": "Build as HyperFrames/HTML first; keep all labels editable in code rather than baked into images."
+    },
+    {
+      "id": "diagram-003",
+      "beatId": "beat-005",
+      "kind": "map",
+      "sectionTitle": "Why Nixon Really Went to China",
+      "goal": "The United States was stuck in Vietnam. The Cold War balance felt heavy and expensive. The Soviet Union...",
+      "sourceText": "The United States was stuck in Vietnam. The Cold War balance felt heavy and expensive. The Soviet Union was the central strategic competitor. If Washington could open a channel to Beijing, it could put pressure on Moscow, gain leverage in Vietnam, and remake the geometry of the Cold War. This was triangle diplomacy. It was not built on trust. It was built on calculation. China had its own reasons. Mao’s China faced the Soviet Union across a long and militarized border. It needed strategic space. A relationship with Washington could balance Moscow, even if the United States remained ideologically hostile.",
+      "requiredLabels": [
+        "U.S.",
+        "China",
+        "Soviet Union",
+        "shared pressure",
+        "strategic opening"
+      ],
+      "visualLayers": [
+        "dark basemap",
+        "actor nodes",
+        "route or pressure lines",
+        "risk highlights",
+        "source note"
+      ],
+      "dataNeeds": [],
+      "animation": [
+        "map fades in",
+        "nodes pulse",
+        "route line grows",
+        "risk label appears"
+      ],
+      "style": "dark editorial documentary, restrained red/blue/gold accents, source labels, safe-zone text",
+      "implementationHint": "Build as HyperFrames/HTML first; keep all labels editable in code rather than baked into images."
+    },
+    {
+      "id": "diagram-004",
+      "beatId": "beat-006",
+      "kind": "map",
+      "sectionTitle": "Why Nixon Really Went to China",
+      "goal": "That is why the Shanghai Communiqué could be both historic and carefully vague. It did not solve every...",
+      "sourceText": "That is why the Shanghai Communiqué could be both historic and carefully vague. It did not solve every disagreement. It did not erase Taiwan. It did not make China and America natural friends. It created a framework where both sides could cooperate because the larger structure gave them a reason to do so. In Chinese strategic language, there is an old phrase from the Warring States period: yuan jiao jin gong, often translated as “ally with the distant, attack the near.” Do not take that as a magic key to Chinese behavior. Ancient formulas are not software updates for modern states.",
+      "requiredLabels": [
+        "Washington",
+        "Beijing",
+        "Moscow",
+        "Pacific"
+      ],
+      "visualLayers": [
+        "dark basemap",
+        "actor nodes",
+        "route or pressure lines",
+        "risk highlights",
+        "source note"
+      ],
+      "dataNeeds": [],
+      "animation": [
+        "map fades in",
+        "nodes pulse",
+        "route line grows",
+        "risk label appears"
+      ],
+      "style": "dark editorial documentary, restrained red/blue/gold accents, source labels, safe-zone text",
+      "implementationHint": "Build as HyperFrames/HTML first; keep all labels editable in code rather than baked into images."
+    },
+    {
+      "id": "diagram-005",
+      "beatId": "beat-007",
+      "kind": "map",
+      "sectionTitle": "Why Nixon Really Went to China",
+      "goal": "But the phrase does capture something about 1972. China and the United States were distant powers whose immediate...",
+      "sourceText": "But the phrase does capture something about 1972. China and the United States were distant powers whose immediate anxieties converged against a nearer Soviet threat. The point was not friendship. The point was shi, the configuration of power, the direction of the situation. Nixon’s genius was not that he suddenly discovered kindness toward Beijing. It was that he saw the shape of the triangle.",
+      "requiredLabels": [
+        "U.S.",
+        "China",
+        "Soviet Union",
+        "shared pressure",
+        "strategic opening"
+      ],
+      "visualLayers": [
+        "dark basemap",
+        "actor nodes",
+        "route or pressure lines",
+        "risk highlights",
+        "source note"
+      ],
+      "dataNeeds": [],
+      "animation": [
+        "map fades in",
+        "nodes pulse",
+        "route line grows",
+        "risk label appears"
+      ],
+      "style": "dark editorial documentary, restrained red/blue/gold accents, source labels, safe-zone text",
+      "implementationHint": "Build as HyperFrames/HTML first; keep all labels editable in code rather than baked into images."
+    },
+    {
+      "id": "diagram-006",
+      "beatId": "beat-009",
+      "kind": "map",
+      "sectionTitle": "A Summit Without Soviets",
+      "goal": "Now compare that with 2026. There is no Soviet Union sitting above the map, forcing Washington and Beijing...",
+      "sourceText": "Now compare that with 2026. There is no Soviet Union sitting above the map, forcing Washington and Beijing into each other’s arms. Russia matters. Europe matters. Iran, Taiwan, semiconductors, artificial intelligence, supply chains, and the Pacific all matter. But none of these creates the simple strategic gravity that the Soviet Union created in 1972. That is why Trump’s visit was not an opening in the Nixon sense. It was risk management.",
+      "requiredLabels": [
+        "U.S.",
+        "China",
+        "Soviet Union",
+        "shared pressure",
+        "strategic opening"
+      ],
+      "visualLayers": [
+        "dark basemap",
+        "actor nodes",
+        "route or pressure lines",
+        "risk highlights",
+        "source note"
+      ],
+      "dataNeeds": [],
+      "animation": [
+        "map fades in",
+        "nodes pulse",
+        "route line grows",
+        "risk label appears"
+      ],
+      "style": "dark editorial documentary, restrained red/blue/gold accents, source labels, safe-zone text",
+      "implementationHint": "Build as HyperFrames/HTML first; keep all labels editable in code rather than baked into images."
+    },
+    {
+      "id": "diagram-007",
+      "beatId": "beat-010",
+      "kind": "map",
+      "sectionTitle": "A Summit Without Soviets",
+      "goal": "According to public reporting, the May 2026 Beijing visit was framed around stabilizing the world’s most important bilateral...",
+      "sourceText": "According to public reporting, the May 2026 Beijing visit was framed around stabilizing the world’s most important bilateral relationship at a moment of pressure: trade disputes, war fears, technology competition, and anxieties over Taiwan and the wider Pacific. Chinese state media emphasized stability and respect. American coverage focused on deals, uncertainty, symbolism, and the possibility that big gestures might substitute for durable agreements. That is a very different world from 1972. Back then, the two sides were trying to build a bridge across an ideological gulf because both wanted leverage against Moscow. Today, they are trying to prevent the bridge itself from becoming a battlefield. The old Chinese strategic vocabulary helps again, but in reverse.",
+      "requiredLabels": [
+        "U.S.",
+        "China",
+        "Soviet Union",
+        "shared pressure",
+        "strategic opening"
+      ],
+      "visualLayers": [
+        "dark basemap",
+        "actor nodes",
+        "route or pressure lines",
+        "risk highlights",
+        "source note"
+      ],
+      "dataNeeds": [],
+      "animation": [
+        "map fades in",
+        "nodes pulse",
+        "route line grows",
+        "risk label appears"
+      ],
+      "style": "dark editorial documentary, restrained red/blue/gold accents, source labels, safe-zone text",
+      "implementationHint": "Build as HyperFrames/HTML first; keep all labels editable in code rather than baked into images."
+    },
+    {
+      "id": "diagram-008",
+      "beatId": "beat-011",
+      "kind": "map",
+      "sectionTitle": "A Summit Without Soviets",
+      "goal": "If yuan jiao jin gong worked when the distant power helped balance the near threat, what happens when...",
+      "sourceText": "If yuan jiao jin gong worked when the distant power helped balance the near threat, what happens when the distant power becomes the near threat in every practical sense? China and America are geographically far apart. But economically, technologically, militarily, and politically, they are now pressed against each other. They are distant neighbors. That is a strange category. It belongs in diplomacy’s drawer of awkward objects, somewhere between “strategic partner” and “temporary understanding,” which usually means nobody wants to admit how fragile the arrangement is. So the visit mattered. But it mattered because both sides were managing danger, not because either side had discovered a new strategic marriage.",
+      "requiredLabels": [
+        "trade",
+        "technology",
+        "security",
+        "pressure points"
+      ],
+      "visualLayers": [
+        "dark basemap",
+        "actor nodes",
+        "route or pressure lines",
+        "risk highlights",
+        "source note"
+      ],
+      "dataNeeds": [],
+      "animation": [
+        "map fades in",
+        "nodes pulse",
+        "route line grows",
+        "risk label appears"
+      ],
+      "style": "dark editorial documentary, restrained red/blue/gold accents, source labels, safe-zone text",
+      "implementationHint": "Build as HyperFrames/HTML first; keep all labels editable in code rather than baked into images."
+    },
+    {
+      "id": "diagram-009",
+      "beatId": "beat-013",
+      "kind": "map",
+      "sectionTitle": "When Economics Became a Minefield",
+      "goal": "One of the biggest differences between Nixon’s visit and Trump’s visit is economic. In 1972, the United States...",
+      "sourceText": "One of the biggest differences between Nixon’s visit and Trump’s visit is economic. In 1972, the United States and China barely had an economic relationship. Trade was tiny. Investment was minimal. Supply chains did not bind the two societies together. That made the opening easier in one sense. There was not much to untangle. By the 1990s and 2000s, the story had changed completely. China’s integration into the global economy, especially after joining the World Trade Organization in 2001, helped create one of the deepest commercial relationships in modern history.",
+      "requiredLabels": [
+        "U.S.",
+        "China",
+        "Soviet Union",
+        "shared pressure",
+        "strategic opening"
+      ],
+      "visualLayers": [
+        "dark basemap",
+        "actor nodes",
+        "route or pressure lines",
+        "risk highlights",
+        "source note"
+      ],
+      "dataNeeds": [],
+      "animation": [
+        "map fades in",
+        "nodes pulse",
+        "route line grows",
+        "risk label appears"
+      ],
+      "style": "dark editorial documentary, restrained red/blue/gold accents, source labels, safe-zone text",
+      "implementationHint": "Build as HyperFrames/HTML first; keep all labels editable in code rather than baked into images."
+    },
+    {
+      "id": "diagram-010",
+      "beatId": "beat-014",
+      "kind": "map",
+      "sectionTitle": "When Economics Became a Minefield",
+      "goal": "For years, the language around that relationship was soothing. Trade would be a ballast. Investment would create incentives...",
+      "sourceText": "For years, the language around that relationship was soothing. Trade would be a ballast. Investment would create incentives for stability. Consumers would benefit. Companies would lobby for calm. Markets would make war irrational. Some of that was true. But ballast can become cargo. Cargo can become leverage. Leverage can become a weapon. By the time of Trump’s first presidency, tariffs had returned as a central instrument of U.S.-China competition. Later, export controls, semiconductor restrictions, investment reviews, sanctions, supply-chain security rules, and Chinese controls over key materials all became part of a wider contest. The result is one of the great reversals of the last fifty years.",
+      "requiredLabels": [
+        "trade",
+        "technology",
+        "security",
+        "pressure points"
+      ],
+      "visualLayers": [
+        "dark basemap",
+        "actor nodes",
+        "route or pressure lines",
+        "risk highlights",
+        "source note"
+      ],
+      "dataNeeds": [],
+      "animation": [
+        "map fades in",
+        "nodes pulse",
+        "route line grows",
+        "risk label appears"
+      ],
+      "style": "dark editorial documentary, restrained red/blue/gold accents, source labels, safe-zone text",
+      "implementationHint": "Build as HyperFrames/HTML first; keep all labels editable in code rather than baked into images."
+    },
+    {
+      "id": "diagram-011",
+      "beatId": "beat-015",
+      "kind": "map",
+      "sectionTitle": "When Economics Became a Minefield",
+      "goal": "In the Nixon era, economic contact was a bridge to be built. In the Trump era, economic contact...",
+      "sourceText": "In the Nixon era, economic contact was a bridge to be built. In the Trump era, economic contact is often a minefield to be mapped. This is where the Chinese historical lens becomes useful, if we use it carefully. In the traditional Chinese tributary order, trade was rarely just trade. It was connected to recognition, hierarchy, border management, and political order. Access to markets could be a tool of governance. Commercial permission could signal status. Ritual and exchange belonged to the same world. That does not mean modern China is trying to recreate the tribute system. That would be a lazy claim, and lazy claims have done enough damage already.",
+      "requiredLabels": [
+        "U.S.",
+        "China",
+        "Soviet Union",
+        "shared pressure",
+        "strategic opening"
+      ],
+      "visualLayers": [
+        "dark basemap",
+        "actor nodes",
+        "route or pressure lines",
+        "risk highlights",
+        "source note"
+      ],
+      "dataNeeds": [],
+      "animation": [
+        "map fades in",
+        "nodes pulse",
+        "route line grows",
+        "risk label appears"
+      ],
+      "style": "dark editorial documentary, restrained red/blue/gold accents, source labels, safe-zone text",
+      "implementationHint": "Build as HyperFrames/HTML first; keep all labels editable in code rather than baked into images."
+    },
+    {
+      "id": "diagram-012",
+      "beatId": "beat-016",
+      "kind": "map",
+      "sectionTitle": "When Economics Became a Minefield",
+      "goal": "The point is more modest: in Chinese political history, commerce has often been understood as part of order,...",
+      "sourceText": "The point is more modest: in Chinese political history, commerce has often been understood as part of order, not separate from it. Modern Washington, meanwhile, is learning the same lesson from a different direction. Trade is not simply prices and containers. It is dependence, pressure, and national security. Both governments now treat economic connection as a strategic instrument. That may be rational. It is also dangerous. Because once every supply chain becomes a security question, every factory becomes a pressure point, and every app, chip, mineral, and port can be dragged into geopolitics. At that point, interdependence does not disappear. It becomes nervous.",
+      "requiredLabels": [
+        "trade",
+        "technology",
+        "security",
+        "pressure points"
+      ],
+      "visualLayers": [
+        "dark basemap",
+        "actor nodes",
+        "route or pressure lines",
+        "risk highlights",
+        "source note"
+      ],
+      "dataNeeds": [],
+      "animation": [
+        "map fades in",
+        "nodes pulse",
+        "route line grows",
+        "risk label appears"
+      ],
+      "style": "dark editorial documentary, restrained red/blue/gold accents, source labels, safe-zone text",
+      "implementationHint": "Build as HyperFrames/HTML first; keep all labels editable in code rather than baked into images."
+    },
+    {
+      "id": "diagram-013",
+      "beatId": "beat-019",
+      "kind": "map",
+      "sectionTitle": "Why Body Language Matters More Than the Communiqué",
+      "goal": "Every image from Trump’s Beijing visit had at least three audiences: the American public, the Chinese public, and...",
+      "sourceText": "Every image from Trump’s Beijing visit had at least three audiences: the American public, the Chinese public, and the wider world of allies, rivals, investors, militaries, and nervous officials trying to read the weather. This is where Chinese political culture offers another useful camera. In the old tributary system, ritual was not decorative. It made order visible. The journey of an envoy, the reception ceremony, the language of tribute and return gifts, the arrangement of bodies in a room — these were not small details. They were political grammar. Modern diplomacy is not the tribute system. Presidents are not imperial envoys. The international system is built, at least formally, on sovereign equality. But power still needs theater.",
+      "requiredLabels": [
+        "Washington",
+        "Beijing",
+        "Moscow",
+        "Pacific"
+      ],
+      "visualLayers": [
+        "dark basemap",
+        "actor nodes",
+        "route or pressure lines",
+        "risk highlights",
+        "source note"
+      ],
+      "dataNeeds": [],
+      "animation": [
+        "map fades in",
+        "nodes pulse",
+        "route line grows",
+        "risk label appears"
+      ],
+      "style": "dark editorial documentary, restrained red/blue/gold accents, source labels, safe-zone text",
+      "implementationHint": "Build as HyperFrames/HTML first; keep all labels editable in code rather than baked into images."
+    },
+    {
+      "id": "diagram-014",
+      "beatId": "beat-020",
+      "kind": "map",
+      "sectionTitle": "Why Body Language Matters More Than the Communiqué",
+      "goal": "All great powers use it. Washington uses aircraft carriers, joint statements, flags, and Oval Office seating. Beijing uses...",
+      "sourceText": "All great powers use it. Washington uses aircraft carriers, joint statements, flags, and Oval Office seating. Beijing uses protocol, venue, historical symbolism, and the careful choreography of access. The difference now is that ideology has returned to the table more openly. During the high era of globalization, many people hoped that economics would soften political difference. Today, governance models, technology standards, media narratives, and security fears are all part of the competition. Even a handshake is no longer just a handshake. It has to survive domestic politics.",
+      "requiredLabels": [
+        "Washington",
+        "Beijing",
+        "Moscow",
+        "Pacific"
+      ],
+      "visualLayers": [
+        "dark basemap",
+        "actor nodes",
+        "route or pressure lines",
+        "risk highlights",
+        "source note"
+      ],
+      "dataNeeds": [],
+      "animation": [
+        "map fades in",
+        "nodes pulse",
+        "route line grows",
+        "risk label appears"
+      ],
+      "style": "dark editorial documentary, restrained red/blue/gold accents, source labels, safe-zone text",
+      "implementationHint": "Build as HyperFrames/HTML first; keep all labels editable in code rather than baked into images."
+    },
+    {
+      "id": "diagram-015",
+      "beatId": "beat-021",
+      "kind": "map",
+      "sectionTitle": "Why Body Language Matters More Than the Communiqué",
+      "goal": "Nixon could present China as a strategic surprise. Trump had to present China as a relationship he could...",
+      "sourceText": "Nixon could present China as a strategic surprise. Trump had to present China as a relationship he could manage without looking weak. Xi had to receive Trump without looking dependent on American approval. That is a lot of work for one photograph. No wonder diplomats look tired.",
+      "requiredLabels": [
+        "U.S.",
+        "China",
+        "Soviet Union",
+        "shared pressure",
+        "strategic opening"
+      ],
+      "visualLayers": [
+        "dark basemap",
+        "actor nodes",
+        "route or pressure lines",
+        "risk highlights",
+        "source note"
+      ],
+      "dataNeeds": [],
+      "animation": [
+        "map fades in",
+        "nodes pulse",
+        "route line grows",
+        "risk label appears"
+      ],
+      "style": "dark editorial documentary, restrained red/blue/gold accents, source labels, safe-zone text",
+      "implementationHint": "Build as HyperFrames/HTML first; keep all labels editable in code rather than baked into images."
+    },
+    {
+      "id": "diagram-016",
+      "beatId": "beat-023",
+      "kind": "map",
+      "sectionTitle": "The Next Ten Years Won’t Look Like the Last Fifty",
+      "goal": "The Nixon model is gone. That does not mean diplomacy is useless. It means we should stop asking...",
+      "sourceText": "The Nixon model is gone. That does not mean diplomacy is useless. It means we should stop asking diplomacy to do the wrong historical job. In 1972, the challenge was to use a shared strategic fear to open a closed relationship. In 2026, the challenge is to manage a deeply connected relationship after the shared strategic foundation has disappeared. That is harder in some ways. The United States and China are not isolated from each other. They are entangled. Their competition runs through trade, technology, military planning, finance, universities, media, public opinion, and the daily lives of ordinary people who would very much prefer that great-power rivalry not raise the price of everything they buy.",
+      "requiredLabels": [
+        "U.S.",
+        "China",
+        "Soviet Union",
+        "shared pressure",
+        "strategic opening"
+      ],
+      "visualLayers": [
+        "dark basemap",
+        "actor nodes",
+        "route or pressure lines",
+        "risk highlights",
+        "source note"
+      ],
+      "dataNeeds": [],
+      "animation": [
+        "map fades in",
+        "nodes pulse",
+        "route line grows",
+        "risk label appears"
+      ],
+      "style": "dark editorial documentary, restrained red/blue/gold accents, source labels, safe-zone text",
+      "implementationHint": "Build as HyperFrames/HTML first; keep all labels editable in code rather than baked into images."
+    },
+    {
+      "id": "diagram-017",
+      "beatId": "beat-024",
+      "kind": "map",
+      "sectionTitle": "The Next Ten Years Won’t Look Like the Last Fifty",
+      "goal": "The best historical comparison may not be Nixon’s opening. It may be the strange machinery of Cold War...",
+      "sourceText": "The best historical comparison may not be Nixon’s opening. It may be the strange machinery of Cold War crisis management: hotlines, arms-control talks, quiet channels, rules of the road, and the disciplined art of not mistaking every provocation for the beginning of the end. But even that comparison has limits. The U.S.-Soviet rivalry had a brutally clear center: nuclear confrontation. U.S.-China rivalry is more diffuse. There are nuclear risks, yes, but also chips, shipping lanes, currencies, data, minerals, alliances, sanctions, universities, and domestic politics. There is no single red line glowing on the map. There are many lines, some bright, some invisible, some drawn by people who may not agree where the ink begins.",
+      "requiredLabels": [
+        "U.S.",
+        "China",
+        "Soviet Union",
+        "shared pressure",
+        "strategic opening"
+      ],
+      "visualLayers": [
+        "dark basemap",
+        "actor nodes",
+        "route or pressure lines",
+        "risk highlights",
+        "source note"
+      ],
+      "dataNeeds": [],
+      "animation": [
+        "map fades in",
+        "nodes pulse",
+        "route line grows",
+        "risk label appears"
+      ],
+      "style": "dark editorial documentary, restrained red/blue/gold accents, source labels, safe-zone text",
+      "implementationHint": "Build as HyperFrames/HTML first; keep all labels editable in code rather than baked into images."
+    },
+    {
+      "id": "diagram-018",
+      "beatId": "beat-025",
+      "kind": "map",
+      "sectionTitle": "The Next Ten Years Won’t Look Like the Last Fifty",
+      "goal": "Chinese strategists have long emphasized shi: the tendency of a situation, the momentum of forces, the changing configuration...",
+      "sourceText": "Chinese strategists have long emphasized shi: the tendency of a situation, the momentum of forces, the changing configuration that wise actors must read before they act. That concept is useful here because it warns against nostalgia. The shi of 1972 is gone. The shape of power has changed. The triangle is broken. The economic bridge has become a strategic instrument. The ritual remains, but the meaning of the ritual has shifted. So Trump’s visit to China should not be judged by whether it recreates Nixon. It cannot.",
+      "requiredLabels": [
+        "U.S.",
+        "China",
+        "Soviet Union",
+        "shared pressure",
+        "strategic opening"
+      ],
+      "visualLayers": [
+        "dark basemap",
+        "actor nodes",
+        "route or pressure lines",
+        "risk highlights",
+        "source note"
+      ],
+      "dataNeeds": [],
+      "animation": [
+        "map fades in",
+        "nodes pulse",
+        "route line grows",
+        "risk label appears"
+      ],
+      "style": "dark editorial documentary, restrained red/blue/gold accents, source labels, safe-zone text",
+      "implementationHint": "Build as HyperFrames/HTML first; keep all labels editable in code rather than baked into images."
+    },
+    {
+      "id": "diagram-019",
+      "beatId": "beat-026",
+      "kind": "map",
+      "sectionTitle": "The Next Ten Years Won’t Look Like the Last Fifty",
+      "goal": "The better question is whether it helps build habits of managed hostility: channels that survive anger, procedures that...",
+      "sourceText": "The better question is whether it helps build habits of managed hostility: channels that survive anger, procedures that reduce miscalculation, language that allows both sides to step back without humiliation, and enough strategic patience to keep competition from becoming collapse. That is not inspiring. It is not the stuff of a grand historical photograph. But it may be the kind of peace available to us now. In 1972, China and America could look past each other toward a common threat. Today, they have to look directly at each other and still find a way not to fall.",
+      "requiredLabels": [
+        "U.S.",
+        "China",
+        "Soviet Union",
+        "shared pressure",
+        "strategic opening"
+      ],
+      "visualLayers": [
+        "dark basemap",
+        "actor nodes",
+        "route or pressure lines",
+        "risk highlights",
+        "source note"
+      ],
+      "dataNeeds": [],
+      "animation": [
+        "map fades in",
+        "nodes pulse",
+        "route line grows",
+        "risk label appears"
+      ],
+      "style": "dark editorial documentary, restrained red/blue/gold accents, source labels, safe-zone text",
+      "implementationHint": "Build as HyperFrames/HTML first; keep all labels editable in code rather than baked into images."
+    },
+    {
+      "id": "diagram-020",
+      "beatId": "beat-027",
+      "kind": "relationship",
+      "sectionTitle": "The Next Ten Years Won’t Look Like the Last Fifty",
+      "goal": "If there is no shared enemy strong enough to define the relationship, then what will keep these two...",
+      "sourceText": "If there is no shared enemy strong enough to define the relationship, then what will keep these two powers from drifting into a conflict neither one says it wants? That is the question behind the handshake. And it will last much longer than the photograph.",
+      "requiredLabels": [
+        "actor A",
+        "actor B",
+        "pressure",
+        "constraint"
+      ],
+      "visualLayers": [
+        "background texture",
+        "primary geometry",
+        "labels",
+        "callout",
+        "source note"
+      ],
+      "dataNeeds": [],
+      "animation": [
+        "nodes appear",
+        "pressure lines draw",
+        "key label pulses",
+        "old structure collapses into new structure"
+      ],
+      "style": "dark editorial documentary, restrained red/blue/gold accents, source labels, safe-zone text",
+      "implementationHint": "Build as HyperFrames/HTML first; keep all labels editable in code rather than baked into images."
+    }
+  ],
+  "captions": [
+    {
+      "beatId": "beat-001",
+      "caption": "Some photographs arrive already wearing someone else’s memory. When President Donald Trump landed in Beijing in May 2026, the comparison was almost",
+      "emphasis": "the comparison was almost too tempting",
+      "placement": "bottom safe zone",
+      "maxLines": 2
+    },
+    {
+      "beatId": "beat-002",
+      "caption": "But the danger of a famous photograph is that it teaches us to look for the wrong thing. Trump’s China visit looked,",
+      "emphasis": "the structure was almost the opposite",
+      "placement": "bottom safe zone",
+      "maxLines": 2
+    },
+    {
+      "beatId": "beat-003",
+      "caption": "Why Nixon Really Went to China",
+      "emphasis": "Why Nixon Really Went to China",
+      "placement": "bottom safe zone",
+      "maxLines": 2
+    },
+    {
+      "beatId": "beat-004",
+      "caption": "The 1972 visit was not a sentimental act of reconciliation. It was strategy. By the late 1960s, the communist world was badly",
+      "emphasis": "the communist world was badly divided",
+      "placement": "bottom safe zone",
+      "maxLines": 2
+    },
+    {
+      "beatId": "beat-005",
+      "caption": "The United States was stuck in Vietnam. The Cold War balance felt heavy and expensive. The Soviet Union was the central strategic",
+      "emphasis": "The United States was stuck in Vietnam",
+      "placement": "bottom safe zone",
+      "maxLines": 2
+    },
+    {
+      "beatId": "beat-006",
+      "caption": "That is why the Shanghai Communiqué could be both historic and carefully vague. It did not solve every disagreement. It did not",
+      "emphasis": "It did not solve every disagreement",
+      "placement": "bottom safe zone",
+      "maxLines": 2
+    },
+    {
+      "beatId": "beat-007",
+      "caption": "But the phrase does capture something about 1972. China and the United States were distant powers whose immediate anxieties converged against a",
+      "emphasis": "the direction of the situation",
+      "placement": "bottom safe zone",
+      "maxLines": 2
+    },
+    {
+      "beatId": "beat-008",
+      "caption": "A Summit Without Soviets",
+      "emphasis": "A Summit Without Soviets",
+      "placement": "bottom safe zone",
+      "maxLines": 2
+    },
+    {
+      "beatId": "beat-009",
+      "caption": "Now compare that with 2026. There is no Soviet Union sitting above the map, forcing Washington and Beijing into each other’s arms.",
+      "emphasis": "Now compare that with 2026",
+      "placement": "bottom safe zone",
+      "maxLines": 2
+    },
+    {
+      "beatId": "beat-010",
+      "caption": "According to public reporting, the May 2026 Beijing visit was framed around stabilizing the world’s most important bilateral relationship at a moment",
+      "emphasis": "American coverage focused on deals",
+      "placement": "bottom safe zone",
+      "maxLines": 2
+    },
+    {
+      "beatId": "beat-011",
+      "caption": "If yuan jiao jin gong worked when the distant power helped balance the near threat, what happens when the distant power becomes",
+      "emphasis": "they are now pressed against each other",
+      "placement": "bottom safe zone",
+      "maxLines": 2
+    },
+    {
+      "beatId": "beat-012",
+      "caption": "When Economics Became a Minefield",
+      "emphasis": "When Economics Became a Minefield",
+      "placement": "bottom safe zone",
+      "maxLines": 2
+    },
+    {
+      "beatId": "beat-013",
+      "caption": "One of the biggest differences between Nixon’s visit and Trump’s visit is economic. In 1972, the United States and China barely had",
+      "emphasis": "the story had changed completely",
+      "placement": "bottom safe zone",
+      "maxLines": 2
+    },
+    {
+      "beatId": "beat-014",
+      "caption": "For years, the language around that relationship was soothing. Trade would be a ballast. Investment would create incentives for stability. Consumers would",
+      "emphasis": "Markets would make war irrational",
+      "placement": "bottom safe zone",
+      "maxLines": 2
+    },
+    {
+      "beatId": "beat-015",
+      "caption": "In the Nixon era, economic contact was a bridge to be built. In the Trump era, economic contact is often a minefield",
+      "emphasis": "economic contact was a bridge to be built",
+      "placement": "bottom safe zone",
+      "maxLines": 2
+    },
+    {
+      "beatId": "beat-016",
+      "caption": "The point is more modest: in Chinese political history, commerce has often been understood as part of order, not separate from it.",
+      "emphasis": "every factory becomes a pressure point",
+      "placement": "bottom safe zone",
+      "maxLines": 2
+    },
+    {
+      "beatId": "beat-017",
+      "caption": "Why Body Language Matters More Than the Communiqué",
+      "emphasis": "Why Body Language Matters More Than the Communiqué",
+      "placement": "bottom safe zone",
+      "maxLines": 2
+    },
+    {
+      "beatId": "beat-018",
+      "caption": "When agreements are thin, ritual becomes thick. That is why summit choreography matters. The room. The table. The walk. The banquet. The",
+      "emphasis": "That is why summit choreography matters",
+      "placement": "bottom safe zone",
+      "maxLines": 2
+    },
+    {
+      "beatId": "beat-019",
+      "caption": "Every image from Trump’s Beijing visit had at least three audiences: the American public, the Chinese public, and the wider world of",
+      "emphasis": "the arrangement of bodies in a room",
+      "placement": "bottom safe zone",
+      "maxLines": 2
+    },
+    {
+      "beatId": "beat-020",
+      "caption": "All great powers use it. Washington uses aircraft carriers, joint statements, flags, and Oval Office seating. Beijing uses protocol, venue, historical symbolism,",
+      "emphasis": "During the high era of globalization",
+      "placement": "bottom safe zone",
+      "maxLines": 2
+    },
+    {
+      "beatId": "beat-021",
+      "caption": "Nixon could present China as a strategic surprise. Trump had to present China as a relationship he could manage without looking weak.",
+      "emphasis": "That is a lot of work for one photograph",
+      "placement": "bottom safe zone",
+      "maxLines": 2
+    },
+    {
+      "beatId": "beat-022",
+      "caption": "The Next Ten Years Won’t Look Like the Last Fifty",
+      "emphasis": "The Next Ten Years Won’t Look Like the Last Fifty",
+      "placement": "bottom safe zone",
+      "maxLines": 2
+    },
+    {
+      "beatId": "beat-023",
+      "caption": "The Nixon model is gone. That does not mean diplomacy is useless. It means we should stop asking diplomacy to do the",
+      "emphasis": "Their competition runs through trade",
+      "placement": "bottom safe zone",
+      "maxLines": 2
+    },
+    {
+      "beatId": "beat-024",
+      "caption": "The best historical comparison may not be Nixon’s opening. It may be the strange machinery of Cold War crisis management: hotlines, arms-control",
+      "emphasis": "But even that comparison has limits",
+      "placement": "bottom safe zone",
+      "maxLines": 2
+    },
+    {
+      "beatId": "beat-025",
+      "caption": "Chinese strategists have long emphasized shi: the tendency of a situation, the momentum of forces, the changing configuration that wise actors must",
+      "emphasis": "but the meaning of the ritual has shifted",
+      "placement": "bottom safe zone",
+      "maxLines": 2
+    },
+    {
+      "beatId": "beat-026",
+      "caption": "The better question is whether it helps build habits of managed hostility: channels that survive anger, procedures that reduce miscalculation, language that",
+      "emphasis": "procedures that reduce miscalculation",
+      "placement": "bottom safe zone",
+      "maxLines": 2
+    },
+    {
+      "beatId": "beat-027",
+      "caption": "If there is no shared enemy strong enough to define the relationship, then what will keep these two powers from drifting into",
+      "emphasis": "That is the question behind the handshake",
+      "placement": "bottom safe zone",
+      "maxLines": 2
+    }
+  ],
+  "reviewChecklist": [
+    "Does any AI image look like fake evidence?",
+    "Are all factual visuals sourced or labeled?",
+    "Does any section rely on unlicensed news material?",
+    "Is every chart backed by a real data source?",
+    "Is there a visual event at least every 3-6 seconds?",
+    "Can this visual system work for a different lane such as finance?"
+  ]
+}

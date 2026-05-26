@@ -47,12 +47,14 @@ Minimum output package:
 - `captions.json`: subtitle and emphasis plan.
 - Asset checklist: what must be sourced, generated, drawn, or verified.
 - Rights checklist: which visuals are evidence and which are illustrative.
+- `audit-report.md`: visual plan quality gate before sourcing assets or assembling a review video.
 
 Later output package:
 
 - HyperFrames or Remotion project.
 - Asset manifest with paths for generated images and approved footage.
 - Review render.
+- Review manifest with visual mix, PPT risk, missing assets, and must-fix items.
 
 ## Visual Principles
 
@@ -203,12 +205,12 @@ Do not keep polishing the PPT-like MP4 renderer.
 Next step:
 
 ```text
-Improve video-tool v0.1/v0.2 planning output:
-1. Better beat segmentation.
-2. Better distinction between evidence, illustration, diagram, chart, and title.
-3. Better image2 prompt specificity.
-4. Better diagram specs for real HyperFrames implementation.
-5. Add an asset task manifest for manual sourcing/generation.
-6. Then generate a HyperFrames review project from selected beats and returned assets.
+Move into the video generation stage without skipping review gates:
+1. Generate or revise visual-plan.json from the approved script.
+2. Run video-tool/audit-plan.js to catch diagram overuse, evidence gaps, rights risk, and generated-image risk.
+3. Fix the visual plan before asset work when the audit is blocked.
+4. Source or generate assets using the asset checklist and image2 prompts.
+5. Validate returned assets with check-assets.js.
+6. Then generate a HyperFrames review project from visual-plan.json plus asset-intake.json.
+7. Use the review manifest to decide which footage, archive, document, map, diagram, or illustration assets must be replaced before final render.
 ```
-

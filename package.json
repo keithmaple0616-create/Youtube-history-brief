@@ -6,6 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "video:plan": "node video-tool/plan-video.js",
+    "video:audit-plan": "node video-tool/audit-plan.js",
+    "video:review-project": "node video-tool/generate-hyperframes-review.js",
     "video:check-assets": "node video-tool/check-assets.js",
     "video:sample:one-minute": "node scripts/make_one_minute_sample.js",
     "video:sample:reference-style": "node scripts/make_reference_style_sample.js",

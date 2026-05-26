@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { box-sizing: border-box; }
+      html, body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #071017;
+        color: #f4ead8;
+        font-family: Arial, Inter, system-ui, sans-serif;
+      }
+      [data-composition-id="review"] {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 74% 18%, rgba(76, 125, 168, 0.16), transparent 30%),
+          linear-gradient(180deg, #071017, #0a151d 60%, #05090d);
+      }
+      .scene {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        overflow: hidden;
+      }
+      .visual-wrap {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        background: #071017;
+      }
+      .media {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .grain {
+        position: absolute;
+        inset: 0;
+        background:
+          repeating-linear-gradient(0deg, transparent 0 7px, rgba(244, 234, 216, 0.035) 7px 8px),
+          linear-gradient(90deg, rgba(7, 16, 23, 0.42), transparent 28%, transparent 70%, rgba(7, 16, 23, 0.46));
+        opacity: 0.48;
+        pointer-events: none;
+      }
+      .title-plate,
+      .source-plate,
+      .diagram-plate {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 120px 150px;
+        gap: 24px;
+      }
+      .title-plate h2 {
+        max-width: 1180px;
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 78px;
+        line-height: 0.96;
+        font-weight: 700;
+        color: #f4ead8;
+      }
+      .plate-kicker,
+      .plate-label,
+      .small-note {
+        max-width: 780px;
+        color: #c8bfae;
+        font-size: 18px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+      .source-plate {
+        background:
+          radial-gradient(circle at 28% 38%, rgba(209, 164, 81, 0.16), transparent 24%),
+          linear-gradient(135deg, rgba(178, 58, 52, 0.16), transparent 42%),
+          #071017;
+      }
+      .source-plate.illustration {
+        background:
+          radial-gradient(circle at 65% 34%, rgba(76, 125, 168, 0.17), transparent 25%),
+          linear-gradient(145deg, rgba(244, 234, 216, 0.07), transparent 44%),
+          #071017;
+      }
+      .film-card {
+        position: absolute;
+        width: 530px;
+        height: 330px;
+        border: 1px solid rgba(244, 234, 216, 0.22);
+        background:
+          linear-gradient(135deg, rgba(244, 234, 216, 0.15), rgba(7, 16, 23, 0.4)),
+          repeating-linear-gradient(90deg, rgba(244, 234, 216, 0.06) 0 8px, transparent 8px 16px);
+        box-shadow: 0 30px 90px rgba(0, 0, 0, 0.42);
+      }
+      .film-card.one { right: 190px; top: 170px; transform: rotate(2deg); }
+      .film-card.two { right: 370px; top: 360px; transform: rotate(-3deg); opacity: 0.72; }
+      .diagram-plate {
+        background:
+          linear-gradient(90deg, rgba(7, 16, 23, 0.2), rgba(7, 16, 23, 0.76)),
+          radial-gradient(circle at 52% 48%, rgba(76, 125, 168, 0.13), transparent 34%);
+      }
+      .node {
+        position: absolute;
+        width: 170px;
+        height: 170px;
+        border-radius: 50%;
+        border: 1px solid rgba(244, 234, 216, 0.32);
+        display: grid;
+        place-items: center;
+        color: #f4ead8;
+        font-weight: 900;
+        letter-spacing: 0.12em;
+        background: rgba(7, 16, 23, 0.72);
+        z-index: 3;
+      }
+      .node-a { left: 420px; top: 330px; border-color: rgba(76, 125, 168, 0.74); }
+      .node-b { left: 875px; top: 210px; border-color: rgba(178, 58, 52, 0.74); }
+      .node-c { left: 1120px; top: 590px; border-color: rgba(209, 164, 81, 0.74); }
+      .line {
+        position: absolute;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, rgba(209, 164, 81, 0.86), transparent);
+        transform-origin: left center;
+        z-index: 2;
+      }
+      .line-ab { left: 585px; top: 395px; width: 340px; transform: rotate(-15deg); }
+      .line-bc { left: 1010px; top: 365px; width: 300px; transform: rotate(56deg); }
+      .line-ca { left: 580px; top: 520px; width: 620px; transform: rotate(18deg); }
+      .hud {
+        position: absolute;
+        left: 54px;
+        top: 42px;
+        right: 54px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 8;
+        pointer-events: none;
+      }
+      .source-label,
+      .risk {
+        padding: 9px 12px;
+        border: 1px solid rgba(244, 234, 216, 0.18);
+        background: rgba(7, 16, 23, 0.7);
+        color: #f4ead8;
+        font-size: 13px;
+        font-weight: 900;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+      .risk.medium { border-color: rgba(209, 164, 81, 0.6); color: #d1a451; }
+      .risk.high { border-color: rgba(178, 58, 52, 0.8); color: #ff9a8f; }
+      .lower {
+        position: absolute;
+        left: 64px;
+        right: 64px;
+        bottom: 46px;
+        z-index: 8;
+        display: grid;
+        grid-template-columns: 320px 1fr 320px;
+        gap: 24px;
+        align-items: end;
+        padding: 18px 20px;
+        border-top: 1px solid rgba(244, 234, 216, 0.18);
+        background: linear-gradient(180deg, transparent, rgba(7, 16, 23, 0.74));
+      }
+      .section,
+      .meta {
+        color: #c8bfae;
+        font-size: 15px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .caption {
+        color: #f4ead8;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 33px;
+        line-height: 1.15;
+        text-wrap: balance;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-composition-id="review" data-width="1920" data-height="1080" data-duration="82" data-start="0" data-track-index="0">
+      <script type="application/json" id="review-data">{&quot;schemaVersion&quot;:1,&quot;sourcePlan&quot;:&quot;script-to-video-plan&quot;,&quot;lane&quot;:&quot;history&quot;,&quot;sourceFiles&quot;:{&quot;visualPlan&quot;:&quot;outputs/video-tool-v0.3-planning-demo/visual-plan.json&quot;,&quot;intake&quot;:&quot;outputs/video-tool-v0.3-planning-demo/asset-intake.json&quot;},&quot;durationSec&quot;:82,&quot;scenes&quot;:[{&quot;id&quot;:&quot;beat-001&quot;,&quot;order&quot;:1,&quot;start&quot;:0,&quot;duration&quot;:7,&quot;sectionTitle&quot;:&quot;The Photograph That Deceives&quot;,&quot;role&quot;:&quot;hook&quot;,&quot;visualType&quot;:&quot;title-card&quot;,&quot;reviewType&quot;:&quot;title-card&quot;,&quot;rightsRisk&quot;:&quot;low&quot;,&quot;screenText&quot;:&quot;THE COMPARISON WAS ALMOST TOO TEMPTING&quot;,&quot;caption&quot;:&quot;Some photographs arrive already wearing someone else’s memory. When President Donald Trump landed in Beijing in May 2026, the comparison was almost&quot;,&quot;emphasis&quot;:&quot;the comparison was almost too tempting&quot;,&quot;summary&quot;:&quot;Some photographs arrive already wearing someone else’s memory. When President Donald Trump landed in Beijing in May 2026,...&quot;,&quot;sourcePolicy&quot;:&quot;No factual footage required; generated/abstract background is acceptable.&quot;,&quot;visualGoal&quot;:&quot;kinetic text + atmosphere plate&quot;,&quot;visualNote&quot;:&quot;Trump arriving in Beijing in May 2026, then a slow dissolve to Nixon stepping off Air Force One in 1972.&quot;,&quot;asset&quot;:{&quot;exists&quot;:false,&quot;kind&quot;:&quot;image&quot;,&quot;src&quot;:&quot;&quot;,&quot;raw&quot;:&quot;assets/generated/beat-001-background.png&quot;},&quot;assetTask&quot;:{&quot;taskType&quot;:&quot;generated-background&quot;,&quot;priority&quot;:&quot;high&quot;,&quot;status&quot;:&quot;missing&quot;,&quot;onScreenLabel&quot;:&quot;optional&quot;},&quot;reviewFlags&quot;:[&quot;missing-asset&quot;]},{&quot;id&quot;:&quot;beat-002&quot;,&quot;order&quot;:2,&quot;start&quot;:7,&quot;duration&quot;:8,&quot;sectionTitle&quot;:&quot;The Photograph That Deceives&quot;,&quot;role&quot;:&quot;argument&quot;,&quot;visualType&quot;:&quot;diagram&quot;,&quot;reviewType&quot;:&quot;diagram-placeholder&quot;,&quot;rightsRisk&quot;:&quot;low&quot;,&quot;screenText&quot;:&quot;the structure was almost the opposite&quot;,&quot;caption&quot;:&quot;But the danger of a famous photograph is that it teaches us to look for the wrong thing. Trump’s China visit looked,&quot;,&quot;emphasis&quot;:&quot;the structure was almost the opposite&quot;,&quot;summary&quot;:&quot;But the danger of a famous photograph is that it teaches us to look for the wrong thing....&quot;,&quot;sourcePolicy&quot;:&quot;Can be fully generated as graphics because it explains structure rather than proving an event.&quot;,&quot;visualGoal&quot;:&quot;map / relationship diagram / process graphic&quot;,&quot;visualNote&quot;:&quot;Trump arriving in Beijing in May 2026, then a slow dissolve to Nixon stepping off Air Force One in 1972.&quot;,&quot;asset&quot;:{&quot;exists&quot;:false,&quot;kind&quot;:&quot;html&quot;,&quot;src&quot;:&quot;&quot;,&quot;raw&quot;:&quot;assets/diagrams/beat-002-diagram.html&quot;},&quot;assetTask&quot;:{&quot;taskType&quot;:&quot;code-diagram&quot;,&quot;priority&quot;:&quot;high&quot;,&quot;status&quot;:&quot;missing&quot;,&quot;onScreenLabel&quot;:&quot;not required&quot;},&quot;reviewFlags&quot;:[&quot;missing-asset&quot;,&quot;ppt-risk&quot;]},{&quot;id&quot;:&quot;beat-003&quot;,&quot;order&quot;:3,&quot;start&quot;:15,&quot;duration&quot;:4,&quot;sectionTitle&quot;:&quot;Why Nixon Really Went to China&quot;,&quot;role&quot;:&quot;chapter&quot;,&quot;visualType&quot;:&quot;chapter-card&quot;,&quot;reviewType&quot;:&quot;title-card&quot;,&quot;rightsRisk&quot;:&quot;low&quot;,&quot;screenText&quot;:&quot;Why Nixon Really Went to China&quot;,&quot;caption&quot;:&quot;Why Nixon Really Went to China&quot;,&quot;emphasis&quot;:&quot;Why Nixon Really Went to China&quot;,&quot;summary&quot;:&quot;Why Nixon Really Went to China&quot;,&quot;sourcePolicy&quot;:&quot;No factual footage required.&quot;,&quot;visualGoal&quot;:&quot;chapter card / thesis card&quot;,&quot;visualNote&quot;:&quot;1960s maps of the Sino-Soviet border, Vietnam War footage, Nixon and Kissinger in archive images.&quot;,&quot;asset&quot;:{&quot;exists&quot;:false,&quot;kind&quot;:&quot;image&quot;,&quot;src&quot;:&quot;&quot;,&quot;raw&quot;:&quot;assets/generated/beat-003-background.png&quot;},&quot;assetTask&quot;:{&quot;taskType&quot;:&quot;generated-background&quot;,&quot;priority&quot;:&quot;medium&quot;,&quot;status&quot;:&quot;missing&quot;,&quot;onScreenLabel&quot;:&quot;optional&quot;},&quot;reviewFlags&quot;:[&quot;missing-asset&quot;]},{&quot;id&quot;:&quot;beat-004&quot;,&quot;order&quot;:4,&quot;start&quot;:19,&quot;duration&quot;:8,&quot;sectionTitle&quot;:&quot;Why Nixon Really Went to China&quot;,&quot;role&quot;:&quot;argument&quot;,&quot;visualType&quot;:&quot;diagram&quot;,&quot;reviewType&quot;:&quot;diagram-placeholder&quot;,&quot;rightsRisk&quot;:&quot;low&quot;,&quot;screenText&quot;:&quot;the communist world was badly divided&quot;,&quot;caption&quot;:&quot;The 1972 visit was not a sentimental act of reconciliation. It was strategy. By the late 1960s, the communist world was badly&quot;,&quot;emphasis&quot;:&quot;the communist world was badly divided&quot;,&quot;summary&quot;:&quot;The 1972 visit was not a sentimental act of reconciliation. It was strategy. By the late 1960s, the...&quot;,&quot;sourcePolicy&quot;:&quot;Can be fully generated as graphics because it explains structure rather than proving an event.&quot;,&quot;visualGoal&quot;:&quot;map / relationship diagram / process graphic&quot;,&quot;visualNote&quot;:&quot;1960s maps of the Sino-Soviet border, Vietnam War footage, Nixon and Kissinger in archive images.&quot;,&quot;asset&quot;:{&quot;exists&quot;:false,&quot;kind&quot;:&quot;html&quot;,&quot;src&quot;:&quot;&quot;,&quot;raw&quot;:&quot;assets/diagrams/beat-004-diagram.html&quot;},&quot;assetTask&quot;:{&quot;taskType&quot;:&quot;code-diagram&quot;,&quot;priority&quot;:&quot;high&quot;,&quot;status&quot;:&quot;missing&quot;,&quot;onScreenLabel&quot;:&quot;not required&quot;},&quot;reviewFlags&quot;:[&quot;missing-asset&quot;,&quot;ppt-risk&quot;]},{&quot;id&quot;:&quot;beat-005&quot;,&quot;order&quot;:5,&quot;start&quot;:27,&quot;duration&quot;:8,&quot;sectionTitle&quot;:&quot;Why Nixon Really Went to China&quot;,&quot;role&quot;:&quot;argument&quot;,&quot;visualType&quot;:&quot;diagram&quot;,&quot;reviewType&quot;:&quot;diagram-placeholder&quot;,&quot;rightsRisk&quot;:&quot;low&quot;,&quot;screenText&quot;:&quot;The United States was stuck in Vietnam&quot;,&quot;caption&quot;:&quot;The United States was stuck in Vietnam. The Cold War balance felt heavy and expensive. The Soviet Union was the central strategic&quot;,&quot;emphasis&quot;:&quot;The United States was stuck in Vietnam&quot;,&quot;summary&quot;:&quot;The United States was stuck in Vietnam. The Cold War balance felt heavy and expensive. The Soviet Union...&quot;,&quot;sourcePolicy&quot;:&quot;Can be fully generated as graphics because it explains structure rather than proving an event.&quot;,&quot;visualGoal&quot;:&quot;map / relationship diagram / process graphic&quot;,&quot;visualNote&quot;:&quot;1960s maps of the Sino-Soviet border, Vietnam War footage, Nixon and Kissinger in archive images.&quot;,&quot;asset&quot;:{&quot;exists&quot;:false,&quot;kind&quot;:&quot;html&quot;,&quot;src&quot;:&quot;&quot;,&quot;raw&quot;:&quot;assets/diagrams/beat-005-diagram.html&quot;},&quot;assetTask&quot;:{&quot;taskType&quot;:&quot;code-diagram&quot;,&quot;priority&quot;:&quot;high&quot;,&quot;status&quot;:&quot;missing&quot;,&quot;onScreenLabel&quot;:&quot;not required&quot;},&quot;reviewFlags&quot;:[&quot;missing-asset&quot;,&quot;ppt-risk&quot;]},{&quot;id&quot;:&quot;beat-006&quot;,&quot;order&quot;:6,&quot;start&quot;:35,&quot;duration&quot;:8,&quot;sectionTitle&quot;:&quot;Why Nixon Really Went to China&quot;,&quot;role&quot;:&quot;argument&quot;,&quot;visualType&quot;:&quot;diagram&quot;,&quot;reviewType&quot;:&quot;diagram-placeholder&quot;,&quot;rightsRisk&quot;:&quot;low&quot;,&quot;screenText&quot;:&quot;It did not solve every disagreement&quot;,&quot;caption&quot;:&quot;That is why the Shanghai Communiqué could be both historic and carefully vague. It did not solve every disagreement. It did not&quot;,&quot;emphasis&quot;:&quot;It did not solve every disagreement&quot;,&quot;summary&quot;:&quot;That is why the Shanghai Communiqué could be both historic and carefully vague. It did not solve every...&quot;,&quot;sourcePolicy&quot;:&quot;Can be fully generated as graphics because it explains structure rather than proving an event.&quot;,&quot;visualGoal&quot;:&quot;map / relationship diagram / process graphic&quot;,&quot;visualNote&quot;:&quot;1960s maps of the Sino-Soviet border, Vietnam War footage, Nixon and Kissinger in archive images.&quot;,&quot;asset&quot;:{&quot;exists&quot;:false,&quot;kind&quot;:&quot;html&quot;,&quot;src&quot;:&quot;&quot;,&quot;raw&quot;:&quot;assets/diagrams/beat-006-diagram.html&quot;},&quot;assetTask&quot;:{&quot;taskType&quot;:&quot;code-diagram&quot;,&quot;priority&quot;:&quot;high&quot;,&quot;status&quot;:&quot;missing&quot;,&quot;onScreenLabel&quot;:&quot;not required&quot;},&quot;reviewFlags&quot;:[&quot;missing-asset&quot;,&quot;ppt-risk&quot;]},{&quot;id&quot;:&quot;beat-007&quot;,&quot;order&quot;:7,&quot;start&quot;:43,&quot;duration&quot;:7,&quot;sectionTitle&quot;:&quot;Why Nixon Really Went to China&quot;,&quot;role&quot;:&quot;argument&quot;,&quot;visualType&quot;:&quot;diagram&quot;,&quot;reviewType&quot;:&quot;diagram-placeholder&quot;,&quot;rightsRisk&quot;:&quot;low&quot;,&quot;screenText&quot;:&quot;the direction of the situation&quot;,&quot;caption&quot;:&quot;But the phrase does capture something about 1972. China and the United States were distant powers whose immediate anxieties converged against a&quot;,&quot;emphasis&quot;:&quot;the direction of the situation&quot;,&quot;summary&quot;:&quot;But the phrase does capture something about 1972. China and the United States were distant powers whose immediate...&quot;,&quot;sourcePolicy&quot;:&quot;Can be fully generated as graphics because it explains structure rather than proving an event.&quot;,&quot;visualGoal&quot;:&quot;map / relationship diagram / process graphic&quot;,&quot;visualNote&quot;:&quot;1960s maps of the Sino-Soviet border, Vietnam War footage, Nixon and Kissinger in archive images.&quot;,&quot;asset&quot;:{&quot;exists&quot;:false,&quot;kind&quot;:&quot;html&quot;,&quot;src&quot;:&quot;&quot;,&quot;raw&quot;:&quot;assets/diagrams/beat-007-diagram.html&quot;},&quot;assetTask&quot;:{&quot;taskType&quot;:&quot;code-diagram&quot;,&quot;priority&quot;:&quot;high&quot;,&quot;status&quot;:&quot;missing&quot;,&quot;onScreenLabel&quot;:&quot;not required&quot;},&quot;reviewFlags&quot;:[&quot;missing-asset&quot;,&quot;ppt-risk&quot;]},{&quot;id&quot;:&quot;beat-008&quot;,&quot;order&quot;:8,&quot;start&quot;:50,&quot;duration&quot;:4,&quot;sectionTitle&quot;:&quot;A Summit Without Soviets&quot;,&quot;role&quot;:&quot;chapter&quot;,&quot;visualType&quot;:&quot;chapter-card&quot;,&quot;reviewType&quot;:&quot;title-card&quot;,&quot;rightsRisk&quot;:&quot;low&quot;,&quot;screenText&quot;:&quot;A Summit Without Soviets&quot;,&quot;caption&quot;:&quot;A Summit Without Soviets&quot;,&quot;emphasis&quot;:&quot;A Summit Without Soviets&quot;,&quot;summary&quot;:&quot;A Summit Without Soviets&quot;,&quot;sourcePolicy&quot;:&quot;No factual footage required.&quot;,&quot;visualGoal&quot;:&quot;chapter card / thesis card&quot;,&quot;visualNote&quot;:&quot;modern Beijing skyline, U.S. and Chinese flags, trade headlines, military footage in the Pacific.&quot;,&quot;asset&quot;:{&quot;exists&quot;:false,&quot;kind&quot;:&quot;image&quot;,&quot;src&quot;:&quot;&quot;,&quot;raw&quot;:&quot;assets/generated/beat-008-background.png&quot;},&quot;assetTask&quot;:{&quot;taskType&quot;:&quot;generated-background&quot;,&quot;priority&quot;:&quot;medium&quot;,&quot;status&quot;:&quot;missing&quot;,&quot;onScreenLabel&quot;:&quot;optional&quot;},&quot;reviewFlags&quot;:[&quot;missing-asset&quot;]},{&quot;id&quot;:&quot;beat-009&quot;,&quot;order&quot;:9,&quot;start&quot;:54,&quot;duration&quot;:8,&quot;sectionTitle&quot;:&quot;A Summit Without Soviets&quot;,&quot;role&quot;:&quot;argument&quot;,&quot;visualType&quot;:&quot;diagram&quot;,&quot;reviewType&quot;:&quot;diagram-placeholder&quot;,&quot;rightsRisk&quot;:&quot;low&quot;,&quot;screenText&quot;:&quot;Now compare that with 2026&quot;,&quot;caption&quot;:&quot;Now compare that with 2026. There is no Soviet Union sitting above the map, forcing Washington and Beijing into each other’s arms.&quot;,&quot;emphasis&quot;:&quot;Now compare that with 2026&quot;,&quot;summary&quot;:&quot;Now compare that with 2026. There is no Soviet Union sitting above the map, forcing Washington and Beijing...&quot;,&quot;sourcePolicy&quot;:&quot;Can be fully generated as graphics because it explains structure rather than proving an event.&quot;,&quot;visualGoal&quot;:&quot;map / relationship diagram / process graphic&quot;,&quot;visualNote&quot;:&quot;modern Beijing skyline, U.S. and Chinese flags, trade headlines, military footage in the Pacific.&quot;,&quot;asset&quot;:{&quot;exists&quot;:false,&quot;kind&quot;:&quot;html&quot;,&quot;src&quot;:&quot;&quot;,&quot;raw&quot;:&quot;assets/diagrams/beat-009-diagram.html&quot;},&quot;assetTask&quot;:{&quot;taskType&quot;:&quot;code-diagram&quot;,&quot;priority&quot;:&quot;high&quot;,&quot;status&quot;:&quot;missing&quot;,&quot;onScreenLabel&quot;:&quot;not required&quot;},&quot;reviewFlags&quot;:[&quot;missing-asset&quot;,&quot;ppt-risk&quot;]},{&quot;id&quot;:&quot;beat-010&quot;,&quot;order&quot;:10,&quot;start&quot;:62,&quot;duration&quot;:8,&quot;sectionTitle&quot;:&quot;A Summit Without Soviets&quot;,&quot;role&quot;:&quot;argument&quot;,&quot;visualType&quot;:&quot;diagram&quot;,&quot;reviewType&quot;:&quot;diagram-placeholder&quot;,&quot;rightsRisk&quot;:&quot;low&quot;,&quot;screenText&quot;:&quot;American coverage focused on deals&quot;,&quot;caption&quot;:&quot;According to public reporting, the May 2026 Beijing visit was framed around stabilizing the world’s most important bilateral relationship at a moment&quot;,&quot;emphasis&quot;:&quot;American coverage focused on deals&quot;,&quot;summary&quot;:&quot;According to public reporting, the May 2026 Beijing visit was framed around stabilizing the world’s most important bilateral...&quot;,&quot;sourcePolicy&quot;:&quot;Can be fully generated as graphics because it explains structure rather than proving an event.&quot;,&quot;visualGoal&quot;:&quot;map / relationship diagram / process graphic&quot;,&quot;visualNote&quot;:&quot;modern Beijing skyline, U.S. and Chinese flags, trade headlines, military footage in the Pacific.&quot;,&quot;asset&quot;:{&quot;exists&quot;:false,&quot;kind&quot;:&quot;html&quot;,&quot;src&quot;:&quot;&quot;,&quot;raw&quot;:&quot;assets/diagrams/beat-010-diagram.html&quot;},&quot;assetTask&quot;:{&quot;taskType&quot;:&quot;code-diagram&quot;,&quot;priority&quot;:&quot;high&quot;,&quot;status&quot;:&quot;missing&quot;,&quot;onScreenLabel&quot;:&quot;not required&quot;},&quot;reviewFlags&quot;:[&quot;missing-asset&quot;,&quot;ppt-risk&quot;]},{&quot;id&quot;:&quot;beat-011&quot;,&quot;order&quot;:11,&quot;start&quot;:70,&quot;duration&quot;:8,&quot;sectionTitle&quot;:&quot;A Summit Without Soviets&quot;,&quot;role&quot;:&quot;argument&quot;,&quot;visualType&quot;:&quot;diagram&quot;,&quot;reviewType&quot;:&quot;diagram-placeholder&quot;,&quot;rightsRisk&quot;:&quot;low&quot;,&quot;screenText&quot;:&quot;they are now pressed against each other&quot;,&quot;caption&quot;:&quot;If yuan jiao jin gong worked when the distant power helped balance the near threat, what happens when the distant power becomes&quot;,&quot;emphasis&quot;:&quot;they are now pressed against each other&quot;,&quot;summary&quot;:&quot;If yuan jiao jin gong worked when the distant power helped balance the near threat, what happens when...&quot;,&quot;sourcePolicy&quot;:&quot;Can be fully generated as graphics because it explains structure rather than proving an event.&quot;,&quot;visualGoal&quot;:&quot;map / relationship diagram / process graphic&quot;,&quot;visualNote&quot;:&quot;modern Beijing skyline, U.S. and Chinese flags, trade headlines, military footage in the Pacific.&quot;,&quot;asset&quot;:{&quot;exists&quot;:false,&quot;kind&quot;:&quot;html&quot;,&quot;src&quot;:&quot;&quot;,&quot;raw&quot;:&quot;assets/diagrams/beat-011-diagram.html&quot;},&quot;assetTask&quot;:{&quot;taskType&quot;:&quot;code-diagram&quot;,&quot;priority&quot;:&quot;high&quot;,&quot;status&quot;:&quot;missing&quot;,&quot;onScreenLabel&quot;:&quot;not required&quot;},&quot;reviewFlags&quot;:[&quot;missing-asset&quot;,&quot;ppt-risk&quot;]},{&quot;id&quot;:&quot;beat-012&quot;,&quot;order&quot;:12,&quot;start&quot;:78,&quot;duration&quot;:4,&quot;sectionTitle&quot;:&quot;When Economics Became a Minefield&quot;,&quot;role&quot;:&quot;chapter&quot;,&quot;visualType&quot;:&quot;chapter-card&quot;,&quot;reviewType&quot;:&quot;title-card&quot;,&quot;rightsRisk&quot;:&quot;low&quot;,&quot;screenText&quot;:&quot;When Economics Became a Minefield&quot;,&quot;caption&quot;:&quot;When Economics Became a Minefield&quot;,&quot;emphasis&quot;:&quot;When Economics Became a Minefield&quot;,&quot;summary&quot;:&quot;When Economics Became a Minefield&quot;,&quot;sourcePolicy&quot;:&quot;No factual footage required.&quot;,&quot;visualGoal&quot;:&quot;chapter card / thesis card&quot;,&quot;visualNote&quot;:&quot;container ports, chip fabrication plants, cargo ships, tariff headlines, rare earth mining imagery.&quot;,&quot;asset&quot;:{&quot;exists&quot;:false,&quot;kind&quot;:&quot;image&quot;,&quot;src&quot;:&quot;&quot;,&quot;raw&quot;:&quot;assets/generated/beat-012-background.png&quot;},&quot;assetTask&quot;:{&quot;taskType&quot;:&quot;generated-background&quot;,&quot;priority&quot;:&quot;medium&quot;,&quot;status&quot;:&quot;missing&quot;,&quot;onScreenLabel&quot;:&quot;optional&quot;},&quot;reviewFlags&quot;:[&quot;missing-asset&quot;]}],&quot;review&quot;:{&quot;purpose&quot;:&quot;HyperFrames review project for pacing, material mix, missing assets, and PPT risk.&quot;,&quot;materialMix&quot;:{&quot;title-card&quot;:4,&quot;diagram-placeholder&quot;:8},&quot;gates&quot;:[&quot;Does the opening begin with concrete people, places, documents, or events?&quot;,&quot;Does any section rely on diagrams before the viewer sees source-grounded material?&quot;,&quot;Are placeholders clearly marked as placeholders?&quot;,&quot;Are generated visuals labeled as illustration when needed?&quot;,&quot;Can weak sections be fixed by sourcing footage rather than adding more text?&quot;]},&quot;title&quot;:&quot;Nixon Trump China Review&quot;}</script>
+      <section id="beat-001" class="scene title-card" data-start="0" data-duration="7" data-track-index="0">
+    <div class="visual-wrap">
+      <div class="title-plate">
+      <div class="plate-kicker">hook</div>
+      <h2>THE COMPARISON WAS ALMOST TOO TEMPTING</h2>
+    </div>
+      <div class="grain"></div>
+    </div>
+    <div class="hud">
+      <div class="source-label">title card</div>
+      <div class="risk low">rights: low</div>
+    </div>
+    <div class="lower">
+      <div class="section">The Photograph That Deceives</div>
+      <div class="caption">Some photographs arrive already wearing someone else’s memory. When President Donald Trump landed in Beijing in May 2026, the comparison was almost</div>
+      <div class="meta">generated-background · missing</div>
+    </div>
+  </section>
+      <section id="beat-002" class="scene diagram-placeholder" data-start="7" data-duration="8" data-track-index="0">
+    <div class="visual-wrap">
+      <div class="diagram-plate">
+      <div class="node node-a">U.S.</div>
+      <div class="node node-b">China</div>
+      <div class="node node-c">Pressure</div>
+      <div class="line line-ab"></div>
+      <div class="line line-bc"></div>
+      <div class="line line-ca"></div>
+      <div class="plate-label">DIAGRAM SLOT</div>
+    </div>
+      <div class="grain"></div>
+    </div>
+    <div class="hud">
+      <div class="source-label">diagram placeholder</div>
+      <div class="risk low">rights: low</div>
+    </div>
+    <div class="lower">
+      <div class="section">The Photograph That Deceives</div>
+      <div class="caption">But the danger of a famous photograph is that it teaches us to look for the wrong thing. Trump’s China visit looked,</div>
+      <div class="meta">code-diagram · missing</div>
+    </div>
+  </section>
+      <section id="beat-003" class="scene title-card" data-start="15" data-duration="4" data-track-index="0">
+    <div class="visual-wrap">
+      <div class="title-plate">
+      <div class="plate-kicker">chapter</div>
+      <h2>Why Nixon Really Went to China</h2>
+    </div>
+      <div class="grain"></div>
+    </div>
+    <div class="hud">
+      <div class="source-label">title card</div>
+      <div class="risk low">rights: low</div>
+    </div>
+    <div class="lower">
+      <div class="section">Why Nixon Really Went to China</div>
+      <div class="caption">Why Nixon Really Went to China</div>
+      <div class="meta">generated-background · missing</div>
+    </div>
+  </section>
+      <section id="beat-004" class="scene diagram-placeholder" data-start="19" data-duration="8" data-track-index="0">
+    <div class="visual-wrap">
+      <div class="diagram-plate">
+      <div class="node node-a">U.S.</div>
+      <div class="node node-b">China</div>
+      <div class="node node-c">Pressure</div>
+      <div class="line line-ab"></div>
+      <div class="line line-bc"></div>
+      <div class="line line-ca"></div>
+      <div class="plate-label">DIAGRAM SLOT</div>
+    </div>
+      <div class="grain"></div>
+    </div>
+    <div class="hud">
+      <div class="source-label">diagram placeholder</div>
+      <div class="risk low">rights: low</div>
+    </div>
+    <div class="lower">
+      <div class="section">Why Nixon Really Went to China</div>
+      <div class="caption">The 1972 visit was not a sentimental act of reconciliation. It was strategy. By the late 1960s, the communist world was badly</div>
+      <div class="meta">code-diagram · missing</div>
+    </div>
+  </section>
+      <section id="beat-005" class="scene diagram-placeholder" data-start="27" data-duration="8" data-track-index="0">
+    <div class="visual-wrap">
+      <div class="diagram-plate">
+      <div class="node node-a">U.S.</div>
+      <div class="node node-b">China</div>
+      <div class="node node-c">Pressure</div>
+      <div class="line line-ab"></div>
+      <div class="line line-bc"></div>
+      <div class="line line-ca"></div>
+      <div class="plate-label">DIAGRAM SLOT</div>
+    </div>
+      <div class="grain"></div>
+    </div>
+    <div class="hud">
+      <div class="source-label">diagram placeholder</div>
+      <div class="risk low">rights: low</div>
+    </div>
+    <div class="lower">
+      <div class="section">Why Nixon Really Went to China</div>
+      <div class="caption">The United States was stuck in Vietnam. The Cold War balance felt heavy and expensive. The Soviet Union was the central strategic</div>
+      <div class="meta">code-diagram · missing</div>
+    </div>
+  </section>
+      <section id="beat-006" class="scene diagram-placeholder" data-start="35" data-duration="8" data-track-index="0">
+    <div class="visual-wrap">
+      <div class="diagram-plate">
+      <div class="node node-a">U.S.</div>
+      <div class="node node-b">China</div>
+      <div class="node node-c">Pressure</div>
+      <div class="line line-ab"></div>
+      <div class="line line-bc"></div>
+      <div class="line line-ca"></div>
+      <div class="plate-label">DIAGRAM SLOT</div>
+    </div>
+      <div class="grain"></div>
+    </div>
+    <div class="hud">
+      <div class="source-label">diagram placeholder</div>
+      <div class="risk low">rights: low</div>
+    </div>
+    <div class="lower">
+      <div class="section">Why Nixon Really Went to China</div>
+      <div class="caption">That is why the Shanghai Communiqué could be both historic and carefully vague. It did not solve every disagreement. It did not</div>
+      <div class="meta">code-diagram · missing</div>
+    </div>
+  </section>
+      <section id="beat-007" class="scene diagram-placeholder" data-start="43" data-duration="7" data-track-index="0">
+    <div class="visual-wrap">
+      <div class="diagram-plate">
+      <div class="node node-a">U.S.</div>
+      <div class="node node-b">China</div>
+      <div class="node node-c">Pressure</div>
+      <div class="line line-ab"></div>
+      <div class="line line-bc"></div>
+      <div class="line line-ca"></div>
+      <div class="plate-label">DIAGRAM SLOT</div>
+    </div>
+      <div class="grain"></div>
+    </div>
+    <div class="hud">
+      <div class="source-label">diagram placeholder</div>
+      <div class="risk low">rights: low</div>
+    </div>
+    <div class="lower">
+      <div class="section">Why Nixon Really Went to China</div>
+      <div class="caption">But the phrase does capture something about 1972. China and the United States were distant powers whose immediate anxieties converged against a</div>
+      <div class="meta">code-diagram · missing</div>
+    </div>
+  </section>
+      <section id="beat-008" class="scene title-card" data-start="50" data-duration="4" data-track-index="0">
+    <div class="visual-wrap">
+      <div class="title-plate">
+      <div class="plate-kicker">chapter</div>
+      <h2>A Summit Without Soviets</h2>
+    </div>
+      <div class="grain"></div>
+    </div>
+    <div class="hud">
+      <div class="source-label">title card</div>
+      <div class="risk low">rights: low</div>
+    </div>
+    <div class="lower">
+      <div class="section">A Summit Without Soviets</div>
+      <div class="caption">A Summit Without Soviets</div>
+      <div class="meta">generated-background · missing</div>
+    </div>
+  </section>
+      <section id="beat-009" class="scene diagram-placeholder" data-start="54" data-duration="8" data-track-index="0">
+    <div class="visual-wrap">
+      <div class="diagram-plate">
+      <div class="node node-a">U.S.</div>
+      <div class="node node-b">China</div>
+      <div class="node node-c">Pressure</div>
+      <div class="line line-ab"></div>
+      <div class="line line-bc"></div>
+      <div class="line line-ca"></div>
+      <div class="plate-label">DIAGRAM SLOT</div>
+    </div>
+      <div class="grain"></div>
+    </div>
+    <div class="hud">
+      <div class="source-label">diagram placeholder</div>
+      <div class="risk low">rights: low</div>
+    </div>
+    <div class="lower">
+      <div class="section">A Summit Without Soviets</div>
+      <div class="caption">Now compare that with 2026. There is no Soviet Union sitting above the map, forcing Washington and Beijing into each other’s arms.</div>
+      <div class="meta">code-diagram · missing</div>
+    </div>
+  </section>
+      <section id="beat-010" class="scene diagram-placeholder" data-start="62" data-duration="8" data-track-index="0">
+    <div class="visual-wrap">
+      <div class="diagram-plate">
+      <div class="node node-a">U.S.</div>
+      <div class="node node-b">China</div>
+      <div class="node node-c">Pressure</div>
+      <div class="line line-ab"></div>
+      <div class="line line-bc"></div>
+      <div class="line line-ca"></div>
+      <div class="plate-label">DIAGRAM SLOT</div>
+    </div>
+      <div class="grain"></div>
+    </div>
+    <div class="hud">
+      <div class="source-label">diagram placeholder</div>
+      <div class="risk low">rights: low</div>
+    </div>
+    <div class="lower">
+      <div class="section">A Summit Without Soviets</div>
+      <div class="caption">According to public reporting, the May 2026 Beijing visit was framed around stabilizing the world’s most important bilateral relationship at a moment</div>
+      <div class="meta">code-diagram · missing</div>
+    </div>
+  </section>
+      <section id="beat-011" class="scene diagram-placeholder" data-start="70" data-duration="8" data-track-index="0">
+    <div class="visual-wrap">
+      <div class="diagram-plate">
+      <div class="node node-a">U.S.</div>
+      <div class="node node-b">China</div>
+      <div class="node node-c">Pressure</div>
+      <div class="line line-ab"></div>
+      <div class="line line-bc"></div>
+      <div class="line line-ca"></div>
+      <div class="plate-label">DIAGRAM SLOT</div>
+    </div>
+      <div class="grain"></div>
+    </div>
+    <div class="hud">
+      <div class="source-label">diagram placeholder</div>
+      <div class="risk low">rights: low</div>
+    </div>
+    <div class="lower">
+      <div class="section">A Summit Without Soviets</div>
+      <div class="caption">If yuan jiao jin gong worked when the distant power helped balance the near threat, what happens when the distant power becomes</div>
+      <div class="meta">code-diagram · missing</div>
+    </div>
+  </section>
+      <section id="beat-012" class="scene title-card" data-start="78" data-duration="4" data-track-index="0">
+    <div class="visual-wrap">
+      <div class="title-plate">
+      <div class="plate-kicker">chapter</div>
+      <h2>When Economics Became a Minefield</h2>
+    </div>
+      <div class="grain"></div>
+    </div>
+    <div class="hud">
+      <div class="source-label">title card</div>
+      <div class="risk low">rights: low</div>
+    </div>
+    <div class="lower">
+      <div class="section">When Economics Became a Minefield</div>
+      <div class="caption">When Economics Became a Minefield</div>
+      <div class="meta">generated-background · missing</div>
+    </div>
+  </section>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const sceneIds = ["beat-001","beat-002","beat-003","beat-004","beat-005","beat-006","beat-007","beat-008","beat-009","beat-010","beat-011","beat-012"];
+      const sceneData = [{"id":"beat-001","start":0,"duration":7},{"id":"beat-002","start":7,"duration":8},{"id":"beat-003","start":15,"duration":4},{"id":"beat-004","start":19,"duration":8},{"id":"beat-005","start":27,"duration":8},{"id":"beat-006","start":35,"duration":8},{"id":"beat-007","start":43,"duration":7},{"id":"beat-008","start":50,"duration":4},{"id":"beat-009","start":54,"duration":8},{"id":"beat-010","start":62,"duration":8},{"id":"beat-011","start":70,"duration":8},{"id":"beat-012","start":78,"duration":4}];
+      const tl = gsap.timeline({ paused: true });
+      sceneData.forEach((scene) => {
+        const selector = "#" + scene.id;
+        tl.set(selector, { opacity: 1 }, scene.start);
+        tl.fromTo(selector + " .visual-wrap", { scale: 1.035 }, { scale: 1.075, duration: scene.duration, ease: "none" }, scene.start);
+        tl.from(selector + " .caption", { y: 22, opacity: 0, duration: 0.45, ease: "power3.out" }, scene.start + 0.2);
+        tl.from(selector + " .source-label", { y: -16, opacity: 0, duration: 0.35, ease: "power2.out" }, scene.start + 0.15);
+        tl.from(selector + " .node", { scale: 0.88, opacity: 0, stagger: 0.08, duration: 0.45, ease: "power3.out" }, scene.start + 0.35);
+        tl.from(selector + " .line", { scaleX: 0, opacity: 0, stagger: 0.08, duration: 0.55, ease: "power2.out" }, scene.start + 0.55);
+        tl.to(selector, { opacity: 0, duration: 0.35, ease: "power2.inOut" }, scene.start + scene.duration - 0.35);
+      });
+      window.__timelines.review = tl;
+    </script>
+  </body>
+</html>

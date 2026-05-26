@@ -26,6 +26,24 @@ After manually returning assets:
 npm run video:check-assets -- --intake outputs/video-plan-demo/asset-intake.json
 ```
 
+Audit a generated visual plan before asset work or assembly:
+
+```bash
+npm run video:audit-plan -- \
+  --plan outputs/video-plan-demo/visual-plan.json \
+  --out outputs/video-plan-demo
+```
+
+Generate a HyperFrames review project from a plan and asset intake sheet:
+
+```bash
+npm run video:review-project -- \
+  --plan outputs/video-plan-demo/visual-plan.json \
+  --intake outputs/video-plan-demo/asset-intake.json \
+  --out hyperframes/reviews/video-plan-demo \
+  --max-beats 12
+```
+
 Outputs:
 
 - `visual-plan.json`: structured visual beats and asset decisions.
@@ -37,6 +55,8 @@ Outputs:
 - `asset-checklist.md`: creator-readable asset and rights checklist.
 - `asset-intake.json`: creator-filled return sheet for generated, sourced, or drawn assets.
 - `asset-return-checklist.md`: human-readable checklist for the manual asset return loop.
+- `audit-report.md`: visual-plan health check for evidence balance, diagram overuse, rights risk, and generated-image risk.
+- HyperFrames review project: `index.html`, `review-data.json`, `review-manifest.json`, `DESIGN.md`, `README.md`.
 
 ## One-Minute Test Render
 
@@ -74,6 +94,36 @@ Recommended loop:
 ```
 
 Generated images should be labeled as illustration when they could be mistaken for evidence. Do not use generated images as fake footage, fake screenshots, fake documents, or fake images of real current politicians.
+
+## Visual Plan Audit
+
+Before spending time sourcing footage or assembling a review video, run:
+
+```bash
+npm run video:audit-plan -- --plan outputs/video-plan-demo/visual-plan.json
+```
+
+The audit flags common failure modes:
+
+- Too many diagram/chart beats, which can make the result feel like a slide deck.
+- Too little evidence-like material for factual claims.
+- High rights-risk beats.
+- Generated illustrations that mention real current figures, screenshots, documents, or news evidence.
+- Long narration chunks that should be split before assembly.
+
+Use the audit as a production gate. A `blocked` plan should be revised before assembly. A `review` plan can move forward, but the flagged beats should be checked by the creator.
+
+## HyperFrames Review Project
+
+The review project generator is the first video-generation stage:
+
+```text
+visual-plan.json + asset-intake.json
+-> HyperFrames review folder
+-> visible placeholders, material mix, missing assets, and PPT risk
+```
+
+It does not download footage, call AI image generation, or create a final MP4. It creates an inspectable video skeleton so the creator can decide what footage, archive material, documents, diagrams, or generated illustrations must be added before final assembly.
 
 ## Design Principles
 

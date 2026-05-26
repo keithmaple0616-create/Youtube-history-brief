@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "projectTitle": "Nixon Trump China Review",
+  "durationEstimateSec": 82,
+  "beatCount": 12,
+  "visualMix": {
+    "footage": 0,
+    "archivePhoto": 0,
+    "document": 0,
+    "map": 0,
+    "chart": 0,
+    "diagram": 63,
+    "generatedIllustration": 0,
+    "titleCard": 19,
+    "documentaryImage": 0
+  },
+  "visualMixPercent": {
+    "footage": 0,
+    "archivePhoto": 0,
+    "document": 0,
+    "map": 0,
+    "chart": 0,
+    "diagram": 76.8,
+    "generatedIllustration": 0,
+    "titleCard": 23.2,
+    "documentaryImage": 0
+  },
+  "riskSummary": {
+    "pptRisk": "high",
+    "copyrightRisk": "low",
+    "fakeEvidenceRisk": "low"
+  },
+  "missingAssets": [
+    {
+      "beatId": "beat-001",
+      "visualType": "title-card",
+      "neededAsset": "kinetic text + atmosphere plate",
+      "expectedPath": "assets/generated/beat-001-background.png",
+      "taskType": "generated-background"
+    },
+    {
+      "beatId": "beat-002",
+      "visualType": "diagram",
+      "neededAsset": "map / relationship diagram / process graphic",
+      "expectedPath": "assets/diagrams/beat-002-diagram.html",
+      "taskType": "code-diagram"
+    },
+    {
+      "beatId": "beat-003",
+      "visualType": "chapter-card",
+      "neededAsset": "chapter card / thesis card",
+      "expectedPath": "assets/generated/beat-003-background.png",
+      "taskType": "generated-background"
+    },
+    {
+      "beatId": "beat-004",
+      "visualType": "diagram",
+      "neededAsset": "map / relationship diagram / process graphic",
+      "expectedPath": "assets/diagrams/beat-004-diagram.html",
+      "taskType": "code-diagram"
+    },
+    {
+      "beatId": "beat-005",
+      "visualType": "diagram",
+      "neededAsset": "map / relationship diagram / process graphic",
+      "expectedPath": "assets/diagrams/beat-005-diagram.html",
+      "taskType": "code-diagram"
+    },
+    {
+      "beatId": "beat-006",
+      "visualType": "diagram",
+      "neededAsset": "map / relationship diagram / process graphic",
+      "expectedPath": "assets/diagrams/beat-006-diagram.html",
+      "taskType": "code-diagram"
+    },
+    {
+      "beatId": "beat-007",
+      "visualType": "diagram",
+      "neededAsset": "map / relationship diagram / process graphic",
+      "expectedPath": "assets/diagrams/beat-007-diagram.html",
+      "taskType": "code-diagram"
+    },
+    {
+      "beatId": "beat-008",
+      "visualType": "chapter-card",
+      "neededAsset": "chapter card / thesis card",
+      "expectedPath": "assets/generated/beat-008-background.png",
+      "taskType": "generated-background"
+    },
+    {
+      "beatId": "beat-009",
+      "visualType": "diagram",
+      "neededAsset": "map / relationship diagram / process graphic",
+      "expectedPath": "assets/diagrams/beat-009-diagram.html",
+      "taskType": "code-diagram"
+    },
+    {
+      "beatId": "beat-010",
+      "visualType": "diagram",
+      "neededAsset": "map / relationship diagram / process graphic",
+      "expectedPath": "assets/diagrams/beat-010-diagram.html",
+      "taskType": "code-diagram"
+    },
+    {
+      "beatId": "beat-011",
+      "visualType": "diagram",
+      "neededAsset": "map / relationship diagram / process graphic",
+      "expectedPath": "assets/diagrams/beat-011-diagram.html",
+      "taskType": "code-diagram"
+    },
+    {
+      "beatId": "beat-012",
+      "visualType": "chapter-card",
+      "neededAsset": "chapter card / thesis card",
+      "expectedPath": "assets/generated/beat-012-background.png",
+      "taskType": "generated-background"
+    }
+  ],
+  "mustFixBeforeRender": [
+    "Real/source-like material is too weak for a documentary review. Replace some diagram/title placeholders with footage, archive, map, document, or source screenshot assets."
+  ],
+  "recommendedNextActions": [
+    "Replace the first 10 seconds with real footage or source-like material before polishing graphics.",
+    "Convert repeated diagram placeholders into footage/document/map beats where possible.",
+    "Fill sourceUrl, license, owner, and accessDate for evidence and chart assets.",
+    "Use generated images only as labeled illustration or atmosphere."
+  ]
+}

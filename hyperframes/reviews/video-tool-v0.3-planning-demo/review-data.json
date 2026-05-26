@@ -1,0 +1,431 @@
+{
+  "schemaVersion": 1,
+  "sourcePlan": "script-to-video-plan",
+  "lane": "history",
+  "sourceFiles": {
+    "visualPlan": "outputs/video-tool-v0.3-planning-demo/visual-plan.json",
+    "intake": "outputs/video-tool-v0.3-planning-demo/asset-intake.json"
+  },
+  "durationSec": 82,
+  "scenes": [
+    {
+      "id": "beat-001",
+      "order": 1,
+      "start": 0,
+      "duration": 7,
+      "sectionTitle": "The Photograph That Deceives",
+      "role": "hook",
+      "visualType": "title-card",
+      "reviewType": "title-card",
+      "rightsRisk": "low",
+      "screenText": "THE COMPARISON WAS ALMOST TOO TEMPTING",
+      "caption": "Some photographs arrive already wearing someone else’s memory. When President Donald Trump landed in Beijing in May 2026, the comparison was almost",
+      "emphasis": "the comparison was almost too tempting",
+      "summary": "Some photographs arrive already wearing someone else’s memory. When President Donald Trump landed in Beijing in May 2026,...",
+      "sourcePolicy": "No factual footage required; generated/abstract background is acceptable.",
+      "visualGoal": "kinetic text + atmosphere plate",
+      "visualNote": "Trump arriving in Beijing in May 2026, then a slow dissolve to Nixon stepping off Air Force One in 1972.",
+      "asset": {
+        "exists": false,
+        "kind": "image",
+        "src": "",
+        "raw": "assets/generated/beat-001-background.png"
+      },
+      "assetTask": {
+        "taskType": "generated-background",
+        "priority": "high",
+        "status": "missing",
+        "onScreenLabel": "optional"
+      },
+      "reviewFlags": [
+        "missing-asset"
+      ]
+    },
+    {
+      "id": "beat-002",
+      "order": 2,
+      "start": 7,
+      "duration": 8,
+      "sectionTitle": "The Photograph That Deceives",
+      "role": "argument",
+      "visualType": "diagram",
+      "reviewType": "diagram-placeholder",
+      "rightsRisk": "low",
+      "screenText": "the structure was almost the opposite",
+      "caption": "But the danger of a famous photograph is that it teaches us to look for the wrong thing. Trump’s China visit looked,",
+      "emphasis": "the structure was almost the opposite",
+      "summary": "But the danger of a famous photograph is that it teaches us to look for the wrong thing....",
+      "sourcePolicy": "Can be fully generated as graphics because it explains structure rather than proving an event.",
+      "visualGoal": "map / relationship diagram / process graphic",
+      "visualNote": "Trump arriving in Beijing in May 2026, then a slow dissolve to Nixon stepping off Air Force One in 1972.",
+      "asset": {
+        "exists": false,
+        "kind": "html",
+        "src": "",
+        "raw": "assets/diagrams/beat-002-diagram.html"
+      },
+      "assetTask": {
+        "taskType": "code-diagram",
+        "priority": "high",
+        "status": "missing",
+        "onScreenLabel": "not required"
+      },
+      "reviewFlags": [
+        "missing-asset",
+        "ppt-risk"
+      ]
+    },
+    {
+      "id": "beat-003",
+      "order": 3,
+      "start": 15,
+      "duration": 4,
+      "sectionTitle": "Why Nixon Really Went to China",
+      "role": "chapter",
+      "visualType": "chapter-card",
+      "reviewType": "title-card",
+      "rightsRisk": "low",
+      "screenText": "Why Nixon Really Went to China",
+      "caption": "Why Nixon Really Went to China",
+      "emphasis": "Why Nixon Really Went to China",
+      "summary": "Why Nixon Really Went to China",
+      "sourcePolicy": "No factual footage required.",
+      "visualGoal": "chapter card / thesis card",
+      "visualNote": "1960s maps of the Sino-Soviet border, Vietnam War footage, Nixon and Kissinger in archive images.",
+      "asset": {
+        "exists": false,
+        "kind": "image",
+        "src": "",
+        "raw": "assets/generated/beat-003-background.png"
+      },
+      "assetTask": {
+        "taskType": "generated-background",
+        "priority": "medium",
+        "status": "missing",
+        "onScreenLabel": "optional"
+      },
+      "reviewFlags": [
+        "missing-asset"
+      ]
+    },
+    {
+      "id": "beat-004",
+      "order": 4,
+      "start": 19,
+      "duration": 8,
+      "sectionTitle": "Why Nixon Really Went to China",
+      "role": "argument",
+      "visualType": "diagram",
+      "reviewType": "diagram-placeholder",
+      "rightsRisk": "low",
+      "screenText": "the communist world was badly divided",
+      "caption": "The 1972 visit was not a sentimental act of reconciliation. It was strategy. By the late 1960s, the communist world was badly",
+      "emphasis": "the communist world was badly divided",
+      "summary": "The 1972 visit was not a sentimental act of reconciliation. It was strategy. By the late 1960s, the...",
+      "sourcePolicy": "Can be fully generated as graphics because it explains structure rather than proving an event.",
+      "visualGoal": "map / relationship diagram / process graphic",
+      "visualNote": "1960s maps of the Sino-Soviet border, Vietnam War footage, Nixon and Kissinger in archive images.",
+      "asset": {
+        "exists": false,
+        "kind": "html",
+        "src": "",
+        "raw": "assets/diagrams/beat-004-diagram.html"
+      },
+      "assetTask": {
+        "taskType": "code-diagram",
+        "priority": "high",
+        "status": "missing",
+        "onScreenLabel": "not required"
+      },
+      "reviewFlags": [
+        "missing-asset",
+        "ppt-risk"
+      ]
+    },
+    {
+      "id": "beat-005",
+      "order": 5,
+      "start": 27,
+      "duration": 8,
+      "sectionTitle": "Why Nixon Really Went to China",
+      "role": "argument",
+      "visualType": "diagram",
+      "reviewType": "diagram-placeholder",
+      "rightsRisk": "low",
+      "screenText": "The United States was stuck in Vietnam",
+      "caption": "The United States was stuck in Vietnam. The Cold War balance felt heavy and expensive. The Soviet Union was the central strategic",
+      "emphasis": "The United States was stuck in Vietnam",
+      "summary": "The United States was stuck in Vietnam. The Cold War balance felt heavy and expensive. The Soviet Union...",
+      "sourcePolicy": "Can be fully generated as graphics because it explains structure rather than proving an event.",
+      "visualGoal": "map / relationship diagram / process graphic",
+      "visualNote": "1960s maps of the Sino-Soviet border, Vietnam War footage, Nixon and Kissinger in archive images.",
+      "asset": {
+        "exists": false,
+        "kind": "html",
+        "src": "",
+        "raw": "assets/diagrams/beat-005-diagram.html"
+      },
+      "assetTask": {
+        "taskType": "code-diagram",
+        "priority": "high",
+        "status": "missing",
+        "onScreenLabel": "not required"
+      },
+      "reviewFlags": [
+        "missing-asset",
+        "ppt-risk"
+      ]
+    },
+    {
+      "id": "beat-006",
+      "order": 6,
+      "start": 35,
+      "duration": 8,
+      "sectionTitle": "Why Nixon Really Went to China",
+      "role": "argument",
+      "visualType": "diagram",
+      "reviewType": "diagram-placeholder",
+      "rightsRisk": "low",
+      "screenText": "It did not solve every disagreement",
+      "caption": "That is why the Shanghai Communiqué could be both historic and carefully vague. It did not solve every disagreement. It did not",
+      "emphasis": "It did not solve every disagreement",
+      "summary": "That is why the Shanghai Communiqué could be both historic and carefully vague. It did not solve every...",
+      "sourcePolicy": "Can be fully generated as graphics because it explains structure rather than proving an event.",
+      "visualGoal": "map / relationship diagram / process graphic",
+      "visualNote": "1960s maps of the Sino-Soviet border, Vietnam War footage, Nixon and Kissinger in archive images.",
+      "asset": {
+        "exists": false,
+        "kind": "html",
+        "src": "",
+        "raw": "assets/diagrams/beat-006-diagram.html"
+      },
+      "assetTask": {
+        "taskType": "code-diagram",
+        "priority": "high",
+        "status": "missing",
+        "onScreenLabel": "not required"
+      },
+      "reviewFlags": [
+        "missing-asset",
+        "ppt-risk"
+      ]
+    },
+    {
+      "id": "beat-007",
+      "order": 7,
+      "start": 43,
+      "duration": 7,
+      "sectionTitle": "Why Nixon Really Went to China",
+      "role": "argument",
+      "visualType": "diagram",
+      "reviewType": "diagram-placeholder",
+      "rightsRisk": "low",
+      "screenText": "the direction of the situation",
+      "caption": "But the phrase does capture something about 1972. China and the United States were distant powers whose immediate anxieties converged against a",
+      "emphasis": "the direction of the situation",
+      "summary": "But the phrase does capture something about 1972. China and the United States were distant powers whose immediate...",
+      "sourcePolicy": "Can be fully generated as graphics because it explains structure rather than proving an event.",
+      "visualGoal": "map / relationship diagram / process graphic",
+      "visualNote": "1960s maps of the Sino-Soviet border, Vietnam War footage, Nixon and Kissinger in archive images.",
+      "asset": {
+        "exists": false,
+        "kind": "html",
+        "src": "",
+        "raw": "assets/diagrams/beat-007-diagram.html"
+      },
+      "assetTask": {
+        "taskType": "code-diagram",
+        "priority": "high",
+        "status": "missing",
+        "onScreenLabel": "not required"
+      },
+      "reviewFlags": [
+        "missing-asset",
+        "ppt-risk"
+      ]
+    },
+    {
+      "id": "beat-008",
+      "order": 8,
+      "start": 50,
+      "duration": 4,
+      "sectionTitle": "A Summit Without Soviets",
+      "role": "chapter",
+      "visualType": "chapter-card",
+      "reviewType": "title-card",
+      "rightsRisk": "low",
+      "screenText": "A Summit Without Soviets",
+      "caption": "A Summit Without Soviets",
+      "emphasis": "A Summit Without Soviets",
+      "summary": "A Summit Without Soviets",
+      "sourcePolicy": "No factual footage required.",
+      "visualGoal": "chapter card / thesis card",
+      "visualNote": "modern Beijing skyline, U.S. and Chinese flags, trade headlines, military footage in the Pacific.",
+      "asset": {
+        "exists": false,
+        "kind": "image",
+        "src": "",
+        "raw": "assets/generated/beat-008-background.png"
+      },
+      "assetTask": {
+        "taskType": "generated-background",
+        "priority": "medium",
+        "status": "missing",
+        "onScreenLabel": "optional"
+      },
+      "reviewFlags": [
+        "missing-asset"
+      ]
+    },
+    {
+      "id": "beat-009",
+      "order": 9,
+      "start": 54,
+      "duration": 8,
+      "sectionTitle": "A Summit Without Soviets",
+      "role": "argument",
+      "visualType": "diagram",
+      "reviewType": "diagram-placeholder",
+      "rightsRisk": "low",
+      "screenText": "Now compare that with 2026",
+      "caption": "Now compare that with 2026. There is no Soviet Union sitting above the map, forcing Washington and Beijing into each other’s arms.",
+      "emphasis": "Now compare that with 2026",
+      "summary": "Now compare that with 2026. There is no Soviet Union sitting above the map, forcing Washington and Beijing...",
+      "sourcePolicy": "Can be fully generated as graphics because it explains structure rather than proving an event.",
+      "visualGoal": "map / relationship diagram / process graphic",
+      "visualNote": "modern Beijing skyline, U.S. and Chinese flags, trade headlines, military footage in the Pacific.",
+      "asset": {
+        "exists": false,
+        "kind": "html",
+        "src": "",
+        "raw": "assets/diagrams/beat-009-diagram.html"
+      },
+      "assetTask": {
+        "taskType": "code-diagram",
+        "priority": "high",
+        "status": "missing",
+        "onScreenLabel": "not required"
+      },
+      "reviewFlags": [
+        "missing-asset",
+        "ppt-risk"
+      ]
+    },
+    {
+      "id": "beat-010",
+      "order": 10,
+      "start": 62,
+      "duration": 8,
+      "sectionTitle": "A Summit Without Soviets",
+      "role": "argument",
+      "visualType": "diagram",
+      "reviewType": "diagram-placeholder",
+      "rightsRisk": "low",
+      "screenText": "American coverage focused on deals",
+      "caption": "According to public reporting, the May 2026 Beijing visit was framed around stabilizing the world’s most important bilateral relationship at a moment",
+      "emphasis": "American coverage focused on deals",
+      "summary": "According to public reporting, the May 2026 Beijing visit was framed around stabilizing the world’s most important bilateral...",
+      "sourcePolicy": "Can be fully generated as graphics because it explains structure rather than proving an event.",
+      "visualGoal": "map / relationship diagram / process graphic",
+      "visualNote": "modern Beijing skyline, U.S. and Chinese flags, trade headlines, military footage in the Pacific.",
+      "asset": {
+        "exists": false,
+        "kind": "html",
+        "src": "",
+        "raw": "assets/diagrams/beat-010-diagram.html"
+      },
+      "assetTask": {
+        "taskType": "code-diagram",
+        "priority": "high",
+        "status": "missing",
+        "onScreenLabel": "not required"
+      },
+      "reviewFlags": [
+        "missing-asset",
+        "ppt-risk"
+      ]
+    },
+    {
+      "id": "beat-011",
+      "order": 11,
+      "start": 70,
+      "duration": 8,
+      "sectionTitle": "A Summit Without Soviets",
+      "role": "argument",
+      "visualType": "diagram",
+      "reviewType": "diagram-placeholder",
+      "rightsRisk": "low",
+      "screenText": "they are now pressed against each other",
+      "caption": "If yuan jiao jin gong worked when the distant power helped balance the near threat, what happens when the distant power becomes",
+      "emphasis": "they are now pressed against each other",
+      "summary": "If yuan jiao jin gong worked when the distant power helped balance the near threat, what happens when...",
+      "sourcePolicy": "Can be fully generated as graphics because it explains structure rather than proving an event.",
+      "visualGoal": "map / relationship diagram / process graphic",
+      "visualNote": "modern Beijing skyline, U.S. and Chinese flags, trade headlines, military footage in the Pacific.",
+      "asset": {
+        "exists": false,
+        "kind": "html",
+        "src": "",
+        "raw": "assets/diagrams/beat-011-diagram.html"
+      },
+      "assetTask": {
+        "taskType": "code-diagram",
+        "priority": "high",
+        "status": "missing",
+        "onScreenLabel": "not required"
+      },
+      "reviewFlags": [
+        "missing-asset",
+        "ppt-risk"
+      ]
+    },
+    {
+      "id": "beat-012",
+      "order": 12,
+      "start": 78,
+      "duration": 4,
+      "sectionTitle": "When Economics Became a Minefield",
+      "role": "chapter",
+      "visualType": "chapter-card",
+      "reviewType": "title-card",
+      "rightsRisk": "low",
+      "screenText": "When Economics Became a Minefield",
+      "caption": "When Economics Became a Minefield",
+      "emphasis": "When Economics Became a Minefield",
+      "summary": "When Economics Became a Minefield",
+      "sourcePolicy": "No factual footage required.",
+      "visualGoal": "chapter card / thesis card",
+      "visualNote": "container ports, chip fabrication plants, cargo ships, tariff headlines, rare earth mining imagery.",
+      "asset": {
+        "exists": false,
+        "kind": "image",
+        "src": "",
+        "raw": "assets/generated/beat-012-background.png"
+      },
+      "assetTask": {
+        "taskType": "generated-background",
+        "priority": "medium",
+        "status": "missing",
+        "onScreenLabel": "optional"
+      },
+      "reviewFlags": [
+        "missing-asset"
+      ]
+    }
+  ],
+  "review": {
+    "purpose": "HyperFrames review project for pacing, material mix, missing assets, and PPT risk.",
+    "materialMix": {
+      "title-card": 4,
+      "diagram-placeholder": 8
+    },
+    "gates": [
+      "Does the opening begin with concrete people, places, documents, or events?",
+      "Does any section rely on diagrams before the viewer sees source-grounded material?",
+      "Are placeholders clearly marked as placeholders?",
+      "Are generated visuals labeled as illustration when needed?",
+      "Can weak sections be fixed by sourcing footage rather than adding more text?"
+    ]
+  },
+  "title": "Nixon Trump China Review"
+}
