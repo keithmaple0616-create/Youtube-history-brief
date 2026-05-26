@@ -395,6 +395,9 @@ function htmlForReview(data) {
         opacity: 0;
         overflow: hidden;
       }
+      .scene[data-start="0"] {
+        opacity: 1;
+      }
       .visual-wrap {
         position: absolute;
         inset: 0;
@@ -577,6 +580,25 @@ function htmlForReview(data) {
         tl.to(selector, { opacity: 0, duration: 0.35, ease: "power2.inOut" }, scene.start + scene.duration - 0.35);
       });
       window.__timelines.review = tl;
+
+      const hasHyperFramesController = Boolean(window.__HYPERFRAMES__ || window.__hyperframes);
+      if (!hasHyperFramesController) {
+        const totalDuration = ${data.durationSec};
+        const setSceneAt = (time) => {
+          const active = sceneData.find((scene) => time >= scene.start && time < scene.start + scene.duration) || sceneData[0];
+          sceneIds.forEach((id) => {
+            const element = document.getElementById(id);
+            if (!element) return;
+            element.style.opacity = id === active.id ? "1" : "0";
+          });
+        };
+        setSceneAt(0);
+        const startedAt = performance.now();
+        window.setInterval(() => {
+          const elapsed = ((performance.now() - startedAt) / 1000) % totalDuration;
+          setSceneAt(elapsed);
+        }, 250);
+      }
     </script>
   </body>
 </html>
