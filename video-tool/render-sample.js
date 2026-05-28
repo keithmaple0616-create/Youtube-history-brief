@@ -10,6 +10,7 @@ function parseArgs(argv) {
     if (token === "--plan") args.plan = argv[++i];
     else if (token === "--out") args.out = argv[++i];
     else if (token === "--max-beats") args.maxBeats = Number(argv[++i]);
+    else if (token === "--audio-dir") args.audioDir = argv[++i];
   }
   return args;
 }
@@ -71,6 +72,24 @@ function paletteFor(type) {
   return { accent: "#b23a34", tint: "#f4ead8", label: "CHAPTER / TITLE CARD" };
 }
 
+async function probeDuration(path) {
+  try {
+    const result = await run("ffprobe", [
+      "-v",
+      "error",
+      "-show_entries",
+      "format=duration",
+      "-of",
+      "default=noprint_wrappers=1:nokey=1",
+      path
+    ]);
+    const duration = Number(result.stdout.trim());
+    return Number.isFinite(duration) ? duration : 0;
+  } catch {
+    return 0;
+  }
+}
+
 function textLines(lines, x, y, size, fill, weight = 400, gap = 1.28) {
   return lines.map((line, index) =>
     `<text x="${x}" y="${y + index * size * gap}" fill="${fill}" font-size="${size}" font-family="Arial, Helvetica, sans-serif" font-weight="${weight}">${escapeXml(line)}</text>`
@@ -109,6 +128,44 @@ function svgForBeat({ beat, index, total, plan }) {
 </svg>`;
 }
 
+async function buildAudioTrack({ beats, audioDir, outDir }) {
+  if (!audioDir) return null;
+  const audioFiles = [];
+  for (const beat of beats) {
+    const path = resolve(audioDir, `${beat.id}.mp3`);
+    try {
+      const duration = await probeDuration(path);
+      if (duration > 0) audioFiles.push({ beatId: beat.id, path, duration });
+    } catch {
+      // Missing audio clips are allowed for rough samples.
+    }
+  }
+  if (!audioFiles.length) return null;
+
+  const concatPath = join(outDir, "audio.ffconcat");
+  const lines = ["ffconcat version 1.0"];
+  for (const file of audioFiles) {
+    lines.push(`file '${file.path.replaceAll("'", "'\\''")}'`);
+  }
+  await writeFile(concatPath, `${lines.join("\n")}\n`, "utf8");
+  const narrationPath = join(outDir, "narration.mp3");
+  await run("ffmpeg", [
+    "-y",
+    "-f",
+    "concat",
+    "-safe",
+    "0",
+    "-i",
+    concatPath,
+    "-c:a",
+    "libmp3lame",
+    "-q:a",
+    "4",
+    "narration.mp3"
+  ], outDir);
+  return { narrationPath, files: audioFiles };
+}
+
 async function main() {
   const args = parseArgs(process.argv);
   if (!args.plan || !args.out) {
@@ -123,6 +180,7 @@ async function main() {
   const outDir = resolve(dirname(args.out));
   const framesDir = join(outDir, "frames");
   await mkdir(framesDir, { recursive: true });
+  const audioTrack = await buildAudioTrack({ beats, audioDir: args.audioDir, outDir });
 
   const concatLines = ["ffconcat version 1.0"];
   let duration = 0;
@@ -132,7 +190,10 @@ async function main() {
     const pngPath = join(framesDir, `${name}.png`);
     await writeFile(svgPath, svgForBeat({ beat, index, total: beats.length, plan }), "utf8");
     await run("sips", ["-s", "format", "png", svgPath, "--out", pngPath]);
-    const beatDuration = Math.max(3, Math.min(14, Number(beat.estimatedDurationSec || 6)));
+    const audioDuration = audioTrack?.files.find((file) => file.beatId === beat.id)?.duration || 0;
+    const beatDuration = audioDuration > 0
+      ? Math.max(3, audioDuration + 0.25)
+      : Math.max(3, Math.min(14, Number(beat.estimatedDurationSec || 6)));
     concatLines.push(`file '${pngPath.replaceAll("'", "'\\''")}'`);
     concatLines.push(`duration ${beatDuration}`);
     duration += beatDuration;
@@ -142,6 +203,7 @@ async function main() {
   const concatPath = join(outDir, "frames.ffconcat");
   await writeFile(concatPath, `${concatLines.join("\n")}\n`, "utf8");
 
+  const videoOnlyName = audioTrack ? "video-only.mp4" : basename(args.out);
   await run("ffmpeg", [
     "-y",
     "-f",
@@ -160,10 +222,28 @@ async function main() {
     "23",
     "-movflags",
     "+faststart",
-    basename(args.out)
+    videoOnlyName
   ], outDir);
 
-  await writeFile(join(outDir, "render-report.md"), `# Render Report\n\n- Output: \`${args.out}\`\n- Duration: ${duration}s\n- Beats rendered: ${beats.length}\n- Renderer: SVG frames + ffmpeg low-fidelity sample\n\nThis sample is for pacing and structure review. Replace placeholders with sourced footage/images before final publishing.\n`, "utf8");
+  if (audioTrack) {
+    await run("ffmpeg", [
+      "-y",
+      "-i",
+      videoOnlyName,
+      "-i",
+      "narration.mp3",
+      "-c:v",
+      "copy",
+      "-c:a",
+      "aac",
+      "-b:a",
+      "160k",
+      "-shortest",
+      basename(args.out)
+    ], outDir);
+  }
+
+  await writeFile(join(outDir, "render-report.md"), `# Render Report\n\n- Output: \`${args.out}\`\n- Duration: ${duration}s\n- Beats rendered: ${beats.length}\n- Audio clips: ${audioTrack?.files.length || 0}\n- Renderer: SVG frames + ffmpeg${audioTrack ? " + narration audio" : ""}\n\nThis sample is for pacing and structure review. Replace placeholders with sourced footage/images before final publishing.\n`, "utf8");
   console.log(`Rendered sample MP4: ${args.out}`);
 }
 

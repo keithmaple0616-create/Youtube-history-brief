@@ -12,10 +12,10 @@
         <div>
           <p class="eyebrow">Video Production Desk</p>
           <h1>视频生产工作台</h1>
-          <p class="subhead">正式脚本 -> 素材规划 -> 外部搜集 -> image2 插图 -> 风险审查 -> 审片项目</p>
+          <p class="subhead">完整文案 -> 分镜节奏/素材提示词 -> 素材回填 -> MiniMax 配音并生成完整视频</p>
         </div>
         <div class="guardrail">
-          本工具不会确认素材版权，也不会把 AI 图当作新闻证据。它用于规划、搜集、回填和审查视频素材。
+          主流程只有四步。素材版权仍需人工确认；AI 图只能作为插图，不能当新闻证据或档案证据。
         </div>
       </section>
 
@@ -41,13 +41,30 @@
           <label>
             目标版本
             <select id="targetVersion">
-              <option value="review-sample">60-90 秒 review sample</option>
               <option value="full-video">12-15 分钟完整长视频</option>
+              <option value="review-sample">60-90 秒样片</option>
             </select>
           </label>
           <label>
-            Review beats
-            <input id="maxBeats" type="number" min="3" max="30" value="12" />
+            生成 beat 数
+            <input id="maxBeats" type="number" min="3" max="120" value="120" />
+          </label>
+          <div class="divider"></div>
+          <h2>MiniMax 配音</h2>
+          <label>
+            API Key
+            <input id="minimaxApiKey" type="password" placeholder="也可以放在 .env 的 MINIMAX_API_KEY" />
+          </label>
+          <label>
+            平台区域
+            <select id="minimaxRegion">
+              <option value="cn">中国站 minimaxi.com</option>
+              <option value="global">国际站 minimax.io</option>
+            </select>
+          </label>
+          <label>
+            Voice ID
+            <input id="voiceId" value="English_expressive_narrator" />
           </label>
           <button id="createProject" class="primary">新建项目</button>
           <button id="loadSample" class="secondary">填入现有 Trump/Nixon 项目稿</button>
@@ -67,17 +84,19 @@
               <span>正式脚本</span>
               <span id="scriptStats" class="muted">0 chars</span>
             </div>
-            <textarea id="scriptText" spellcheck="false" placeholder="粘贴已经确认的 final script。这里不写 brief，不改正式稿，只做视频素材规划。"></textarea>
+            <textarea id="scriptText" spellcheck="false" placeholder="粘贴完整正式文案。工具会先分析文案，再生成分镜节奏、搜索素材清单和 image2 生图提示词。"></textarea>
           </div>
 
           <div class="actions">
-            <button id="generatePlan" class="primary" disabled>生成视频素材规划</button>
-            <button id="runAudit" class="secondary" disabled>运行风险审查</button>
-            <button id="generateReview" class="secondary" disabled>生成审片项目</button>
-            <button id="renderVideo" class="secondary" disabled>渲染样片 MP4</button>
-            <button id="checkAssets" class="secondary" disabled>检查素材回填</button>
-            <a id="reviewLink" class="link-button disabled" target="_blank" rel="noreferrer">打开审片页面</a>
+            <button id="generatePlan" class="primary" disabled>1 分析文案并生成分镜</button>
+            <button id="saveIntake" class="secondary" disabled>2 保存素材回填</button>
+            <button id="finalVideo" class="secondary" disabled>3 生成完整视频</button>
+            <button id="checkAssets" class="secondary" disabled>检查素材</button>
             <a id="videoLink" class="link-button disabled" target="_blank" rel="noreferrer">打开视频</a>
+            <button id="runAudit" class="secondary utility-action" disabled>风险审查</button>
+            <button id="generateReview" class="secondary utility-action" disabled>审片项目</button>
+            <button id="renderVideo" class="secondary utility-action" disabled>无配音样片</button>
+            <a id="reviewLink" class="link-button disabled utility-action" target="_blank" rel="noreferrer">打开审片</a>
           </div>
 
           <section class="status-grid">
@@ -94,18 +113,26 @@
               <strong id="diagramMetric">--</strong>
             </div>
             <div class="metric">
-              <span>PPT 风险</span>
+              <span>视频状态</span>
               <strong id="pptMetric">--</strong>
             </div>
           </section>
 
+          <section class="intake-panel">
+            <div class="panel-title">
+              <span>素材回填</span>
+              <span class="muted">把你找到的素材路径、source URL、license 填进这里</span>
+            </div>
+            <textarea id="assetIntakeText" spellcheck="false" placeholder="生成分镜后，这里会出现 asset-intake.json。"></textarea>
+          </section>
+
           <section class="output-panel">
             <nav class="tabs" aria-label="输出文件">
-              <button class="tab active" data-tab="summary">总览</button>
+              <button class="tab active" data-tab="summary">分镜总览</button>
               <button class="tab" data-tab="storyboard">分段结构</button>
-              <button class="tab" data-tab="external">外部搜集</button>
+              <button class="tab" data-tab="external">搜索素材</button>
               <button class="tab" data-tab="image2">image2</button>
-              <button class="tab" data-tab="audit">风险报告</button>
+              <button class="tab" data-tab="audit">辅助审查</button>
               <button class="tab" data-tab="assets">素材回填</button>
             </nav>
             <div class="output-toolbar">

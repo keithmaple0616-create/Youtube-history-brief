@@ -201,11 +201,29 @@ button:hover,
   padding: 14px;
 }
 
+.intake-panel {
+  margin-bottom: 14px;
+  padding: 14px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.intake-panel textarea {
+  min-height: 170px;
+  font-family: Menlo, Consolas, monospace;
+  font-size: 12px;
+}
+
 .actions {
   display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 10px;
   margin: 14px 0;
+}
+
+.utility-action {
+  opacity: 0.72;
 }
 
 .actions .primary {

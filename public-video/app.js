@@ -13,6 +13,9 @@ const refs = {
   lane: $("lane"),
   targetVersion: $("targetVersion"),
   maxBeats: $("maxBeats"),
+  minimaxApiKey: $("minimaxApiKey"),
+  minimaxRegion: $("minimaxRegion"),
+  voiceId: $("voiceId"),
   scriptText: $("scriptText"),
   scriptStats: $("scriptStats"),
   createProject: $("createProject"),
@@ -24,6 +27,8 @@ const refs = {
   runAudit: $("runAudit"),
   generateReview: $("generateReview"),
   renderVideo: $("renderVideo"),
+  finalVideo: $("finalVideo"),
+  saveIntake: $("saveIntake"),
   checkAssets: $("checkAssets"),
   reviewLink: $("reviewLink"),
   videoLink: $("videoLink"),
@@ -34,6 +39,7 @@ const refs = {
   statusLine: $("statusLine"),
   summaryView: $("summaryView"),
   textView: $("textView"),
+  assetIntakeText: $("assetIntakeText"),
   copyOutput: $("copyOutput")
 };
 
@@ -98,6 +104,8 @@ function updateControls() {
   refs.runAudit.disabled = !hasPlan;
   refs.generateReview.disabled = !hasPlan;
   refs.renderVideo.disabled = !hasPlan;
+  refs.finalVideo.disabled = !hasPlan;
+  refs.saveIntake.disabled = !hasPlan;
   refs.checkAssets.disabled = !hasPlan;
   refs.currentProject.textContent = state.project ? state.project.title : "未创建";
 }
@@ -107,7 +115,7 @@ function updateMetrics() {
   const manifest = state.data?.reviewManifest;
   refs.evidenceMetric.textContent = audit ? `${audit.evidencePercent}%` : manifest ? `${Math.round((manifest.visualMixPercent.footage || 0) + (manifest.visualMixPercent.archivePhoto || 0) + (manifest.visualMixPercent.document || 0))}%` : "--";
   refs.diagramMetric.textContent = audit ? `${audit.diagramPercent}%` : manifest ? `${Math.round((manifest.visualMixPercent.diagram || 0) + (manifest.visualMixPercent.chart || 0))}%` : "--";
-  refs.pptMetric.textContent = manifest?.riskSummary?.pptRisk || (audit?.status === "blocked" ? "high" : audit?.status === "review" ? "medium" : audit ? "low" : "--");
+  refs.pptMetric.textContent = state.data?.videoUrl ? "已生成" : manifest?.riskSummary?.pptRisk || (audit?.status === "blocked" ? "high" : audit?.status === "review" ? "medium" : audit ? "low" : "--");
   if (state.data?.videoUrl) {
     refs.videoLink.href = state.data.videoUrl;
     refs.videoLink.classList.remove("disabled");
@@ -137,8 +145,8 @@ function renderSummary() {
       <h2>素材比例总览</h2>
       <div class="mix-grid">
         <span>Beats<strong>${beats.length || "--"}</strong></span>
-        <span>Audit<strong>${audit?.status || "--"}</strong></span>
-        <span>PPT Risk<strong>${manifest?.riskSummary?.pptRisk || "--"}</strong></span>
+        <span>Search Tasks<strong>${fileText("external-sourcing-prompts.md") ? "ready" : "--"}</strong></span>
+        <span>Image2<strong>${fileText("image2-prompts.md") ? "ready" : "--"}</strong></span>
         <span>Missing<strong>${manifest?.missingAssets?.length ?? "--"}</strong></span>
         <span>MP4<strong>${state.data?.videoUrl ? "ready" : "--"}</strong></span>
       </div>
@@ -187,6 +195,7 @@ async function loadProject(id) {
   state.project = payload.project;
   state.data = payload;
   refs.scriptText.value = await fetch(`/outputs/video-projects/${encodeURIComponent(id)}/script.md`).then((res) => res.text());
+  refs.assetIntakeText.value = fileText("asset-intake.json");
   updateScriptStats();
   renderProjectList();
   renderTab();
@@ -206,6 +215,7 @@ async function createProject() {
   });
   state.project = payload.project;
   state.data = { project: payload.project, files: {}, plan: null, audit: null };
+  refs.assetIntakeText.value = "";
   await refreshProjects();
   renderTab();
   setStatus("项目已创建，可以生成视频素材规划");
@@ -214,13 +224,21 @@ async function createProject() {
 async function runAction(action, label) {
   if (!state.project) return;
   setStatus(`正在${label}...`);
-  const body = ["review", "render"].includes(action) ? { maxBeats: Number(refs.maxBeats.value || 12) } : {};
+  const body = ["review", "render", "final-video"].includes(action)
+    ? {
+        maxBeats: Number(refs.maxBeats.value || 120),
+        minimaxApiKey: refs.minimaxApiKey.value.trim(),
+        minimaxRegion: refs.minimaxRegion.value,
+        voiceId: refs.voiceId.value.trim()
+      }
+    : {};
   const payload = await api(`/api/projects/${encodeURIComponent(state.project.id)}/${action}`, {
     method: "POST",
     body: JSON.stringify(body)
   });
   state.project = payload.project;
   state.data = payload;
+  refs.assetIntakeText.value = fileText("asset-intake.json");
   if (payload.reviewUrl) {
     refs.reviewLink.href = payload.reviewUrl;
     refs.reviewLink.classList.remove("disabled");
@@ -232,6 +250,19 @@ async function runAction(action, label) {
   await refreshProjects();
   renderTab();
   setStatus(`${label}完成`);
+}
+
+async function saveIntake() {
+  if (!state.project) return;
+  setStatus("正在保存素材回填...");
+  const payload = await api(`/api/projects/${encodeURIComponent(state.project.id)}/intake`, {
+    method: "POST",
+    body: JSON.stringify({ intake: refs.assetIntakeText.value })
+  });
+  state.project = payload.project;
+  state.data = payload;
+  renderTab();
+  setStatus("素材回填已保存");
 }
 
 async function checkAssets() {
@@ -267,8 +298,20 @@ refs.generatePlan.addEventListener("click", () => runAction("plan", "生成视�
 refs.runAudit.addEventListener("click", () => runAction("audit", "运行风险审查").catch((error) => setStatus(error.message)));
 refs.generateReview.addEventListener("click", () => runAction("review", "生成审片项目").catch((error) => setStatus(error.message)));
 refs.renderVideo.addEventListener("click", () => runAction("render", "渲染样片 MP4").catch((error) => setStatus(error.message)));
+refs.finalVideo.addEventListener("click", () => runAction("final-video", "生成完整视频").catch((error) => setStatus(error.message)));
+refs.saveIntake.addEventListener("click", () => saveIntake().catch((error) => setStatus(error.message)));
 refs.checkAssets.addEventListener("click", () => checkAssets().catch((error) => setStatus(error.message)));
 refs.scriptText.addEventListener("input", updateScriptStats);
+refs.minimaxApiKey.value = localStorage.getItem("videoDeskMinimaxApiKey") || "";
+refs.minimaxRegion.value = localStorage.getItem("videoDeskMinimaxRegion") || "cn";
+refs.voiceId.value = localStorage.getItem("videoDeskVoiceId") || "English_expressive_narrator";
+[refs.minimaxApiKey, refs.minimaxRegion, refs.voiceId].forEach((input) => {
+  input.addEventListener("input", () => {
+    localStorage.setItem("videoDeskMinimaxApiKey", refs.minimaxApiKey.value);
+    localStorage.setItem("videoDeskMinimaxRegion", refs.minimaxRegion.value);
+    localStorage.setItem("videoDeskVoiceId", refs.voiceId.value);
+  });
+});
 refs.copyOutput.addEventListener("click", async () => {
   await navigator.clipboard.writeText(state.tabText || "");
   setStatus("当前内容已复制");

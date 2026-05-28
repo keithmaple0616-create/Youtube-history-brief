@@ -22,7 +22,8 @@ const mimeTypes = {
   ".jpeg": "image/jpeg",
   ".webp": "image/webp",
   ".mp4": "video/mp4",
-  ".mov": "video/quicktime"
+  ".mov": "video/quicktime",
+  ".mp3": "audio/mpeg"
 };
 
 function json(res, status, payload) {
@@ -262,6 +263,7 @@ async function readOutputFiles(projectDir) {
     "image2-prompts.md",
     "asset-checklist.md",
     "asset-return-checklist.md",
+    "asset-intake.json",
     "audit-report.md"
   ];
   const files = {};
@@ -272,7 +274,9 @@ async function readOutputFiles(projectDir) {
   const planPath = join(projectDir, "visual-plan.json");
   const auditJsonPath = join(projectDir, "audit-report.json");
   const reviewManifestPath = join(projectDir, "review", "review-manifest.json");
-  const videoPath = join(projectDir, "renders", "sample.mp4");
+  const finalVideoPath = join(projectDir, "renders", "final.mp4");
+  const sampleVideoPath = join(projectDir, "renders", "sample.mp4");
+  const videoPath = (await exists(finalVideoPath)) ? finalVideoPath : sampleVideoPath;
   return {
     files,
     plan: (await exists(planPath)) ? JSON.parse(await readFile(planPath, "utf8")) : null,
@@ -345,6 +349,114 @@ async function renderProject(projectId, maxBeats = 12) {
   };
 }
 
+function getMiniMaxTtsEndpoint(region) {
+  return region === "global" ? "https://api.minimax.io/v1/t2a_v2" : "https://api.minimaxi.com/v1/t2a_v2";
+}
+
+function getMiniMaxKey(req, body) {
+  return String(body.minimaxApiKey || req.headers["x-minimax-api-key"] || process.env.MINIMAX_TTS_API_KEY || process.env.MINIMAX_API_KEY || "").trim();
+}
+
+async function synthesizeMiniMaxTts({ apiKey, region, model, voiceId, text, outputPath }) {
+  const response = await fetch(getMiniMaxTtsEndpoint(region), {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${apiKey}`
+    },
+    body: JSON.stringify({
+      model,
+      text,
+      stream: false,
+      voice_setting: {
+        voice_id: voiceId,
+        speed: 1,
+        vol: 1,
+        pitch: 0
+      },
+      audio_setting: {
+        sample_rate: 32000,
+        bitrate: 128000,
+        format: "mp3",
+        channel: 1
+      }
+    })
+  });
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok || data.base_resp?.status_code) {
+    const message = data.base_resp?.status_msg || data.error?.message || data.message || "MiniMax TTS request failed.";
+    throw new Error(message);
+  }
+  const audioHex = data.data?.audio;
+  if (!audioHex) throw new Error("MiniMax TTS did not return audio.");
+  await writeFile(outputPath, Buffer.from(audioHex, "hex"));
+}
+
+async function generateNarration({ project, req, body, maxBeats }) {
+  const apiKey = getMiniMaxKey(req, body);
+  if (!apiKey) throw new Error("生成完整视频需要 MiniMax API Key。请在页面填写，或在 .env 里设置 MINIMAX_API_KEY。");
+  const plan = JSON.parse(await readFile(join(project.path, "visual-plan.json"), "utf8"));
+  const beats = (plan.beats || []).slice(0, maxBeats || 999);
+  const audioDir = join(project.path, "audio");
+  await mkdir(audioDir, { recursive: true });
+  const region = body.minimaxRegion || process.env.MINIMAX_REGION || "cn";
+  const model = body.ttsModel || process.env.MINIMAX_TTS_MODEL || "speech-2.8-turbo";
+  const voiceId = body.voiceId || process.env.MINIMAX_TTS_VOICE_ID || "English_expressive_narrator";
+  const clips = [];
+  for (const beat of beats) {
+    const outputPath = join(audioDir, `${beat.id}.mp3`);
+    await synthesizeMiniMaxTts({
+      apiKey,
+      region,
+      model,
+      voiceId,
+      text: beat.text || beat.summary || beat.caption || "",
+      outputPath
+    });
+    clips.push({ beatId: beat.id, path: outputPath, voiceId, model });
+  }
+  await writeFile(join(audioDir, "narration-manifest.json"), `${JSON.stringify({ region, model, voiceId, clips }, null, 2)}\n`, "utf8");
+  return { audioDir, generated: clips.length, region, model, voiceId };
+}
+
+async function finalVideoProject(projectId, req, body) {
+  const project = await readProject(projectId);
+  if (!(await exists(join(project.path, "visual-plan.json")))) {
+    await planProject(projectId);
+  }
+  const maxBeats = Number(body.maxBeats || 999);
+  const narration = await generateNarration({ project, req, body, maxBeats });
+  const renderDir = join(project.path, "renders");
+  const outputPath = join(renderDir, "final.mp4");
+  await mkdir(renderDir, { recursive: true });
+  const result = await runNode([
+    "video-tool/render-sample.js",
+    "--plan",
+    join(project.path, "visual-plan.json"),
+    "--out",
+    outputPath,
+    "--max-beats",
+    String(maxBeats),
+    "--audio-dir",
+    narration.audioDir
+  ]);
+  return {
+    project,
+    videoUrl: relativeUrl(outputPath),
+    narration,
+    renderLog: [result.stdout, result.stderr].filter(Boolean).join("\n"),
+    ...(await readOutputFiles(project.path))
+  };
+}
+
+async function saveIntake(projectId, body) {
+  const project = await readProject(projectId);
+  const raw = typeof body.intake === "string" ? body.intake : JSON.stringify(body.intake, null, 2);
+  const parsed = JSON.parse(raw);
+  await writeFile(join(project.path, "asset-intake.json"), `${JSON.stringify(parsed, null, 2)}\n`, "utf8");
+  return { project, ...(await readOutputFiles(project.path)) };
+}
+
 async function checkAssets(projectId) {
   const project = await readProject(projectId);
   try {
@@ -384,6 +496,13 @@ async function handleApi(req, res, url) {
     if (req.method === "POST" && action === "render") {
       const body = await readBody(req);
       return json(res, 200, await renderProject(projectId, Number(body.maxBeats || 12)));
+    }
+    if (req.method === "POST" && action === "final-video") {
+      const body = await readBody(req);
+      return json(res, 200, await finalVideoProject(projectId, req, body));
+    }
+    if (req.method === "POST" && action === "intake") {
+      return json(res, 200, await saveIntake(projectId, await readBody(req)));
     }
     if (req.method === "POST" && action === "check-assets") return json(res, 200, await checkAssets(projectId));
     return json(res, 404, { error: "API route not found." });
