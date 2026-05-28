@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
+    "video:start": "PORT=5124 node video-server.js",
     "video:plan": "node video-tool/plan-video.js",
     "video:audit-plan": "node video-tool/audit-plan.js",
     "video:review-project": "node video-tool/generate-hyperframes-review.js",

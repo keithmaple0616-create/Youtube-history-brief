@@ -14,6 +14,13 @@
 
 ## 如何启动
 
+Brief 工具和视频工具是两个独立本地页面：
+
+- Brief Tool: `http://localhost:5123`
+- Video Production Desk: `http://localhost:5124`
+
+### Brief 工具
+
 最简单的方式：
 
 1. 打开桌面上的项目文件夹。
@@ -48,6 +55,25 @@ http://localhost:5123
 5. 在页面左下角的「设置」里选择模型供应商，粘贴对应 API Key，然后点击「保存设置」。
 
 也可以根据 `.env.example` 创建本地 `.env` 文件，但第一版建议直接用页面里的设置框。
+
+### 视频生产工作台
+
+最简单的方式：
+
+1. 双击 `Start Video Tool.command`。
+2. 在浏览器里打开：
+
+```text
+http://localhost:5124
+```
+
+手动方式：
+
+```bash
+npm run video:start
+```
+
+视频生产工作台不会一键生成最终成片。它负责把已确认的正式脚本转成素材规划、外部搜集清单、image2 提示词、风险报告、素材回填表和 HyperFrames 审片项目。过程文件会生成到被 Git 忽略的 `outputs/video-projects/`，不会污染源码目录。
 
 ## 支持的模型供应商
 

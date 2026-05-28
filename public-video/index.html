@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>视频生产工作台</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="topbar">
+        <div>
+          <p class="eyebrow">Video Production Desk</p>
+          <h1>视频生产工作台</h1>
+          <p class="subhead">正式脚本 -> 素材规划 -> 外部搜集 -> image2 插图 -> 风险审查 -> 审片项目</p>
+        </div>
+        <div class="guardrail">
+          本工具不会确认素材版权，也不会把 AI 图当作新闻证据。它用于规划、搜集、回填和审查视频素材。
+        </div>
+      </section>
+
+      <section class="workspace">
+        <aside class="panel setup-panel">
+          <div class="panel-title">
+            <span>项目设置</span>
+            <button id="refreshProjects" class="icon-button" title="刷新项目">↻</button>
+          </div>
+          <label>
+            项目名
+            <input id="title" value="Trump China Nixon Reversal" />
+          </label>
+          <label>
+            视频类型
+            <select id="lane">
+              <option value="history">history</option>
+              <option value="finance">finance</option>
+              <option value="tech">tech</option>
+              <option value="geopolitical">geopolitical</option>
+            </select>
+          </label>
+          <label>
+            目标版本
+            <select id="targetVersion">
+              <option value="review-sample">60-90 秒 review sample</option>
+              <option value="full-video">12-15 分钟完整长视频</option>
+            </select>
+          </label>
+          <label>
+            Review beats
+            <input id="maxBeats" type="number" min="3" max="30" value="12" />
+          </label>
+          <button id="createProject" class="primary">新建项目</button>
+          <button id="loadSample" class="secondary">填入现有 Trump/Nixon 项目稿</button>
+
+          <div class="divider"></div>
+          <h2>已有项目</h2>
+          <div id="projectList" class="project-list"></div>
+
+          <div class="divider"></div>
+          <h2>素材包</h2>
+          <div id="materialPacks" class="pack-list"></div>
+        </aside>
+
+        <section class="main-panel">
+          <div class="script-panel">
+            <div class="panel-title">
+              <span>正式脚本</span>
+              <span id="scriptStats" class="muted">0 chars</span>
+            </div>
+            <textarea id="scriptText" spellcheck="false" placeholder="粘贴已经确认的 final script。这里不写 brief，不改正式稿，只做视频素材规划。"></textarea>
+          </div>
+
+          <div class="actions">
+            <button id="generatePlan" class="primary" disabled>生成视频素材规划</button>
+            <button id="runAudit" class="secondary" disabled>运行风险审查</button>
+            <button id="generateReview" class="secondary" disabled>生成审片项目</button>
+            <button id="checkAssets" class="secondary" disabled>检查素材回填</button>
+            <a id="reviewLink" class="link-button disabled" target="_blank" rel="noreferrer">打开审片页面</a>
+          </div>
+
+          <section class="status-grid">
+            <div class="metric">
+              <span>当前项目</span>
+              <strong id="currentProject">未创建</strong>
+            </div>
+            <div class="metric">
+              <span>Evidence</span>
+              <strong id="evidenceMetric">--</strong>
+            </div>
+            <div class="metric">
+              <span>Diagram/Chart</span>
+              <strong id="diagramMetric">--</strong>
+            </div>
+            <div class="metric">
+              <span>PPT 风险</span>
+              <strong id="pptMetric">--</strong>
+            </div>
+          </section>
+
+          <section class="output-panel">
+            <nav class="tabs" aria-label="输出文件">
+              <button class="tab active" data-tab="summary">总览</button>
+              <button class="tab" data-tab="storyboard">分段结构</button>
+              <button class="tab" data-tab="external">外部搜集</button>
+              <button class="tab" data-tab="image2">image2</button>
+              <button class="tab" data-tab="audit">风险报告</button>
+              <button class="tab" data-tab="assets">素材回填</button>
+            </nav>
+            <div class="output-toolbar">
+              <button id="copyOutput" class="secondary">复制当前内容</button>
+              <span id="statusLine" class="muted">等待创建项目</span>
+            </div>
+            <div id="summaryView" class="tab-view active"></div>
+            <pre id="textView" class="tab-view text-output"></pre>
+          </section>
+        </section>
+      </section>
+    </main>
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>
