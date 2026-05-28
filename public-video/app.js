@@ -23,8 +23,10 @@ const refs = {
   generatePlan: $("generatePlan"),
   runAudit: $("runAudit"),
   generateReview: $("generateReview"),
+  renderVideo: $("renderVideo"),
   checkAssets: $("checkAssets"),
   reviewLink: $("reviewLink"),
+  videoLink: $("videoLink"),
   currentProject: $("currentProject"),
   evidenceMetric: $("evidenceMetric"),
   diagramMetric: $("diagramMetric"),
@@ -63,7 +65,7 @@ function renderProjectList() {
     button.className = `project-item ${state.project?.id === project.id ? "active" : ""}`;
     button.innerHTML = `
       <strong>${project.title}</strong>
-      <span>${project.lane} · ${project.hasPlan ? "已规划" : "未规划"} · ${project.hasReview ? "有审片页" : "无审片页"}</span>
+      <span>${project.lane} · ${project.hasPlan ? "已规划" : "未规划"} · ${project.hasReview ? "有审片页" : "无审片页"} · ${project.hasVideo ? "有视频" : "未渲染"}</span>
     `;
     button.addEventListener("click", () => loadProject(project.id));
     refs.projectList.append(button);
@@ -95,6 +97,7 @@ function updateControls() {
   refs.generatePlan.disabled = !hasProject;
   refs.runAudit.disabled = !hasPlan;
   refs.generateReview.disabled = !hasPlan;
+  refs.renderVideo.disabled = !hasPlan;
   refs.checkAssets.disabled = !hasPlan;
   refs.currentProject.textContent = state.project ? state.project.title : "未创建";
 }
@@ -105,6 +108,10 @@ function updateMetrics() {
   refs.evidenceMetric.textContent = audit ? `${audit.evidencePercent}%` : manifest ? `${Math.round((manifest.visualMixPercent.footage || 0) + (manifest.visualMixPercent.archivePhoto || 0) + (manifest.visualMixPercent.document || 0))}%` : "--";
   refs.diagramMetric.textContent = audit ? `${audit.diagramPercent}%` : manifest ? `${Math.round((manifest.visualMixPercent.diagram || 0) + (manifest.visualMixPercent.chart || 0))}%` : "--";
   refs.pptMetric.textContent = manifest?.riskSummary?.pptRisk || (audit?.status === "blocked" ? "high" : audit?.status === "review" ? "medium" : audit ? "low" : "--");
+  if (state.data?.videoUrl) {
+    refs.videoLink.href = state.data.videoUrl;
+    refs.videoLink.classList.remove("disabled");
+  }
 }
 
 function fileText(name) {
@@ -133,6 +140,7 @@ function renderSummary() {
         <span>Audit<strong>${audit?.status || "--"}</strong></span>
         <span>PPT Risk<strong>${manifest?.riskSummary?.pptRisk || "--"}</strong></span>
         <span>Missing<strong>${manifest?.missingAssets?.length ?? "--"}</strong></span>
+        <span>MP4<strong>${state.data?.videoUrl ? "ready" : "--"}</strong></span>
       </div>
     </div>
     <div class="summary-block">
@@ -206,7 +214,7 @@ async function createProject() {
 async function runAction(action, label) {
   if (!state.project) return;
   setStatus(`正在${label}...`);
-  const body = action === "review" ? { maxBeats: Number(refs.maxBeats.value || 12) } : {};
+  const body = ["review", "render"].includes(action) ? { maxBeats: Number(refs.maxBeats.value || 12) } : {};
   const payload = await api(`/api/projects/${encodeURIComponent(state.project.id)}/${action}`, {
     method: "POST",
     body: JSON.stringify(body)
@@ -216,6 +224,10 @@ async function runAction(action, label) {
   if (payload.reviewUrl) {
     refs.reviewLink.href = payload.reviewUrl;
     refs.reviewLink.classList.remove("disabled");
+  }
+  if (payload.videoUrl) {
+    refs.videoLink.href = payload.videoUrl;
+    refs.videoLink.classList.remove("disabled");
   }
   await refreshProjects();
   renderTab();
@@ -254,6 +266,7 @@ refs.loadSample.addEventListener("click", () => loadSample().catch((error) => se
 refs.generatePlan.addEventListener("click", () => runAction("plan", "生成视频素材规划").catch((error) => setStatus(error.message)));
 refs.runAudit.addEventListener("click", () => runAction("audit", "运行风险审查").catch((error) => setStatus(error.message)));
 refs.generateReview.addEventListener("click", () => runAction("review", "生成审片项目").catch((error) => setStatus(error.message)));
+refs.renderVideo.addEventListener("click", () => runAction("render", "渲染样片 MP4").catch((error) => setStatus(error.message)));
 refs.checkAssets.addEventListener("click", () => checkAssets().catch((error) => setStatus(error.message)));
 refs.scriptText.addEventListener("input", updateScriptStats);
 refs.copyOutput.addEventListener("click", async () => {

@@ -9,6 +9,7 @@
     "video:plan": "node video-tool/plan-video.js",
     "video:audit-plan": "node video-tool/audit-plan.js",
     "video:review-project": "node video-tool/generate-hyperframes-review.js",
+    "video:render-sample": "node video-tool/render-sample.js",
     "video:check-assets": "node video-tool/check-assets.js"
   },
   "engines": {

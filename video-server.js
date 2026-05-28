@@ -137,7 +137,8 @@ async function listProjects() {
       path: dir,
       hasPlan: await exists(join(dir, "visual-plan.json")),
       hasAudit: await exists(join(dir, "audit-report.md")),
-      hasReview: await exists(join(dir, "review", "index.html"))
+      hasReview: await exists(join(dir, "review", "index.html")),
+      hasVideo: await exists(join(dir, "renders", "sample.mp4"))
     });
   }
   return projects.sort((a, b) => String(b.createdAt || "").localeCompare(String(a.createdAt || "")));
@@ -271,11 +272,13 @@ async function readOutputFiles(projectDir) {
   const planPath = join(projectDir, "visual-plan.json");
   const auditJsonPath = join(projectDir, "audit-report.json");
   const reviewManifestPath = join(projectDir, "review", "review-manifest.json");
+  const videoPath = join(projectDir, "renders", "sample.mp4");
   return {
     files,
     plan: (await exists(planPath)) ? JSON.parse(await readFile(planPath, "utf8")) : null,
     audit: (await exists(auditJsonPath)) ? JSON.parse(await readFile(auditJsonPath, "utf8")) : null,
-    reviewManifest: (await exists(reviewManifestPath)) ? JSON.parse(await readFile(reviewManifestPath, "utf8")) : null
+    reviewManifest: (await exists(reviewManifestPath)) ? JSON.parse(await readFile(reviewManifestPath, "utf8")) : null,
+    videoUrl: (await exists(videoPath)) ? relativeUrl(videoPath) : ""
   };
 }
 
@@ -316,6 +319,32 @@ async function reviewProject(projectId, maxBeats = 12) {
   };
 }
 
+async function renderProject(projectId, maxBeats = 12) {
+  const project = await readProject(projectId);
+  const reviewIndex = join(project.path, "review", "index.html");
+  if (!(await exists(reviewIndex))) {
+    await reviewProject(projectId, maxBeats);
+  }
+  const renderDir = join(project.path, "renders");
+  const outputPath = join(renderDir, "sample.mp4");
+  await mkdir(renderDir, { recursive: true });
+  const result = await runNode([
+    "video-tool/render-sample.js",
+    "--plan",
+    join(project.path, "visual-plan.json"),
+    "--out",
+    outputPath,
+    "--max-beats",
+    String(maxBeats || 12)
+  ]);
+  return {
+    project,
+    videoUrl: relativeUrl(outputPath),
+    renderLog: [result.stdout, result.stderr].filter(Boolean).join("\n"),
+    ...(await readOutputFiles(project.path))
+  };
+}
+
 async function checkAssets(projectId) {
   const project = await readProject(projectId);
   try {
@@ -351,6 +380,10 @@ async function handleApi(req, res, url) {
     if (req.method === "POST" && action === "review") {
       const body = await readBody(req);
       return json(res, 200, await reviewProject(projectId, Number(body.maxBeats || 12)));
+    }
+    if (req.method === "POST" && action === "render") {
+      const body = await readBody(req);
+      return json(res, 200, await renderProject(projectId, Number(body.maxBeats || 12)));
     }
     if (req.method === "POST" && action === "check-assets") return json(res, 200, await checkAssets(projectId));
     return json(res, 404, { error: "API route not found." });
