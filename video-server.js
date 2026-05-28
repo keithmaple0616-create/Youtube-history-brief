@@ -2,14 +2,30 @@
 import { createServer } from "node:http";
 import { spawn } from "node:child_process";
 import { createReadStream } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { access, mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import { basename, dirname, extname, isAbsolute, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const rootDir = dirname(fileURLToPath(import.meta.url));
+loadEnvFile(join(rootDir, ".env"));
 const publicDir = join(rootDir, "public-video");
 const projectsRoot = join(rootDir, "outputs", "video-projects");
 const port = Number(process.env.PORT || process.env.VIDEO_PORT || 5124);
+
+function loadEnvFile(path) {
+  if (!existsSync(path)) return;
+  const lines = readFileSync(path, "utf8").split(/\r?\n/);
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith("#")) continue;
+    const separator = trimmed.indexOf("=");
+    if (separator === -1) continue;
+    const key = trimmed.slice(0, separator).trim();
+    const value = trimmed.slice(separator + 1).trim().replace(/^["']|["']$/g, "");
+    if (key && !process.env[key]) process.env[key] = value;
+  }
+}
 
 const mimeTypes = {
   ".html": "text/html; charset=utf-8",
