@@ -44,7 +44,7 @@ Video tool:
 - `plan-video.js` creates a script-to-visual-planning package.
 - Current planning output uses section-aware semantic beats, richer image2 prompts, HyperFrames-oriented diagram specs, and an asset intake/return checklist.
 - `check-assets.js` validates returned local assets and required rights metadata from `asset-intake.json`.
-- `render-test-video.js` exists only as a technical MP4 smoke test. It is not the desired visual direction.
+- The old technical MP4 smoke-test renderer has been removed. Do not bring that path back as the main product direction.
 
 Key requirement doc:
 
@@ -64,9 +64,7 @@ Key requirement doc:
 
 The one-minute MP4 test renderer proved a local MP4 can be generated from `visual-plan.json`, but the initial output looked like a slide deck with huge text.
 
-Do not keep polishing that path as the main product direction.
-
-Use it only as a smoke test.
+Do not keep polishing that path as the main product direction. It has been removed from the cleaned project.
 
 ## Next Step
 
@@ -75,7 +73,7 @@ Continue improving the planning-to-assembly handoff:
 1. Review the v0.3 planning package quality on one history script and one finance/tech script.
 2. Tune evidence-vs-diagram classification where the storyboard overuses diagrams.
 3. Add a first HyperFrames review project generator that consumes `visual-plan.json` plus `asset-intake.json`.
-4. Keep the existing MP4 renderer as a smoke test only.
+4. Keep MP4 rendering behind the material-pack and review-project gates.
 
 ## Latest Useful Commands
 
@@ -116,12 +114,4 @@ npm run video:check-assets -- \
   --intake outputs/video-tool-v0.3-planning-demo/asset-intake.json
 ```
 
-Smoke-test only, not product direction:
-
-```bash
-npm run video:render-test -- \
-  --plan outputs/video-tool-v0.1-demo/visual-plan.json \
-  --out outputs/video-tool-one-minute-test/one-minute-test.mp4 \
-  --duration 60 \
-  --image outputs/video-tool-v0.1-demo/sample-image2/gen-001-sample.png
-```
+MP4 rendering should wait until a material pack and HyperFrames review project have been checked.

@@ -1,1 +1,0 @@
-export {RemotionRoot} from "./video";

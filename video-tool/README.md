@@ -58,20 +58,6 @@ Outputs:
 - `audit-report.md`: visual-plan health check for evidence balance, diagram overuse, rights risk, and generated-image risk.
 - HyperFrames review project: `index.html`, `review-data.json`, `review-manifest.json`, `DESIGN.md`, `README.md`.
 
-## One-Minute Test Render
-
-The v0.2 test renderer turns the first beats in `visual-plan.json` into a rough one-minute MP4. It is a technical draft generator, not a final video engine.
-
-```bash
-npm run video:render-test -- \
-  --plan outputs/video-tool-v0.1-demo/visual-plan.json \
-  --out outputs/video-tool-one-minute-test/one-minute-test.mp4 \
-  --duration 60 \
-  --image outputs/video-tool-v0.1-demo/sample-image2/gen-001-sample.png
-```
-
-The renderer currently uses local HTML thumbnails plus FFmpeg, because this Mac FFmpeg build does not include `drawtext`. Output includes the MP4, rendered frame PNGs, segment files, a contact sheet if you generate one, and `build-notes.md`.
-
 Supported lanes today:
 
 - `history`: history, politics, geopolitics, culture essays.
@@ -170,25 +156,8 @@ In scope:
 - Asset return/intake checklist for manual generation and sourcing.
 - Rights and evidence/illustration checklist.
 
-## v0.2 Test Scope
-
-In scope:
-
-- Read `visual-plan.json`.
-- Render the first six beats as six 10-second cards.
-- Use a supplied generated image as the first title-card background.
-- Produce a 60-second local MP4 for workflow validation.
-
-Still out of scope:
-
-- Real motion design.
-- Voiceover and music.
-- Evidence footage download or rights clearance.
-- Fully assembled HyperFrames/Remotion production output.
-
 Out of scope for now:
 
 - Automatic scraping or downloading news footage.
 - Automatic image generation API calls.
-- Full HyperFrames or Remotion project assembly.
-- MP4 rendering.
+- Final MP4 rendering without a reviewed material pack.

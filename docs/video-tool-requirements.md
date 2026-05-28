@@ -191,16 +191,13 @@ Implemented:
 - captions
 - basic lane support
 
-Experimental only:
+Removed:
 
-- `video-tool/render-test-video.js`
-- one-minute MP4 renderer
-
-The experimental renderer should not drive product decisions. It can remain as a smoke test, but the next real work should improve the planning package and then generate a proper HyperFrames review project.
+- The old one-minute MP4 renderer and publish-candidate sample scripts were removed during cleanup because they encouraged the wrong workflow: stitching existing local images into a video before the material plan was ready.
 
 ## Next Correct Step
 
-Do not keep polishing the PPT-like MP4 renderer.
+Do not recreate or polish the PPT-like MP4 renderer.
 
 Next step:
 
