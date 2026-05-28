@@ -45,27 +45,7 @@
               <option value="review-sample">60-90 秒样片</option>
             </select>
           </label>
-          <label>
-            生成 beat 数
-            <input id="maxBeats" type="number" min="3" max="120" value="120" />
-          </label>
           <div class="divider"></div>
-          <h2>MiniMax 配音</h2>
-          <label>
-            API Key
-            <input id="minimaxApiKey" type="password" placeholder="也可以放在 .env 的 MINIMAX_API_KEY" />
-          </label>
-          <label>
-            平台区域
-            <select id="minimaxRegion">
-              <option value="cn">中国站 minimaxi.com</option>
-              <option value="global">国际站 minimax.io</option>
-            </select>
-          </label>
-          <label>
-            Voice ID
-            <input id="voiceId" value="English_expressive_narrator" />
-          </label>
           <button id="createProject" class="primary">新建项目</button>
           <button id="loadSample" class="secondary">填入现有 Trump/Nixon 项目稿</button>
 
@@ -73,9 +53,6 @@
           <h2>已有项目</h2>
           <div id="projectList" class="project-list"></div>
 
-          <div class="divider"></div>
-          <h2>素材包</h2>
-          <div id="materialPacks" class="pack-list"></div>
         </aside>
 
         <section class="main-panel">
@@ -93,10 +70,6 @@
             <button id="finalVideo" class="secondary" disabled>3 生成完整视频</button>
             <button id="checkAssets" class="secondary" disabled>检查素材</button>
             <a id="videoLink" class="link-button disabled" target="_blank" rel="noreferrer">打开视频</a>
-            <button id="runAudit" class="secondary utility-action" disabled>风险审查</button>
-            <button id="generateReview" class="secondary utility-action" disabled>审片项目</button>
-            <button id="renderVideo" class="secondary utility-action" disabled>无配音样片</button>
-            <a id="reviewLink" class="link-button disabled utility-action" target="_blank" rel="noreferrer">打开审片</a>
           </div>
 
           <section class="status-grid">
@@ -105,11 +78,11 @@
               <strong id="currentProject">未创建</strong>
             </div>
             <div class="metric">
-              <span>Evidence</span>
+              <span>分镜</span>
               <strong id="evidenceMetric">--</strong>
             </div>
             <div class="metric">
-              <span>Diagram/Chart</span>
+              <span>素材任务</span>
               <strong id="diagramMetric">--</strong>
             </div>
             <div class="metric">
@@ -132,7 +105,6 @@
               <button class="tab" data-tab="storyboard">分段结构</button>
               <button class="tab" data-tab="external">搜索素材</button>
               <button class="tab" data-tab="image2">image2</button>
-              <button class="tab" data-tab="audit">辅助审查</button>
               <button class="tab" data-tab="assets">素材回填</button>
             </nav>
             <div class="output-toolbar">

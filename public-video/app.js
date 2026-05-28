@@ -1,7 +1,6 @@
 const state = {
   project: null,
   projects: [],
-  materialPacks: [],
   data: null,
   tab: "summary",
   tabText: ""
@@ -12,25 +11,16 @@ const refs = {
   title: $("title"),
   lane: $("lane"),
   targetVersion: $("targetVersion"),
-  maxBeats: $("maxBeats"),
-  minimaxApiKey: $("minimaxApiKey"),
-  minimaxRegion: $("minimaxRegion"),
-  voiceId: $("voiceId"),
   scriptText: $("scriptText"),
   scriptStats: $("scriptStats"),
   createProject: $("createProject"),
   loadSample: $("loadSample"),
   refreshProjects: $("refreshProjects"),
   projectList: $("projectList"),
-  materialPacks: $("materialPacks"),
   generatePlan: $("generatePlan"),
-  runAudit: $("runAudit"),
-  generateReview: $("generateReview"),
-  renderVideo: $("renderVideo"),
   finalVideo: $("finalVideo"),
   saveIntake: $("saveIntake"),
   checkAssets: $("checkAssets"),
-  reviewLink: $("reviewLink"),
   videoLink: $("videoLink"),
   currentProject: $("currentProject"),
   evidenceMetric: $("evidenceMetric"),
@@ -71,29 +61,10 @@ function renderProjectList() {
     button.className = `project-item ${state.project?.id === project.id ? "active" : ""}`;
     button.innerHTML = `
       <strong>${project.title}</strong>
-      <span>${project.lane} · ${project.hasPlan ? "已规划" : "未规划"} · ${project.hasReview ? "有审片页" : "无审片页"} · ${project.hasVideo ? "有视频" : "未渲染"}</span>
+      <span>${project.lane} · ${project.hasPlan ? "已生成分镜" : "未生成分镜"} · ${project.hasVideo ? "有视频" : "未生成视频"}</span>
     `;
     button.addEventListener("click", () => loadProject(project.id));
     refs.projectList.append(button);
-  }
-}
-
-function renderMaterialPacks() {
-  refs.materialPacks.innerHTML = "";
-  if (!state.materialPacks.length) {
-    refs.materialPacks.innerHTML = '<p class="empty">暂无已保存素材包。</p>';
-    return;
-  }
-  for (const pack of state.materialPacks) {
-    const wrap = document.createElement("div");
-    wrap.className = "pack-item";
-    wrap.innerHTML = `
-      <strong>${pack.title}</strong>
-      <a href="${pack.files.externalSourcing}" target="_blank" rel="noreferrer">外部搜集</a>
-      <a href="${pack.files.image2Prompts}" target="_blank" rel="noreferrer">image2</a>
-      <a href="${pack.files.visualMixPlan}" target="_blank" rel="noreferrer">画面比例</a>
-    `;
-    refs.materialPacks.append(wrap);
   }
 }
 
@@ -101,9 +72,6 @@ function updateControls() {
   const hasProject = Boolean(state.project);
   const hasPlan = Boolean(state.data?.plan);
   refs.generatePlan.disabled = !hasProject;
-  refs.runAudit.disabled = !hasPlan;
-  refs.generateReview.disabled = !hasPlan;
-  refs.renderVideo.disabled = !hasPlan;
   refs.finalVideo.disabled = !hasPlan;
   refs.saveIntake.disabled = !hasPlan;
   refs.checkAssets.disabled = !hasPlan;
@@ -111,11 +79,10 @@ function updateControls() {
 }
 
 function updateMetrics() {
-  const audit = state.data?.audit?.summary;
-  const manifest = state.data?.reviewManifest;
-  refs.evidenceMetric.textContent = audit ? `${audit.evidencePercent}%` : manifest ? `${Math.round((manifest.visualMixPercent.footage || 0) + (manifest.visualMixPercent.archivePhoto || 0) + (manifest.visualMixPercent.document || 0))}%` : "--";
-  refs.diagramMetric.textContent = audit ? `${audit.diagramPercent}%` : manifest ? `${Math.round((manifest.visualMixPercent.diagram || 0) + (manifest.visualMixPercent.chart || 0))}%` : "--";
-  refs.pptMetric.textContent = state.data?.videoUrl ? "已生成" : manifest?.riskSummary?.pptRisk || (audit?.status === "blocked" ? "high" : audit?.status === "review" ? "medium" : audit ? "low" : "--");
+  const beats = state.data?.plan?.beats || [];
+  refs.evidenceMetric.textContent = beats.length ? `${beats.length} 段` : "--";
+  refs.diagramMetric.textContent = fileText("external-sourcing-prompts.md") || fileText("image2-prompts.md") ? "已生成" : "--";
+  refs.pptMetric.textContent = state.data?.videoUrl ? "已生成" : state.data?.plan ? "待生成" : "--";
   if (state.data?.videoUrl) {
     refs.videoLink.href = state.data.videoUrl;
     refs.videoLink.classList.remove("disabled");
@@ -128,8 +95,6 @@ function fileText(name) {
 
 function renderSummary() {
   const plan = state.data?.plan;
-  const audit = state.data?.audit;
-  const manifest = state.data?.reviewManifest;
   const beats = plan?.beats || [];
   const rows = beats.slice(0, 18).map((beat) => `
     <tr>
@@ -142,13 +107,12 @@ function renderSummary() {
   `).join("");
   refs.summaryView.innerHTML = `
     <div class="summary-block">
-      <h2>素材比例总览</h2>
+      <h2>生产进度</h2>
       <div class="mix-grid">
-        <span>Beats<strong>${beats.length || "--"}</strong></span>
-        <span>Search Tasks<strong>${fileText("external-sourcing-prompts.md") ? "ready" : "--"}</strong></span>
-        <span>Image2<strong>${fileText("image2-prompts.md") ? "ready" : "--"}</strong></span>
-        <span>Missing<strong>${manifest?.missingAssets?.length ?? "--"}</strong></span>
-        <span>MP4<strong>${state.data?.videoUrl ? "ready" : "--"}</strong></span>
+        <span>分镜段<strong>${beats.length || "--"}</strong></span>
+        <span>搜索素材<strong>${fileText("external-sourcing-prompts.md") ? "已生成" : "--"}</strong></span>
+        <span>image2<strong>${fileText("image2-prompts.md") ? "已生成" : "--"}</strong></span>
+        <span>视频<strong>${state.data?.videoUrl ? "已生成" : "--"}</strong></span>
       </div>
     </div>
     <div class="summary-block">
@@ -163,7 +127,6 @@ function renderTab() {
     storyboard: "storyboard.md",
     external: "external-sourcing-prompts.md",
     image2: "image2-prompts.md",
-    audit: "audit-report.md",
     assets: "asset-return-checklist.md"
   };
   document.querySelectorAll(".tab").forEach((button) => button.classList.toggle("active", button.dataset.tab === state.tab));
@@ -184,9 +147,7 @@ function renderTab() {
 async function refreshProjects() {
   const payload = await api("/api/projects");
   state.projects = payload.projects || [];
-  state.materialPacks = payload.materialPacks || [];
   renderProjectList();
-  renderMaterialPacks();
 }
 
 async function loadProject(id) {
@@ -226,10 +187,7 @@ async function runAction(action, label) {
   setStatus(`正在${label}...`);
   const body = ["review", "render", "final-video"].includes(action)
     ? {
-        maxBeats: Number(refs.maxBeats.value || 120),
-        minimaxApiKey: refs.minimaxApiKey.value.trim(),
-        minimaxRegion: refs.minimaxRegion.value,
-        voiceId: refs.voiceId.value.trim()
+        targetVersion: refs.targetVersion.value
       }
     : {};
   const payload = await api(`/api/projects/${encodeURIComponent(state.project.id)}/${action}`, {
@@ -239,10 +197,6 @@ async function runAction(action, label) {
   state.project = payload.project;
   state.data = payload;
   refs.assetIntakeText.value = fileText("asset-intake.json");
-  if (payload.reviewUrl) {
-    refs.reviewLink.href = payload.reviewUrl;
-    refs.reviewLink.classList.remove("disabled");
-  }
   if (payload.videoUrl) {
     refs.videoLink.href = payload.videoUrl;
     refs.videoLink.classList.remove("disabled");
@@ -295,23 +249,10 @@ refs.createProject.addEventListener("click", () => createProject().catch((error)
 refs.refreshProjects.addEventListener("click", () => refreshProjects().catch((error) => setStatus(error.message)));
 refs.loadSample.addEventListener("click", () => loadSample().catch((error) => setStatus(error.message)));
 refs.generatePlan.addEventListener("click", () => runAction("plan", "生成视频素材规划").catch((error) => setStatus(error.message)));
-refs.runAudit.addEventListener("click", () => runAction("audit", "运行风险审查").catch((error) => setStatus(error.message)));
-refs.generateReview.addEventListener("click", () => runAction("review", "生成审片项目").catch((error) => setStatus(error.message)));
-refs.renderVideo.addEventListener("click", () => runAction("render", "渲染样片 MP4").catch((error) => setStatus(error.message)));
 refs.finalVideo.addEventListener("click", () => runAction("final-video", "生成完整视频").catch((error) => setStatus(error.message)));
 refs.saveIntake.addEventListener("click", () => saveIntake().catch((error) => setStatus(error.message)));
 refs.checkAssets.addEventListener("click", () => checkAssets().catch((error) => setStatus(error.message)));
 refs.scriptText.addEventListener("input", updateScriptStats);
-refs.minimaxApiKey.value = localStorage.getItem("videoDeskMinimaxApiKey") || "";
-refs.minimaxRegion.value = localStorage.getItem("videoDeskMinimaxRegion") || "cn";
-refs.voiceId.value = localStorage.getItem("videoDeskVoiceId") || "English_expressive_narrator";
-[refs.minimaxApiKey, refs.minimaxRegion, refs.voiceId].forEach((input) => {
-  input.addEventListener("input", () => {
-    localStorage.setItem("videoDeskMinimaxApiKey", refs.minimaxApiKey.value);
-    localStorage.setItem("videoDeskMinimaxRegion", refs.minimaxRegion.value);
-    localStorage.setItem("videoDeskVoiceId", refs.voiceId.value);
-  });
-});
 refs.copyOutput.addEventListener("click", async () => {
   await navigator.clipboard.writeText(state.tabText || "");
   setStatus("当前内容已复制");

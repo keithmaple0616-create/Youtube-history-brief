@@ -137,6 +137,12 @@ function relativeUrl(path) {
   return `/${relative(rootDir, path).replaceAll("\\", "/")}`;
 }
 
+function estimateMaxBeats({ scriptText = "", targetVersion = "full-video" } = {}) {
+  if (targetVersion === "review-sample") return 12;
+  const tokenCount = (String(scriptText).match(/[A-Za-z0-9$%.-]+|[\u4e00-\u9fff]/g) || []).length;
+  return Math.min(120, Math.max(60, Math.ceil(tokenCount / 85)));
+}
+
 async function listProjects() {
   await mkdir(projectsRoot, { recursive: true });
   const entries = await readdir(projectsRoot, { withFileTypes: true });
@@ -259,7 +265,9 @@ async function createProject(payload) {
   }
   if (!scriptText.trim()) throw new Error("Please paste a final script or provide a scriptPath.");
 
-  const meta = { id, title, lane, createdAt, targetVersion: payload.targetVersion || "review-sample" };
+  const targetVersion = payload.targetVersion || "full-video";
+  const maxBeats = estimateMaxBeats({ scriptText, targetVersion });
+  const meta = { id, title, lane, createdAt, targetVersion, maxBeats };
   await writeFile(join(projectDir, "script.md"), scriptText, "utf8");
   await writeFile(join(projectDir, "project.json"), `${JSON.stringify(meta, null, 2)}\n`, "utf8");
   return { ...meta, path: projectDir };
@@ -440,7 +448,7 @@ async function finalVideoProject(projectId, req, body) {
   if (!(await exists(join(project.path, "visual-plan.json")))) {
     await planProject(projectId);
   }
-  const maxBeats = Number(body.maxBeats || 999);
+  const maxBeats = Number(body.maxBeats || project.maxBeats || 999);
   const narration = await generateNarration({ project, req, body, maxBeats });
   const renderDir = join(project.path, "renders");
   const outputPath = join(renderDir, "final.mp4");
@@ -511,7 +519,8 @@ async function handleApi(req, res, url) {
     }
     if (req.method === "POST" && action === "render") {
       const body = await readBody(req);
-      return json(res, 200, await renderProject(projectId, Number(body.maxBeats || 12)));
+      const project = await readProject(projectId);
+      return json(res, 200, await renderProject(projectId, Number(body.maxBeats || project.maxBeats || 12)));
     }
     if (req.method === "POST" && action === "final-video") {
       const body = await readBody(req);
